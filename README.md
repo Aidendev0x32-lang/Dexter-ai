@@ -57,7 +57,7 @@ pnpm build
 ### Option A: Web setup wizard (recommended for first-time setup)
 
 ```bash
-openclaw gateway run --setup --port 18789
+dexter gateway run --setup --port 18789
 ```
 
 Your browser opens automatically. The wizard guides you through:
@@ -68,14 +68,14 @@ Your browser opens automatically. The wizard guides you through:
 Once complete, restart the gateway normally:
 
 ```bash
-openclaw gateway run --port 18789
+dexter gateway run --port 18789
 ```
 
 ### Option B: CLI setup (classic)
 
 ```bash
-openclaw onboard --install-daemon
-openclaw gateway --port 18789 --verbose
+dexter onboard --install-daemon
+dexter gateway --port 18789 --verbose
 ```
 
 ## How it works
@@ -124,7 +124,7 @@ Dexter connects to real messaging surfaces. Treat inbound DMs as **untrusted inp
 
 - **DM pairing** (default): unknown senders receive a pairing code; the bot does not process their message until approved.
 - **Setup mode**: binds to loopback only, auth disabled on `127.0.0.1`, refuses to start on non-loopback interfaces.
-- Run `pnpm openclaw doctor` to surface risky/misconfigured DM policies.
+- Run `dexter doctor` to surface risky/misconfigured DM policies.
 
 ## Chat commands
 
