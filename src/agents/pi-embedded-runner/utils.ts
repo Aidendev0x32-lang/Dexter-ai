@@ -6,6 +6,10 @@ export function mapThinkingLevel(level?: ThinkLevel): ThinkingLevel {
   if (!level) {
     return "off";
   }
+  // Clamp minimal/low to medium — some models (e.g. gpt-5.2-pro) reject "low".
+  if (level === "minimal" || level === "low") {
+    return "medium";
+  }
   return level;
 }
 
