@@ -73,13 +73,15 @@ fi
 ok "Dependencies installed"
 
 # ── Build ──
-info "Building UI..."
-$PKG_MGR run ui:build
-ok "UI built"
-
+# Project build (tsdown) must run before ui:build because tsdown
+# cleans dist/ on each run, which would wipe dist/control-ui/.
 info "Building project..."
 $PKG_MGR run build
 ok "Build complete"
+
+info "Building UI..."
+$PKG_MGR run ui:build
+ok "UI built"
 
 # ── Link binary ──
 info "Linking openclaw CLI..."
