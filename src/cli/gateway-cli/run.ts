@@ -180,6 +180,10 @@ async function runGatewayCommand(opts: GatewayRunOpts) {
       // Auto-enter setup mode for first-time users with no config
       defaultRuntime.log("No config found — starting in setup mode.");
       isSetupMode = true;
+    } else if (!mode) {
+      // Config exists but gateway.mode is unset (e.g. OpenClaw migration)
+      defaultRuntime.log("Config found but gateway.mode is unset — starting in setup mode.");
+      isSetupMode = true;
     } else {
       defaultRuntime.error(
         `Gateway start blocked: set gateway.mode=local (current: ${mode ?? "unset"}) or pass --allow-unconfigured.`,
