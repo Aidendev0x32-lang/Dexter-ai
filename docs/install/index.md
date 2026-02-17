@@ -72,7 +72,7 @@ The **installer script** is the recommended way to install OpenClaw. It handles 
       <Tab title="npm">
         ```bash
         npm install -g openclaw@latest
-        openclaw onboard --install-daemon
+        dexter onboard --install-daemon
         ```
 
         <Accordion title="sharp build errors?">
@@ -89,7 +89,7 @@ The **installer script** is the recommended way to install OpenClaw. It handles 
         ```bash
         pnpm add -g openclaw@latest
         pnpm approve-builds -g        # approve openclaw, node-llama-cpp, sharp, etc.
-        openclaw onboard --install-daemon
+        dexter onboard --install-daemon
         ```
 
         <Note>
@@ -126,7 +126,7 @@ The **installer script** is the recommended way to install OpenClaw. It handles 
       </Step>
       <Step title="Run onboarding">
         ```bash
-        openclaw onboard --install-daemon
+        dexter onboard --install-daemon
         ```
       </Step>
     </Steps>
@@ -161,9 +161,9 @@ The **installer script** is the recommended way to install OpenClaw. It handles 
 Verify everything is working:
 
 ```bash
-openclaw doctor         # check for config issues
-openclaw status         # gateway status
-openclaw dashboard      # open the browser UI
+dexter doctor         # check for config issues
+dexter status         # gateway status
+dexter dashboard      # open the browser UI
 ```
 
 If you need custom runtime paths, use:

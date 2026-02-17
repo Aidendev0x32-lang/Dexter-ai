@@ -41,7 +41,7 @@ x-i18n:
     安装 OpenClaw 并在几分钟内启动 Gateway 网关。
   </Card>
   <Card title="运行向导" href="/start/wizard" icon="sparkles">
-    通过 `openclaw onboard` 和配对流程进行引导式设置。
+    通过 `dexter onboard` 和配对流程进行引导式设置。
   </Card>
   <Card title="打开控制界面" href="/web/control-ui" icon="layout-dashboard">
     启动浏览器仪表板，管理聊天、配置和会话。
@@ -97,13 +97,13 @@ Gateway 网关是会话、路由和渠道连接的唯一事实来源。
   </Step>
   <Step title="新手引导并安装服务">
     ```bash
-    openclaw onboard --install-daemon
+    dexter onboard --install-daemon
     ```
   </Step>
   <Step title="配对 WhatsApp 并启动 Gateway 网关">
     ```bash
-    openclaw channels login
-    openclaw gateway --port 18789
+    dexter channels login
+    dexter gateway --port 18789
     ```
   </Step>
 </Steps>

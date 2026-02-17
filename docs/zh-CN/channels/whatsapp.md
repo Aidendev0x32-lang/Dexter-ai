@@ -20,7 +20,7 @@ x-i18n:
 
 1. 如果可能，使用**单独的手机号码**（推荐）。
 2. 在 `~/.openclaw/openclaw.json` 中配置 WhatsApp。
-3. 运行 `openclaw channels login` 扫描二维码（关联设备）。
+3. 运行 `dexter channels login` 扫描二维码（关联设备）。
 4. 启动 Gateway 网关。
 
 最小配置：
@@ -85,7 +85,7 @@ WhatsApp 需要真实手机号码进行验证。VoIP 和虚拟号码通常会被
 
 **配对模式（可选）：**
 如果你想使用配对而不是允许列表，请将 `channels.whatsapp.dmPolicy` 设置为 `pairing`。未知发送者会收到配对码；使用以下命令批准：
-`openclaw pairing approve whatsapp <code>`
+`dexter pairing approve whatsapp <code>`
 
 ### 个人号码（备选方案）
 
@@ -129,13 +129,13 @@ WhatsApp 需要真实手机号码进行验证。VoIP 和虚拟号码通常会被
 
 ## 登录 + 凭证
 
-- 登录命令：`openclaw channels login`（通过关联设备扫描二维码）。
-- 多账户登录：`openclaw channels login --account <id>`（`<id>` = `accountId`）。
+- 登录命令：`dexter channels login`（通过关联设备扫描二维码）。
+- 多账户登录：`dexter channels login --account <id>`（`<id>` = `accountId`）。
 - 默认账户（省略 `--account` 时）：如果存在则为 `default`，否则为第一个配置的账户 id（排序后）。
 - 凭证存储在 `~/.openclaw/credentials/whatsapp/<accountId>/creds.json`。
 - 备份副本在 `creds.json.bak`（损坏时恢复）。
 - 旧版兼容性：较旧的安装将 Baileys 文件直接存储在 `~/.openclaw/credentials/` 中。
-- 登出：`openclaw channels logout`（或 `--account <id>`）删除 WhatsApp 认证状态（但保留共享的 `oauth.json`）。
+- 登出：`dexter channels logout`（或 `--account <id>`）删除 WhatsApp 认证状态（但保留共享的 `oauth.json`）。
 - 已登出的 socket => 错误提示重新关联。
 
 ## 入站流程（私信 + 群组）
@@ -145,7 +145,7 @@ WhatsApp 需要真实手机号码进行验证。VoIP 和虚拟号码通常会被
 - 状态/广播聊天被忽略。
 - 直接聊天使用 E.164；群组使用群组 JID。
 - **私信策略**：`channels.whatsapp.dmPolicy` 控制直接聊天访问（默认：`pairing`）。
-  - 配对：未知发送者会收到配对码（通过 `openclaw pairing approve whatsapp <code>` 批准；码在 1 小时后过期）。
+  - 配对：未知发送者会收到配对码（通过 `dexter pairing approve whatsapp <code>` 批准；码在 1 小时后过期）。
   - 开放：需要 `channels.whatsapp.allowFrom` 包含 `"*"`。
   - 你关联的 WhatsApp 号码是隐式信任的，因此自身消息会跳过 `channels.whatsapp.dmPolicy` 和 `channels.whatsapp.allowFrom` 检查。
 
@@ -199,7 +199,7 @@ WhatsApp 需要真实手机号码进行验证。VoIP 和虚拟号码通常会被
 配对是未知发送者的私信门控：
 
 - 来自新发送者的第一条私信返回一个短码（消息不会被处理）。
-- 使用以下命令批准：`openclaw pairing approve whatsapp <code>`（使用 `openclaw pairing list whatsapp` 列出）。
+- 使用以下命令批准：`dexter pairing approve whatsapp <code>`（使用 `dexter pairing list whatsapp` 列出）。
 - 码在 1 小时后过期；每个渠道的待处理请求上限为 3 个。
 
 **多个人可以在一个 WhatsApp 号码上使用不同的 OpenClaw 实例吗？**
@@ -323,7 +323,7 @@ WhatsApp 可以在收到传入消息时立即自动发送表情回应，在机�
   - 仅在第一个媒体项上添加标题。
   - 媒体获取支持 HTTP(S) 和本地路径。
   - 动画 GIF：WhatsApp 期望带有 `gifPlayback: true` 的 MP4 以实现内联循环。
-    - CLI：`openclaw message send --media <mp4> --gif-playback`
+    - CLI：`dexter message send --media <mp4> --gif-playback`
     - Gateway 网关：`send` 参数包含 `gifPlayback: true`
 
 ## 语音消息（PTT 音频）
@@ -398,12 +398,12 @@ WhatsApp 将音频作为**语音消息**（PTT 气泡）发送。
 **未关联 / 需要二维码登录**
 
 - 症状：`channels status` 显示 `linked: false` 或警告"Not linked"。
-- 修复：在 Gateway 网关主机上运行 `openclaw channels login` 并扫描二维码（WhatsApp → 设置 → 关联设备）。
+- 修复：在 Gateway 网关主机上运行 `dexter channels login` 并扫描二维码（WhatsApp → 设置 → 关联设备）。
 
 **已关联但断开连接 / 重连循环**
 
 - 症状：`channels status` 显示 `running, disconnected` 或警告"Linked but disconnected"。
-- 修复：`openclaw doctor`（或重启 Gateway 网关）。如果问题持续，通过 `channels login` 重新关联并检查 `openclaw logs --follow`。
+- 修复：`dexter doctor`（或重启 Gateway 网关）。如果问题持续，通过 `channels login` 重新关联并检查 `dexter logs --follow`。
 
 **Bun 运行时**
 

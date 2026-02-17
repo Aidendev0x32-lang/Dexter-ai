@@ -22,14 +22,14 @@ and how you prefer to configure providers.
 Run the wizard in a terminal:
 
 ```bash
-openclaw onboard
+dexter onboard
 ```
 
 Use the CLI wizard when you want full control of the Gateway, workspace,
 channels, and skills. Docs:
 
 - [Onboarding Wizard (CLI)](/start/wizard)
-- [`openclaw onboard` command](/cli/onboard)
+- [`dexter onboard` command](/cli/onboard)
 
 ## macOS app onboarding
 

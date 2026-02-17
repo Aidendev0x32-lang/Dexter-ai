@@ -99,8 +99,8 @@ xcrun swift --version
 如果 Gateway 网关状态一直停留在"Starting..."，检查是否有僵尸进程占用端口：
 
 ```bash
-openclaw gateway status
-openclaw gateway stop
+dexter gateway status
+dexter gateway stop
 
 # 如果你没有使用 LaunchAgent（开发模式/手动运行），找到监听器：
 lsof -nP -iTCP:18789 -sTCP:LISTEN

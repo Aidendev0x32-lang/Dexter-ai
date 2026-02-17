@@ -56,7 +56,7 @@ node --import tsx scripts/repro/tsx-name-repro.ts
 ## Regression history
 
 - `2871657e` (2026-01-06): scripts changed from Bun to tsx to make Bun optional.
-- Before that (Bun path), `openclaw status` and `gateway:watch` worked.
+- Before that (Bun path), `dexter status` and `gateway:watch` worked.
 
 ## Workarounds
 

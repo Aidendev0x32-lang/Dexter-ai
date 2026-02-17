@@ -38,7 +38,7 @@ Related:
 If you don’t want to hand-edit config, run the onboarding wizard:
 
 ```bash
-openclaw onboard
+dexter onboard
 ```
 
 It can set up model + auth for common providers, including **OpenAI Code (Codex)
@@ -115,27 +115,27 @@ Full command behavior/config: [Slash commands](/tools/slash-commands).
 ## CLI commands
 
 ```bash
-openclaw models list
-openclaw models status
-openclaw models set <provider/model>
-openclaw models set-image <provider/model>
+dexter models list
+dexter models status
+dexter models set <provider/model>
+dexter models set-image <provider/model>
 
-openclaw models aliases list
-openclaw models aliases add <alias> <provider/model>
-openclaw models aliases remove <alias>
+dexter models aliases list
+dexter models aliases add <alias> <provider/model>
+dexter models aliases remove <alias>
 
-openclaw models fallbacks list
-openclaw models fallbacks add <provider/model>
-openclaw models fallbacks remove <provider/model>
-openclaw models fallbacks clear
+dexter models fallbacks list
+dexter models fallbacks add <provider/model>
+dexter models fallbacks remove <provider/model>
+dexter models fallbacks clear
 
-openclaw models image-fallbacks list
-openclaw models image-fallbacks add <provider/model>
-openclaw models image-fallbacks remove <provider/model>
-openclaw models image-fallbacks clear
+dexter models image-fallbacks list
+dexter models image-fallbacks add <provider/model>
+dexter models image-fallbacks remove <provider/model>
+dexter models image-fallbacks clear
 ```
 
-`openclaw models` (no subcommand) is a shortcut for `models status`.
+`dexter models` (no subcommand) is a shortcut for `models status`.
 
 ### `models list`
 
@@ -163,12 +163,12 @@ Preferred Anthropic auth is the Claude Code CLI setup-token (run anywhere; paste
 
 ```bash
 claude setup-token
-openclaw models status
+dexter models status
 ```
 
 ## Scanning (OpenRouter free models)
 
-`openclaw models scan` inspects OpenRouter’s **free model catalog** and can
+`dexter models scan` inspects OpenRouter’s **free model catalog** and can
 optionally probe models for tool and image support.
 
 Key flags:

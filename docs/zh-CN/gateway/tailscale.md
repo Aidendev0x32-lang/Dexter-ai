@@ -87,8 +87,8 @@ OpenClaw 仅在请求从 loopback 到达并带有 Tailscale 的 `x-forwarded-for
 ## CLI 示例
 
 ```bash
-openclaw gateway --tailscale serve
-openclaw gateway --tailscale funnel --auth password
+dexter gateway --tailscale serve
+dexter gateway --tailscale funnel --auth password
 ```
 
 ## 注意事项

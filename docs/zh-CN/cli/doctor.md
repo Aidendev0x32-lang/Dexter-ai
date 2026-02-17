@@ -2,7 +2,7 @@
 read_when:
   - 你遇到连接/认证问题，需要引导式修复
   - 你更新后想进行完整性检查
-summary: "`openclaw doctor` 的 CLI 参考（健康检查 + 引导式修复）"
+summary: "`dexter doctor` 的 CLI 参考（健康检查 + 引导式修复）"
 title: doctor
 x-i18n:
   generated_at: "2026-02-03T10:04:15Z"
@@ -13,7 +13,7 @@ x-i18n:
   workflow: 15
 ---
 
-# `openclaw doctor`
+# `dexter doctor`
 
 Gateway 网关和渠道的健康检查 + 快速修复。
 
@@ -25,9 +25,9 @@ Gateway 网关和渠道的健康检查 + 快速修复。
 ## 示例
 
 ```bash
-openclaw doctor
-openclaw doctor --repair
-openclaw doctor --deep
+dexter doctor
+dexter doctor --repair
+dexter doctor --deep
 ```
 
 注意事项：

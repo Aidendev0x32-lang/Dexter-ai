@@ -46,7 +46,7 @@ Android 直接连接到 Gateway 网关 WebSocket（默认 `ws://<host>:18789`）
 ### 1）启动 Gateway 网关
 
 ```bash
-openclaw gateway --port 18789 --verbose
+dexter gateway --port 18789 --verbose
 ```
 
 在日志中确认你看到类似内容：
@@ -96,8 +96,8 @@ Android NSD/mDNS 发现无法跨网络。如果你的 Android 节点和 Gateway 
 在 Gateway 网关机器上：
 
 ```bash
-openclaw nodes pending
-openclaw nodes approve <requestId>
+dexter nodes pending
+dexter nodes approve <requestId>
 ```
 
 配对详情：[Gateway 网关配对](/gateway/pairing)。
@@ -106,11 +106,11 @@ openclaw nodes approve <requestId>
 
 - 通过节点状态：
   ```bash
-  openclaw nodes status
+  dexter nodes status
   ```
 - 通过 Gateway 网关：
   ```bash
-  openclaw gateway call node.list --params "{}"
+  dexter gateway call node.list --params "{}"
   ```
 
 ### 6）聊天 + 历史
@@ -134,7 +134,7 @@ Android 节点的 Chat 面板使用 Gateway 网关的**主会话键**（`main`�
 2. 将节点导航到它（局域网）：
 
 ```bash
-openclaw nodes invoke --node "<Android Node>" --command canvas.navigate --params '{"url":"http://<gateway-hostname>.local:18793/__openclaw__/canvas/"}'
+dexter nodes invoke --node "<Android Node>" --command canvas.navigate --params '{"url":"http://<gateway-hostname>.local:18793/__openclaw__/canvas/"}'
 ```
 
 Tailnet（可选）：如果两个设备都在 Tailscale 上，使用 MagicDNS 名称或 tailnet IP 而不是 `.local`，例如 `http://<gateway-magicdns>:18793/__openclaw__/canvas/`。

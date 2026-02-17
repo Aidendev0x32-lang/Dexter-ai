@@ -35,19 +35,19 @@ Windows 上的 OpenClaw 推荐**通过 WSL2**（推荐 Ubuntu）。CLI + Gateway
 在 WSL2 内：
 
 ```
-openclaw onboard --install-daemon
+dexter onboard --install-daemon
 ```
 
 或：
 
 ```
-openclaw gateway install
+dexter gateway install
 ```
 
 或：
 
 ```
-openclaw configure
+dexter configure
 ```
 
 出现提示时选择 **Gateway service**。
@@ -55,7 +55,7 @@ openclaw configure
 修复/迁移：
 
 ```
-openclaw doctor
+dexter doctor
 ```
 
 ## 高级：通过 LAN 暴露 WSL 服务（portproxy）
@@ -94,7 +94,7 @@ netsh interface portproxy add v4tov4 listenport=$ListenPort listenaddress=0.0.0.
 注意事项：
 
 - 从另一台机器 SSH 目标是 **Windows 主机 IP**（示例：`ssh user@windows-host -p 2222`）。
-- 远程节点必须指向**可访问的** Gateway 网关 URL（不是 `127.0.0.1`）；使用 `openclaw status --all` 确认。
+- 远程节点必须指向**可访问的** Gateway 网关 URL（不是 `127.0.0.1`）；使用 `dexter status --all` 确认。
 - 使用 `listenaddress=0.0.0.0` 进行 LAN 访问；`127.0.0.1` 仅保持本地访问。
 - 如果你想自动化，注册一个计划任务在登录时运行刷新步骤。
 
@@ -146,7 +146,7 @@ cd openclaw
 pnpm install
 pnpm ui:build # auto-installs UI deps on first run
 pnpm build
-openclaw onboard
+dexter onboard
 ```
 
 完整指南：[入门指南](/start/getting-started)

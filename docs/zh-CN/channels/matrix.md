@@ -25,13 +25,13 @@ Matrix 作为插件提供，不包含在核心安装中。
 通过 CLI 安装（npm 仓库）：
 
 ```bash
-openclaw plugins install @openclaw/matrix
+dexter plugins install @openclaw/matrix
 ```
 
 本地检出（从 git 仓库运行时）：
 
 ```bash
-openclaw plugins install ./extensions/matrix
+dexter plugins install ./extensions/matrix
 ```
 
 如果你在配置/新手引导期间选择 Matrix 并检测到 git 检出，OpenClaw 将自动提供本地安装路径。
@@ -41,8 +41,8 @@ openclaw plugins install ./extensions/matrix
 ## 设置
 
 1. 安装 Matrix 插件：
-   - 从 npm：`openclaw plugins install @openclaw/matrix`
-   - 从本地检出：`openclaw plugins install ./extensions/matrix`
+   - 从 npm：`dexter plugins install @openclaw/matrix`
+   - 从本地检出：`dexter plugins install ./extensions/matrix`
 2. 在主服务器上创建 Matrix 账户：
    - 在 [https://matrix.org/ecosystem/hosting/](https://matrix.org/ecosystem/hosting/) 浏览托管选项
    - 或自行托管。
@@ -133,8 +133,8 @@ E2EE 配置（启用端到端加密）：
 
 - 默认：`channels.matrix.dm.policy = "pairing"`。未知发送者会收到配对码。
 - 通过以下方式批准：
-  - `openclaw pairing list matrix`
-  - `openclaw pairing approve matrix <CODE>`
+  - `dexter pairing list matrix`
+  - `dexter pairing approve matrix <CODE>`
 - 公开私信：`channels.matrix.dm.policy="open"` 加上 `channels.matrix.dm.allowFrom=["*"]`。
 - `channels.matrix.dm.allowFrom` 仅接受完整 Matrix 用户 ID（例如 `@user:server`）。向导仅在目录搜索得到唯一精确匹配时将显示名称解析为用户 ID。
 

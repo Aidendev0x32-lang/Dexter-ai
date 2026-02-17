@@ -36,26 +36,26 @@ OpenClaw 需要 Node 22 或更新版本。
 <Steps>
   <Step title="新手引导并安装服务">
     ```bash
-    openclaw onboard --install-daemon
+    dexter onboard --install-daemon
     ```
   </Step>
   <Step title="配对 WhatsApp">
     ```bash
-    openclaw channels login
+    dexter channels login
     ```
   </Step>
   <Step title="启动 Gateway 网关">
     ```bash
-    openclaw gateway --port 18789
+    dexter gateway --port 18789
     ```
   </Step>
 </Steps>
 
-完成新手引导后，Gateway 网关将通过用户服务运行。你也可以使用 `openclaw gateway` 手动启动。
+完成新手引导后，Gateway 网关将通过用户服务运行。你也可以使用 `dexter gateway` 手动启动。
 
 <Info>
 之后在 npm 安装和 git 安装之间切换非常简单。安装另一种方式后，运行
-`openclaw doctor` 即可更新 Gateway 网关服务入口点。
+`dexter doctor` 即可更新 Gateway 网关服务入口点。
 </Info>
 
 ## 从源码安装（开发）
@@ -66,7 +66,7 @@ cd openclaw
 pnpm install
 pnpm ui:build # 首次运行时会自动安装 UI 依赖
 pnpm build
-openclaw onboard --install-daemon
+dexter onboard --install-daemon
 ```
 
 如果你还没有全局安装，可以在仓库目录中通过 `pnpm openclaw ...` 运行新手引导。
@@ -76,7 +76,7 @@ openclaw onboard --install-daemon
 ```bash
 OPENCLAW_CONFIG_PATH=~/.openclaw/a.json \
 OPENCLAW_STATE_DIR=~/.openclaw-a \
-openclaw gateway --port 19001
+dexter gateway --port 19001
 ```
 
 ## 发送测试消息
@@ -84,5 +84,5 @@ openclaw gateway --port 19001
 需要一个正在运行的 Gateway 网关。
 
 ```bash
-openclaw message send --target +15555550123 --message "Hello from OpenClaw"
+dexter message send --target +15555550123 --message "Hello from OpenClaw"
 ```

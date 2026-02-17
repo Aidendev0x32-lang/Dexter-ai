@@ -35,7 +35,7 @@ OpenClaw 有两个日志"界面"：
 Control UI 的 Logs 标签页通过 Gateway 网关（`logs.tail`）尾随此文件。CLI 也可以这样做：
 
 ```bash
-openclaw logs --follow
+dexter logs --follow
 ```
 
 **Verbose 与日志级别**
@@ -75,7 +75,7 @@ Gateway 网关以两种模式打印 WebSocket 协议日志：
 
 ### WS 日志样式
 
-`openclaw gateway` 支持每个 Gateway 网关的样式切换：
+`dexter gateway` 支持每个 Gateway 网关的样式切换：
 
 - `--ws-log auto`（默认）：普通模式已优化；详细模式使用紧凑输出
 - `--ws-log compact`：详细时使用紧凑输出（配对的请求/响应）
@@ -86,13 +86,13 @@ Gateway 网关以两种模式打印 WebSocket 协议日志：
 
 ```bash
 # 优化的（仅错误/慢调用）
-openclaw gateway
+dexter gateway
 
 # 显示所有 WS 流量（配对）
-openclaw gateway --verbose --ws-log compact
+dexter gateway --verbose --ws-log compact
 
 # 显示所有 WS 流量（完整元数据）
-openclaw gateway --verbose --ws-log full
+dexter gateway --verbose --ws-log full
 ```
 
 ## 控制台格式化（子系统日志）

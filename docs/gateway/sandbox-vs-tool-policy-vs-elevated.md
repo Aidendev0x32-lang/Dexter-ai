@@ -18,10 +18,10 @@ OpenClaw has three related (but different) controls:
 Use the inspector to see what OpenClaw is _actually_ doing:
 
 ```bash
-openclaw sandbox explain
-openclaw sandbox explain --session agent:main:main
-openclaw sandbox explain --agent work
-openclaw sandbox explain --json
+dexter sandbox explain
+dexter sandbox explain --session agent:main:main
+dexter sandbox explain --agent work
+dexter sandbox explain --json
 ```
 
 It prints:

@@ -11,13 +11,13 @@ The WhatsApp channel runs via **Baileys Web**. This document captures the curren
 
 ## Goals
 
-- Send media with optional captions via `openclaw message send --media`.
+- Send media with optional captions via `dexter message send --media`.
 - Allow auto-replies from the web inbox to include media alongside text.
 - Keep per-type limits sane and predictable.
 
 ## CLI Surface
 
-- `openclaw message send --media <path-or-url> [--message <caption>]`
+- `dexter message send --media <path-or-url> [--message <caption>]`
   - `--media` optional; caption can be empty for media-only sends.
   - `--dry-run` prints the resolved payload; `--json` emits `{ channel, to, messageId, mediaUrl, caption }`.
 
@@ -36,7 +36,7 @@ The WhatsApp channel runs via **Baileys Web**. This document captures the curren
 ## Auto-Reply Pipeline
 
 - `getReplyFromConfig` returns `{ text?, mediaUrl?, mediaUrls? }`.
-- When media is present, the web sender resolves local paths or URLs using the same pipeline as `openclaw message send`.
+- When media is present, the web sender resolves local paths or URLs using the same pipeline as `dexter message send`.
 - Multiple media entries are sent sequentially if provided.
 
 ## Inbound Media to Commands (Pi)

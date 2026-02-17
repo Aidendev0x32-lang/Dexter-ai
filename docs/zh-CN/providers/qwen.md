@@ -20,7 +20,7 @@ Qwen 为 Qwen Coder 和 Qwen Vision 模型提供免费层 OAuth 流程（每天 
 ## 启用插件
 
 ```bash
-openclaw plugins enable qwen-portal-auth
+dexter plugins enable qwen-portal-auth
 ```
 
 启用后重启 Gateway 网关。
@@ -28,7 +28,7 @@ openclaw plugins enable qwen-portal-auth
 ## 认证
 
 ```bash
-openclaw models auth login --provider qwen-portal --set-default
+dexter models auth login --provider qwen-portal --set-default
 ```
 
 这会运行 Qwen 设备码 OAuth 流程并将提供商条目写入你的 `models.json`（加上一个 `qwen` 别名以便快速切换）。
@@ -41,7 +41,7 @@ openclaw models auth login --provider qwen-portal --set-default
 切换模型：
 
 ```bash
-openclaw models set qwen-portal/coder-model
+dexter models set qwen-portal/coder-model
 ```
 
 ## 复用 Qwen Code CLI 登录

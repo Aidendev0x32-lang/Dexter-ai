@@ -109,7 +109,7 @@ UI 行为：
 ## 模型/工具集成
 
 - 工具接口：`nodes` 工具添加 `location_get` 操作（需要节点）。
-- CLI：`openclaw nodes location get --node <id>`。
+- CLI：`dexter nodes location get --node <id>`。
 - 智能体指南：仅在用户启用位置并理解范围时调用。
 
 ## UX 文案（建议）

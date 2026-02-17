@@ -2,7 +2,7 @@
 read_when:
   - 你想更改默认模型或查看提供商认证状态
   - 你想扫描可用的模型/提供商并调试认证配置
-summary: "`openclaw models` 的 CLI 参考（status/list/set/scan、别名、回退、认证）"
+summary: "`dexter models` 的 CLI 参考（status/list/set/scan、别名、回退、认证）"
 title: models
 x-i18n:
   generated_at: "2026-02-01T20:21:16Z"
@@ -13,7 +13,7 @@ x-i18n:
   workflow: 14
 ---
 
-# `openclaw models`
+# `dexter models`
 
 模型发现、扫描和配置（默认模型、回退、认证配置）。
 
@@ -25,13 +25,13 @@ x-i18n:
 ## 常用命令
 
 ```bash
-openclaw models status
-openclaw models list
-openclaw models set <model-or-alias>
-openclaw models scan
+dexter models status
+dexter models list
+dexter models set <model-or-alias>
+dexter models scan
 ```
 
-`openclaw models status` 显示已解析的默认模型/回退配置以及认证概览。
+`dexter models status` 显示已解析的默认模型/回退配置以及认证概览。
 当提供商使用快照可用时，OAuth/令牌状态部分会包含提供商使用头信息。
 添加 `--probe` 可对每个已配置的提供商配置运行实时认证探测。
 探测会发送真实请求（可能消耗令牌并触发速率限制）。
@@ -63,21 +63,21 @@ openclaw models scan
 ## 别名 + 回退
 
 ```bash
-openclaw models aliases list
-openclaw models fallbacks list
+dexter models aliases list
+dexter models fallbacks list
 ```
 
 ## 认证配置
 
 ```bash
-openclaw models auth add
-openclaw models auth login --provider <id>
-openclaw models auth setup-token
-openclaw models auth paste-token
+dexter models auth add
+dexter models auth login --provider <id>
+dexter models auth setup-token
+dexter models auth paste-token
 ```
 
 `models auth login` 运行提供商插件的认证流程（OAuth/API 密钥）。使用
-`openclaw plugins list` 查看已安装的提供商。
+`dexter plugins list` 查看已安装的提供商。
 
 注意事项：
 

@@ -44,13 +44,13 @@ Status: production-ready via WhatsApp Web (Baileys). Gateway owns linked session
   <Step title="Link WhatsApp (QR)">
 
 ```bash
-openclaw channels login --channel whatsapp
+dexter channels login --channel whatsapp
 ```
 
     For a specific account:
 
 ```bash
-openclaw channels login --channel whatsapp --account work
+dexter channels login --channel whatsapp --account work
 ```
 
   </Step>
@@ -58,7 +58,7 @@ openclaw channels login --channel whatsapp --account work
   <Step title="Start the gateway">
 
 ```bash
-openclaw gateway
+dexter gateway
 ```
 
   </Step>
@@ -66,8 +66,8 @@ openclaw gateway
   <Step title="Approve first pairing request (if using pairing mode)">
 
 ```bash
-openclaw pairing list whatsapp
-openclaw pairing approve whatsapp <CODE>
+dexter pairing list whatsapp
+dexter pairing approve whatsapp <CODE>
 ```
 
     Pairing requests expire after 1 hour. Pending requests are capped at 3 per channel.
@@ -349,7 +349,7 @@ Behavior notes:
   </Accordion>
 
   <Accordion title="Logout behavior">
-    `openclaw channels logout --channel whatsapp [--account <id>]` clears WhatsApp auth state for that account.
+    `dexter channels logout --channel whatsapp [--account <id>]` clears WhatsApp auth state for that account.
 
     In legacy auth directories, `oauth.json` is preserved while Baileys auth files are removed.
 
@@ -373,8 +373,8 @@ Behavior notes:
     Fix:
 
     ```bash
-    openclaw channels login --channel whatsapp
-    openclaw channels status
+    dexter channels login --channel whatsapp
+    dexter channels status
     ```
 
   </Accordion>
@@ -385,8 +385,8 @@ Behavior notes:
     Fix:
 
     ```bash
-    openclaw doctor
-    openclaw logs --follow
+    dexter doctor
+    dexter logs --follow
     ```
 
     If needed, re-link with `channels login`.

@@ -19,13 +19,13 @@ Mattermost ships as a plugin and is not bundled with the core install.
 Install via CLI (npm registry):
 
 ```bash
-openclaw plugins install @openclaw/mattermost
+dexter plugins install @openclaw/mattermost
 ```
 
 Local checkout (when running from a git repo):
 
 ```bash
-openclaw plugins install ./extensions/mattermost
+dexter plugins install ./extensions/mattermost
 ```
 
 If you choose Mattermost during configure/onboarding and a git checkout is detected,
@@ -114,8 +114,8 @@ Related fix scope: [fix(mattermost): honor chatmode mention fallback in group me
 
 - Default: `channels.mattermost.dmPolicy = "pairing"` (unknown senders get a pairing code).
 - Approve via:
-  - `openclaw pairing list mattermost`
-  - `openclaw pairing approve mattermost <CODE>`
+  - `dexter pairing list mattermost`
+  - `dexter pairing approve mattermost <CODE>`
 - Public DMs: `channels.mattermost.dmPolicy="open"` plus `channels.mattermost.allowFrom=["*"]`.
 
 ## Channels (groups)
@@ -126,7 +126,7 @@ Related fix scope: [fix(mattermost): honor chatmode mention fallback in group me
 
 ## Targets for outbound delivery
 
-Use these target formats with `openclaw message send` or cron/webhooks:
+Use these target formats with `dexter message send` or cron/webhooks:
 
 - `channel:<id>` for a channel
 - `user:<id>` for a DM

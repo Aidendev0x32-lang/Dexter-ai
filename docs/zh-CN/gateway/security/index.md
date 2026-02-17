@@ -14,16 +14,16 @@ x-i18n:
 
 # 安全性 🔒
 
-## 快速检查：`openclaw security audit`
+## 快速检查：`dexter security audit`
 
 另请参阅：[形式化验证（安全模型）](/security/formal-verification/)
 
 定期运行此命令（尤其是在更改配置或暴露网络接口之后）：
 
 ```bash
-openclaw security audit
-openclaw security audit --deep
-openclaw security audit --fix
+dexter security audit
+dexter security audit --deep
+dexter security audit --fix
 ```
 
 它会标记常见的安全隐患（Gateway 网关认证暴露、浏览器控制暴露、提权白名单、文件系统权限）。
@@ -85,7 +85,7 @@ OpenClaw 既是产品也是实验：你正在将前沿模型的行为连接到�
 
 仅用于紧急情况，`gateway.controlUi.dangerouslyDisableDeviceAuth` 会完全禁用设备身份检查。这是严重的安全性降级；除非你正在主动调试并能快速恢复，否则请保持关闭。
 
-`openclaw security audit` 会在启用此设置时发出警告。
+`dexter security audit` 会在启用此设置时发出警告。
 
 ## 反向代理配置
 
@@ -164,7 +164,7 @@ OpenClaw 的立场：
 - 优先使用显式的 `plugins.allow` 白名单。
 - 在启用之前审查插件配置。
 - 在插件更改后重启 Gateway 网关。
-- 如果你从 npm 安装插件（`openclaw plugins install <npm-spec>`），将其视为运行不受信任的代码：
+- 如果你从 npm 安装插件（`dexter plugins install <npm-spec>`），将其视为运行不受信任的代码：
   - 安装路径是 `~/.openclaw/extensions/<pluginId>/`（或 `$OPENCLAW_STATE_DIR/extensions/<pluginId>/`）。
   - OpenClaw 使用 `npm pack` 然后在该目录中运行 `npm install --omit=dev`（npm 生命周期脚本可以在安装期间执行代码）。
   - 优先使用固定的精确版本（`@scope/pkg@1.2.3`），并在启用之前检查磁盘上解压的代码。
@@ -183,8 +183,8 @@ OpenClaw 的立场：
 通过 CLI 批准：
 
 ```bash
-openclaw pairing list <channel>
-openclaw pairing approve <channel> <code>
+dexter pairing list <channel>
+dexter pairing approve <channel> <code>
 ```
 
 详情 + 磁盘上的文件：[配对](/channels/pairing)
@@ -285,7 +285,7 @@ OpenClaw 有两个独立的"谁可以触发我？"层：
    - 检查 Gateway 网关日志和最近的会话/记录中是否有意外的工具调用。
    - 审查 `extensions/` 并移除任何你不完全信任的内容。
 4. **重新运行审计**
-   - `openclaw security audit --deep` 并确认报告是干净的。
+   - `dexter security audit --deep` 并确认报告是干净的。
 
 ## 教训（来之不易）
 
@@ -312,7 +312,7 @@ OpenClaw 有两个独立的"谁可以触发我？"层：
 - `~/.openclaw/openclaw.json`：`600`（仅用户读/写）
 - `~/.openclaw`：`700`（仅用户）
 
-`openclaw doctor` 可以警告并提供收紧这些权限的选项。
+`dexter doctor` 可以警告并提供收紧这些权限的选项。
 
 ### 0.4）网络暴露（绑定 + 端口 + 防火墙）
 
@@ -394,7 +394,7 @@ Gateway 网关认证**默认是必需的**。如果没有配置令牌/密码，G
 }
 ```
 
-Doctor 可以为你生成一个：`openclaw doctor --generate-gateway-token`。
+Doctor 可以为你生成一个：`dexter doctor --generate-gateway-token`。
 
 注意：`gateway.remote.token` **仅**用于远程 CLI 调用；它不保护本地 WS 访问。
 可选：使用 `wss://` 时用 `gateway.remote.tlsFingerprint` 固定远程 TLS。
@@ -472,7 +472,7 @@ Doctor 可以为你生成一个：`openclaw doctor --generate-gateway-token`。
 
 - 保持工具摘要脱敏开启（`logging.redactSensitive: "tools"`；默认）。
 - 通过 `logging.redactPatterns` 为你的环境添加自定义模式（令牌、主机名、内部 URL）。
-- 共享诊断信息时，优先使用 `openclaw status --all`（可粘贴，秘密已脱敏）而不是原始日志。
+- 共享诊断信息时，优先使用 `dexter status --all`（可粘贴，秘密已脱敏）而不是原始日志。
 - 如果你不需要长期保留，清理旧的会话记录和日志文件。
 
 详情：[日志记录](/gateway/logging)
@@ -698,7 +698,7 @@ Doctor 可以为你生成一个：`openclaw doctor --generate-gateway-token`。
 
 ### 遏制
 
-1. **停止它：** 停止 macOS 应用（如果它监督 Gateway 网关）或终止你的 `openclaw gateway` 进程。
+1. **停止它：** 停止 macOS 应用（如果它监督 Gateway 网关）或终止你的 `dexter gateway` 进程。
 2. **关闭暴露：** 设置 `gateway.bind: "loopback"`（或禁用 Tailscale Funnel/Serve）直到你了解发生了什么。
 3. **冻结访问：** 将有风险的私信/群组切换到 `dmPolicy: "disabled"` / 要求提及，并移除你可能有的 `"*"` 允许所有条目。
 

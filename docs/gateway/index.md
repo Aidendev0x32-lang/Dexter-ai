@@ -24,11 +24,11 @@ Use this page for day-1 startup and day-2 operations of the Gateway service.
   <Step title="Start the Gateway">
 
 ```bash
-openclaw gateway --port 18789
+dexter gateway --port 18789
 # debug/trace mirrored to stdio
-openclaw gateway --port 18789 --verbose
+dexter gateway --port 18789 --verbose
 # force-kill listener on selected port, then start
-openclaw gateway --force
+dexter gateway --force
 ```
 
   </Step>
@@ -36,9 +36,9 @@ openclaw gateway --force
   <Step title="Verify service health">
 
 ```bash
-openclaw gateway status
-openclaw status
-openclaw logs --follow
+dexter gateway status
+dexter status
+dexter logs --follow
 ```
 
 Healthy baseline: `Runtime: running` and `RPC probe: ok`.
@@ -48,7 +48,7 @@ Healthy baseline: `Runtime: running` and `RPC probe: ok`.
   <Step title="Validate channel readiness">
 
 ```bash
-openclaw channels status --probe
+dexter channels status --probe
 ```
 
   </Step>
@@ -88,14 +88,14 @@ Default mode is `gateway.reload.mode="hybrid"`.
 ## Operator command set
 
 ```bash
-openclaw gateway status
-openclaw gateway status --deep
-openclaw gateway status --json
-openclaw gateway install
-openclaw gateway restart
-openclaw gateway stop
-openclaw logs --follow
-openclaw doctor
+dexter gateway status
+dexter gateway status --deep
+dexter gateway status --json
+dexter gateway install
+dexter gateway restart
+dexter gateway stop
+dexter logs --follow
+dexter doctor
 ```
 
 ## Remote access
@@ -123,22 +123,22 @@ Use supervised runs for production-like reliability.
   <Tab title="macOS (launchd)">
 
 ```bash
-openclaw gateway install
-openclaw gateway status
-openclaw gateway restart
-openclaw gateway stop
+dexter gateway install
+dexter gateway status
+dexter gateway restart
+dexter gateway stop
 ```
 
-LaunchAgent labels are `ai.openclaw.gateway` (default) or `ai.openclaw.<profile>` (named profile). `openclaw doctor` audits and repairs service config drift.
+LaunchAgent labels are `ai.openclaw.gateway` (default) or `ai.openclaw.<profile>` (named profile). `dexter doctor` audits and repairs service config drift.
 
   </Tab>
 
   <Tab title="Linux (systemd user)">
 
 ```bash
-openclaw gateway install
+dexter gateway install
 systemctl --user enable --now openclaw-gateway[-<profile>].service
-openclaw gateway status
+dexter gateway status
 ```
 
 For persistence after logout, enable lingering:
@@ -176,8 +176,8 @@ Checklist per instance:
 Example:
 
 ```bash
-OPENCLAW_CONFIG_PATH=~/.openclaw/a.json OPENCLAW_STATE_DIR=~/.openclaw-a openclaw gateway --port 19001
-OPENCLAW_CONFIG_PATH=~/.openclaw/b.json OPENCLAW_STATE_DIR=~/.openclaw-b openclaw gateway --port 19002
+OPENCLAW_CONFIG_PATH=~/.openclaw/a.json OPENCLAW_STATE_DIR=~/.openclaw-a dexter gateway --port 19001
+OPENCLAW_CONFIG_PATH=~/.openclaw/b.json OPENCLAW_STATE_DIR=~/.openclaw-b dexter gateway --port 19002
 ```
 
 See: [Multiple gateways](/gateway/multiple-gateways).
@@ -185,9 +185,9 @@ See: [Multiple gateways](/gateway/multiple-gateways).
 ### Dev profile quick path
 
 ```bash
-openclaw --dev setup
-openclaw --dev gateway --allow-unconfigured
-openclaw --dev status
+dexter --dev setup
+dexter --dev gateway --allow-unconfigured
+dexter --dev status
 ```
 
 Defaults include isolated state/config and base gateway port `19001`.
@@ -216,8 +216,8 @@ See full protocol docs: [Gateway Protocol](/gateway/protocol).
 ### Readiness
 
 ```bash
-openclaw gateway status
-openclaw channels status --probe
+dexter gateway status
+dexter channels status --probe
 openclaw health
 ```
 

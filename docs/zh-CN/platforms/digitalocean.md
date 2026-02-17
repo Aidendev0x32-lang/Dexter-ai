@@ -83,7 +83,7 @@ openclaw --version
 ## 4) 运行新手引导
 
 ```bash
-openclaw onboard --install-daemon
+dexter onboard --install-daemon
 ```
 
 向导将引导你完成：
@@ -97,7 +97,7 @@ openclaw onboard --install-daemon
 
 ```bash
 # Check status
-openclaw status
+dexter status
 
 # Check service
 systemctl --user status openclaw-gateway.service
@@ -127,8 +127,8 @@ curl -fsSL https://tailscale.com/install.sh | sh
 tailscale up
 
 # Configure Gateway to use Tailscale Serve
-openclaw config set gateway.tailscale.mode serve
-openclaw gateway restart
+dexter config set gateway.tailscale.mode serve
+dexter gateway restart
 ```
 
 打开：`https://<magicdns>/`
@@ -141,8 +141,8 @@ openclaw gateway restart
 **选项 C：Tailnet 绑定（不使用 Serve）**
 
 ```bash
-openclaw config set gateway.bind tailnet
-openclaw gateway restart
+dexter config set gateway.bind tailnet
+dexter gateway restart
 ```
 
 打开：`http://<tailscale-ip>:18789`（需要令牌）。
@@ -152,14 +152,14 @@ openclaw gateway restart
 ### Telegram
 
 ```bash
-openclaw pairing list telegram
-openclaw pairing approve telegram <CODE>
+dexter pairing list telegram
+dexter pairing approve telegram <CODE>
 ```
 
 ### WhatsApp
 
 ```bash
-openclaw channels login whatsapp
+dexter channels login whatsapp
 # Scan QR code
 ```
 
@@ -237,8 +237,8 @@ Oracle Cloud 提供 **Always Free** ARM 实例，比这里任何付费选项都�
 ### Gateway 网关无法启动
 
 ```bash
-openclaw gateway status
-openclaw doctor --non-interactive
+dexter gateway status
+dexter doctor --non-interactive
 journalctl -u openclaw --no-pager -n 50
 ```
 

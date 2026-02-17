@@ -25,7 +25,7 @@ x-i18n:
 
 ## 说明
 
-- `directory` 用于帮助你查找可粘贴到其他命令中的 ID（特别是 `openclaw message send --target ...`）。
+- `directory` 用于帮助你查找可粘贴到其他命令中的 ID（特别是 `dexter message send --target ...`）。
 - 对于许多渠道，结果来源于配置（允许列表/已配置的群组），而非实时的提供商目录。
 - 默认输出为以制表符分隔的 `id`（有时包含 `name`）；脚本中请使用 `--json`。
 
@@ -33,7 +33,7 @@ x-i18n:
 
 ```bash
 openclaw directory peers list --channel slack --query "U0"
-openclaw message send --channel slack --target user:U012ABCDEF --message "hello"
+dexter message send --channel slack --target user:U012ABCDEF --message "hello"
 ```
 
 ## ID 格式（按渠道）

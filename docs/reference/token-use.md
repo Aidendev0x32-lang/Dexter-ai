@@ -52,7 +52,7 @@ Use these in chat:
 Other surfaces:
 
 - **TUI/Web TUI:** `/status` + `/usage` are supported.
-- **CLI:** `openclaw status --usage` and `openclaw channels list` show
+- **CLI:** `dexter status --usage` and `dexter channels list` show
   provider quota windows (not per-response costs).
 
 ## Cost estimation (when shown)

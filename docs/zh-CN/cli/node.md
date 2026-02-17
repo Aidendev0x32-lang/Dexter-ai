@@ -49,7 +49,7 @@ x-i18n:
 ## 运行（前台）
 
 ```bash
-openclaw node run --host <gateway-host> --port 18789
+dexter node run --host <gateway-host> --port 18789
 ```
 
 选项：
@@ -66,7 +66,7 @@ openclaw node run --host <gateway-host> --port 18789
 将无头节点主机安装为用户服务。
 
 ```bash
-openclaw node install --host <gateway-host> --port 18789
+dexter node install --host <gateway-host> --port 18789
 ```
 
 选项：
@@ -83,13 +83,13 @@ openclaw node install --host <gateway-host> --port 18789
 管理服务：
 
 ```bash
-openclaw node status
-openclaw node stop
-openclaw node restart
-openclaw node uninstall
+dexter node status
+dexter node stop
+dexter node restart
+dexter node uninstall
 ```
 
-使用 `openclaw node run` 运行前台节点主机（无服务）。
+使用 `dexter node run` 运行前台节点主机（无服务）。
 
 服务命令接受 `--json` 以获取机器可读输出。
 
@@ -99,8 +99,8 @@ openclaw node uninstall
 通过以下方式批准：
 
 ```bash
-openclaw nodes pending
-openclaw nodes approve <requestId>
+dexter nodes pending
+dexter nodes approve <requestId>
 ```
 
 节点主机将其节点 id、token、显示名称和 Gateway 网关连接信息存储在
@@ -112,4 +112,4 @@ openclaw nodes approve <requestId>
 
 - `~/.openclaw/exec-approvals.json`
 - [执行批准](/tools/exec-approvals)
-- `openclaw approvals --node <id|name|ip>`（从 Gateway 网关编辑）
+- `dexter approvals --node <id|name|ip>`（从 Gateway 网关编辑）

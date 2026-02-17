@@ -22,13 +22,13 @@ are not supported.
 Install the LINE plugin:
 
 ```bash
-openclaw plugins install @openclaw/line
+dexter plugins install @openclaw/line
 ```
 
 Local checkout (when running from a git repo):
 
 ```bash
-openclaw plugins install ./extensions/line
+dexter plugins install ./extensions/line
 ```
 
 ## Setup
@@ -107,8 +107,8 @@ Direct messages default to pairing. Unknown senders get a pairing code and their
 messages are ignored until approved.
 
 ```bash
-openclaw pairing list line
-openclaw pairing approve line <CODE>
+dexter pairing list line
+dexter pairing approve line <CODE>
 ```
 
 Allowlists and policies:

@@ -88,8 +88,8 @@ Prefer `OPENCLAW_GATEWAY_PASSWORD` over committing a password to disk.
 ## CLI examples
 
 ```bash
-openclaw gateway --tailscale serve
-openclaw gateway --tailscale funnel --auth password
+dexter gateway --tailscale serve
+dexter gateway --tailscale funnel --auth password
 ```
 
 ## Notes

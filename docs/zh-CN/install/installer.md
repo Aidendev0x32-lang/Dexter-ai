@@ -46,8 +46,8 @@ Windows (PowerShell) 帮助：
   - `npm`（默认）：`npm install -g openclaw@latest`
   - `git`：克隆/构建源码检出并安装包装脚本
 - 在 Linux 上：必要时将 npm 前缀切换到 `~/.npm-global`，以避免全局 npm 权限错误。
-- 如果是升级现有安装：运行 `openclaw doctor --non-interactive`（尽力执行）。
-- 对于 git 安装：安装/更新后运行 `openclaw doctor --non-interactive`（尽力执行）。
+- 如果是升级现有安装：运行 `dexter doctor --non-interactive`（尽力执行）。
+- 对于 git 安装：安装/更新后运行 `dexter doctor --non-interactive`（尽力执行）。
 - 通过默认设置 `SHARP_IGNORE_GLOBAL_LIBVIPS=1` 来缓解 `sharp` 原生安装问题（避免使用系统 libvips 编译）。
 
 如果你*希望* `sharp` 链接到全局安装的 libvips（或你正在调试），请设置：
@@ -97,7 +97,7 @@ curl -fsSL https://openclaw.ai/install-cli.sh | bash -s -- --help
 - 选择安装方式：
   - `npm`（默认）：`npm install -g openclaw@latest`
   - `git`：克隆/构建源码检出并安装包装脚本
-- 在升级和 git 安装时运行 `openclaw doctor --non-interactive`（尽力执行）。
+- 在升级和 git 安装时运行 `dexter doctor --non-interactive`（尽力执行）。
 
 示例：
 

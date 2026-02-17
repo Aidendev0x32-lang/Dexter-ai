@@ -42,7 +42,7 @@ Voice Call 插件运行在 **Gateway 网关进程内部**。
 ### 选项 A：从 npm 安装（推荐）
 
 ```bash
-openclaw plugins install @openclaw/voice-call
+dexter plugins install @openclaw/voice-call
 ```
 
 之后重启 Gateway 网关。
@@ -50,7 +50,7 @@ openclaw plugins install @openclaw/voice-call
 ### 选项 B：从本地文件夹安装（开发，不复制）
 
 ```bash
-openclaw plugins install ./extensions/voice-call
+dexter plugins install ./extensions/voice-call
 cd ./extensions/voice-call && pnpm install
 ```
 

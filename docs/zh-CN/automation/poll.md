@@ -25,19 +25,19 @@ x-i18n:
 
 ```bash
 # WhatsApp
-openclaw message poll --target +15555550123 \
+dexter message poll --target +15555550123 \
   --poll-question "Lunch today?" --poll-option "Yes" --poll-option "No" --poll-option "Maybe"
-openclaw message poll --target 123456789@g.us \
+dexter message poll --target 123456789@g.us \
   --poll-question "Meeting time?" --poll-option "10am" --poll-option "2pm" --poll-option "4pm" --poll-multi
 
 # Discord
-openclaw message poll --channel discord --target channel:123456789 \
+dexter message poll --channel discord --target channel:123456789 \
   --poll-question "Snack?" --poll-option "Pizza" --poll-option "Sushi"
-openclaw message poll --channel discord --target channel:123456789 \
+dexter message poll --channel discord --target channel:123456789 \
   --poll-question "Plan?" --poll-option "A" --poll-option "B" --poll-duration-hours 48
 
 # MS Teams
-openclaw message poll --channel msteams --target conversation:19:abc@thread.tacv2 \
+dexter message poll --channel msteams --target conversation:19:abc@thread.tacv2 \
   --poll-question "Lunch?" --poll-option "Pizza" --poll-option "Sushi"
 ```
 

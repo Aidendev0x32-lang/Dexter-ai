@@ -29,7 +29,7 @@ x-i18n:
 - 输出：
   - 默认：打印回复文本（加上 `MEDIA:<url>` 行）
   - `--json`：打印结构化负载 + 元数据
-- 可选使用 `--deliver` + `--channel` 将回复投递回渠道（目标格式与 `openclaw message --target` 匹配）。
+- 可选使用 `--deliver` + `--channel` 将回复投递回渠道（目标格式与 `dexter message --target` 匹配）。
 - 使用 `--reply-channel`/`--reply-to`/`--reply-account` 覆盖投递而不更改会话。
 
 如果 Gateway 网关不可达，CLI 会**回退**到嵌入式本地运行。
@@ -37,12 +37,12 @@ x-i18n:
 ## 示例
 
 ```bash
-openclaw agent --to +15555550123 --message "status update"
-openclaw agent --agent ops --message "Summarize logs"
-openclaw agent --session-id 1234 --message "Summarize inbox" --thinking medium
-openclaw agent --to +15555550123 --message "Trace logs" --verbose on --json
-openclaw agent --to +15555550123 --message "Summon reply" --deliver
-openclaw agent --agent ops --message "Generate report" --deliver --reply-channel slack --reply-to "#reports"
+dexter agent --to +15555550123 --message "status update"
+dexter agent --agent ops --message "Summarize logs"
+dexter agent --session-id 1234 --message "Summarize inbox" --thinking medium
+dexter agent --to +15555550123 --message "Trace logs" --verbose on --json
+dexter agent --to +15555550123 --message "Summon reply" --deliver
+dexter agent --agent ops --message "Generate report" --deliver --reply-channel slack --reply-to "#reports"
 ```
 
 ## 标志

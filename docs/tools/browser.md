@@ -34,10 +34,10 @@ agent automation and verification.
 ## Quick start
 
 ```bash
-openclaw browser --browser-profile openclaw status
-openclaw browser --browser-profile openclaw start
-openclaw browser --browser-profile openclaw open https://example.com
-openclaw browser --browser-profile openclaw snapshot
+dexter browser --browser-profile dexter status
+dexter browser --browser-profile openclaw start
+dexter browser --browser-profile openclaw open https://example.com
+dexter browser --browser-profile openclaw snapshot
 ```
 
 If you get “Browser disabled”, enable it in config (see below) and restart the
@@ -101,7 +101,7 @@ auto-detection:
 CLI example:
 
 ```bash
-openclaw config set browser.executablePath "/usr/bin/google-chrome"
+dexter config set browser.executablePath "/usr/bin/google-chrome"
 ```
 
 ```json5
@@ -246,22 +246,22 @@ Chrome extension relay takeover requires host browser control, so either:
 1. Load the extension (dev/unpacked):
 
 ```bash
-openclaw browser extension install
+dexter browser extension install
 ```
 
 - Chrome → `chrome://extensions` → enable “Developer mode”
-- “Load unpacked” → select the directory printed by `openclaw browser extension path`
+- “Load unpacked” → select the directory printed by `dexter browser extension path`
 - Pin the extension, then click it on the tab you want to control (badge shows `ON`).
 
 2. Use it:
 
-- CLI: `openclaw browser --browser-profile chrome tabs`
+- CLI: `dexter browser --browser-profile chrome tabs`
 - Agent tool: `browser` with `profile="chrome"`
 
 Optional: if you want a different name or relay port, create your own profile:
 
 ```bash
-openclaw browser create-profile \
+dexter browser create-profile \
   --name my-chrome \
   --driver extension \
   --cdp-url http://127.0.0.1:18792 \
@@ -366,79 +366,79 @@ All commands also accept `--json` for machine-readable output (stable payloads).
 
 Basics:
 
-- `openclaw browser status`
-- `openclaw browser start`
-- `openclaw browser stop`
-- `openclaw browser tabs`
-- `openclaw browser tab`
-- `openclaw browser tab new`
-- `openclaw browser tab select 2`
-- `openclaw browser tab close 2`
-- `openclaw browser open https://example.com`
-- `openclaw browser focus abcd1234`
-- `openclaw browser close abcd1234`
+- `dexter browser status`
+- `dexter browser start`
+- `dexter browser stop`
+- `dexter browser tabs`
+- `dexter browser tab`
+- `dexter browser tab new`
+- `dexter browser tab select 2`
+- `dexter browser tab close 2`
+- `dexter browser open https://example.com`
+- `dexter browser focus abcd1234`
+- `dexter browser close abcd1234`
 
 Inspection:
 
-- `openclaw browser screenshot`
-- `openclaw browser screenshot --full-page`
-- `openclaw browser screenshot --ref 12`
-- `openclaw browser screenshot --ref e12`
-- `openclaw browser snapshot`
-- `openclaw browser snapshot --format aria --limit 200`
-- `openclaw browser snapshot --interactive --compact --depth 6`
-- `openclaw browser snapshot --efficient`
-- `openclaw browser snapshot --labels`
-- `openclaw browser snapshot --selector "#main" --interactive`
-- `openclaw browser snapshot --frame "iframe#main" --interactive`
-- `openclaw browser console --level error`
-- `openclaw browser errors --clear`
-- `openclaw browser requests --filter api --clear`
-- `openclaw browser pdf`
-- `openclaw browser responsebody "**/api" --max-chars 5000`
+- `dexter browser screenshot`
+- `dexter browser screenshot --full-page`
+- `dexter browser screenshot --ref 12`
+- `dexter browser screenshot --ref e12`
+- `dexter browser snapshot`
+- `dexter browser snapshot --format aria --limit 200`
+- `dexter browser snapshot --interactive --compact --depth 6`
+- `dexter browser snapshot --efficient`
+- `dexter browser snapshot --labels`
+- `dexter browser snapshot --selector "#main" --interactive`
+- `dexter browser snapshot --frame "iframe#main" --interactive`
+- `dexter browser console --level error`
+- `dexter browser errors --clear`
+- `dexter browser requests --filter api --clear`
+- `dexter browser pdf`
+- `dexter browser responsebody "**/api" --max-chars 5000`
 
 Actions:
 
-- `openclaw browser navigate https://example.com`
-- `openclaw browser resize 1280 720`
-- `openclaw browser click 12 --double`
-- `openclaw browser click e12 --double`
-- `openclaw browser type 23 "hello" --submit`
-- `openclaw browser press Enter`
-- `openclaw browser hover 44`
-- `openclaw browser scrollintoview e12`
-- `openclaw browser drag 10 11`
-- `openclaw browser select 9 OptionA OptionB`
-- `openclaw browser download e12 report.pdf`
-- `openclaw browser waitfordownload report.pdf`
-- `openclaw browser upload /tmp/openclaw/uploads/file.pdf`
-- `openclaw browser fill --fields '[{"ref":"1","type":"text","value":"Ada"}]'`
-- `openclaw browser dialog --accept`
-- `openclaw browser wait --text "Done"`
-- `openclaw browser wait "#main" --url "**/dash" --load networkidle --fn "window.ready===true"`
-- `openclaw browser evaluate --fn '(el) => el.textContent' --ref 7`
-- `openclaw browser highlight e12`
-- `openclaw browser trace start`
-- `openclaw browser trace stop`
+- `dexter browser navigate https://example.com`
+- `dexter browser resize 1280 720`
+- `dexter browser click 12 --double`
+- `dexter browser click e12 --double`
+- `dexter browser type 23 "hello" --submit`
+- `dexter browser press Enter`
+- `dexter browser hover 44`
+- `dexter browser scrollintoview e12`
+- `dexter browser drag 10 11`
+- `dexter browser select 9 OptionA OptionB`
+- `dexter browser download e12 report.pdf`
+- `dexter browser waitfordownload report.pdf`
+- `dexter browser upload /tmp/openclaw/uploads/file.pdf`
+- `dexter browser fill --fields '[{"ref":"1","type":"text","value":"Ada"}]'`
+- `dexter browser dialog --accept`
+- `dexter browser wait --text "Done"`
+- `dexter browser wait "#main" --url "**/dash" --load networkidle --fn "window.ready===true"`
+- `dexter browser evaluate --fn '(el) => el.textContent' --ref 7`
+- `dexter browser highlight e12`
+- `dexter browser trace start`
+- `dexter browser trace stop`
 
 State:
 
-- `openclaw browser cookies`
-- `openclaw browser cookies set session abc123 --url "https://example.com"`
-- `openclaw browser cookies clear`
-- `openclaw browser storage local get`
-- `openclaw browser storage local set theme dark`
-- `openclaw browser storage session clear`
-- `openclaw browser set offline on`
-- `openclaw browser set headers --json '{"X-Debug":"1"}'`
-- `openclaw browser set credentials user pass`
-- `openclaw browser set credentials --clear`
-- `openclaw browser set geo 37.7749 -122.4194 --origin "https://example.com"`
-- `openclaw browser set geo --clear`
-- `openclaw browser set media dark`
-- `openclaw browser set timezone America/New_York`
-- `openclaw browser set locale en-US`
-- `openclaw browser set device "iPhone 14"`
+- `dexter browser cookies`
+- `dexter browser cookies set session abc123 --url "https://example.com"`
+- `dexter browser cookies clear`
+- `dexter browser storage local get`
+- `dexter browser storage local set theme dark`
+- `dexter browser storage session clear`
+- `dexter browser set offline on`
+- `dexter browser set headers --json '{"X-Debug":"1"}'`
+- `dexter browser set credentials user pass`
+- `dexter browser set credentials --clear`
+- `dexter browser set geo 37.7749 -122.4194 --origin "https://example.com"`
+- `dexter browser set geo --clear`
+- `dexter browser set media dark`
+- `dexter browser set timezone America/New_York`
+- `dexter browser set locale en-US`
+- `dexter browser set device "iPhone 14"`
 
 Notes:
 
@@ -466,14 +466,14 @@ Notes:
 
 OpenClaw supports two “snapshot” styles:
 
-- **AI snapshot (numeric refs)**: `openclaw browser snapshot` (default; `--format ai`)
+- **AI snapshot (numeric refs)**: `dexter browser snapshot` (default; `--format ai`)
   - Output: a text snapshot that includes numeric refs.
-  - Actions: `openclaw browser click 12`, `openclaw browser type 23 "hello"`.
+  - Actions: `dexter browser click 12`, `dexter browser type 23 "hello"`.
   - Internally, the ref is resolved via Playwright’s `aria-ref`.
 
-- **Role snapshot (role refs like `e12`)**: `openclaw browser snapshot --interactive` (or `--compact`, `--depth`, `--selector`, `--frame`)
+- **Role snapshot (role refs like `e12`)**: `dexter browser snapshot --interactive` (or `--compact`, `--depth`, `--selector`, `--frame`)
   - Output: a role-based list/tree with `[ref=e12]` (and optional `[nth=1]`).
-  - Actions: `openclaw browser click e12`, `openclaw browser highlight e12`.
+  - Actions: `dexter browser click e12`, `dexter browser highlight e12`.
   - Internally, the ref is resolved via `getByRole(...)` (plus `nth()` for duplicates).
   - Add `--labels` to include a viewport screenshot with overlayed `e12` labels.
 
@@ -487,18 +487,18 @@ Ref behavior:
 You can wait on more than just time/text:
 
 - Wait for URL (globs supported by Playwright):
-  - `openclaw browser wait --url "**/dash"`
+  - `dexter browser wait --url "**/dash"`
 - Wait for load state:
-  - `openclaw browser wait --load networkidle`
+  - `dexter browser wait --load networkidle`
 - Wait for a JS predicate:
-  - `openclaw browser wait --fn "window.ready===true"`
+  - `dexter browser wait --fn "window.ready===true"`
 - Wait for a selector to become visible:
-  - `openclaw browser wait "#main"`
+  - `dexter browser wait "#main"`
 
 These can be combined:
 
 ```bash
-openclaw browser wait "#main" \
+dexter browser wait "#main" \
   --url "**/dash" \
   --load networkidle \
   --fn "window.ready===true" \
@@ -509,16 +509,16 @@ openclaw browser wait "#main" \
 
 When an action fails (e.g. “not visible”, “strict mode violation”, “covered”):
 
-1. `openclaw browser snapshot --interactive`
+1. `dexter browser snapshot --interactive`
 2. Use `click <ref>` / `type <ref>` (prefer role refs in interactive mode)
-3. If it still fails: `openclaw browser highlight <ref>` to see what Playwright is targeting
+3. If it still fails: `dexter browser highlight <ref>` to see what Playwright is targeting
 4. If the page behaves oddly:
-   - `openclaw browser errors --clear`
-   - `openclaw browser requests --filter api --clear`
+   - `dexter browser errors --clear`
+   - `dexter browser requests --filter api --clear`
 5. For deep debugging: record a trace:
-   - `openclaw browser trace start`
+   - `dexter browser trace start`
    - reproduce the issue
-   - `openclaw browser trace stop` (prints `TRACE:<path>`)
+   - `dexter browser trace stop` (prints `TRACE:<path>`)
 
 ## JSON output
 
@@ -527,10 +527,10 @@ When an action fails (e.g. “not visible”, “strict mode violation”, “co
 Examples:
 
 ```bash
-openclaw browser status --json
-openclaw browser snapshot --interactive --json
-openclaw browser requests --filter api --json
-openclaw browser cookies --json
+dexter browser status --json
+dexter browser snapshot --interactive --json
+dexter browser requests --filter api --json
+dexter browser cookies --json
 ```
 
 Role snapshots in JSON include `refs` plus a small `stats` block (lines/chars/refs/interactive) so tools can reason about payload size and density.
@@ -553,8 +553,8 @@ These are useful for “make the site behave like X” workflows:
 
 ## Security & privacy
 
-- The openclaw browser profile may contain logged-in sessions; treat it as sensitive.
-- `browser act kind=evaluate` / `openclaw browser evaluate` and `wait --fn`
+- The dexter browser profile may contain logged-in sessions; treat it as sensitive.
+- `browser act kind=evaluate` / `dexter browser evaluate` and `wait --fn`
   execute arbitrary JavaScript in the page context. Prompt injection can steer
   this. Disable it with `browser.evaluateEnabled=false` if you do not need it.
 - For logins and anti-bot notes (X/Twitter, etc.), see [Browser login + X/Twitter posting](/tools/browser-login).

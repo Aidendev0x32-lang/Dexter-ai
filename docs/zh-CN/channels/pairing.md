@@ -38,8 +38,8 @@ x-i18n:
 ### 批准发送者
 
 ```bash
-openclaw pairing list telegram
-openclaw pairing approve telegram <CODE>
+dexter pairing list telegram
+dexter pairing approve telegram <CODE>
 ```
 
 支持的渠道：`telegram`、`whatsapp`、`signal`、`imessage`、`discord`、`slack`。
@@ -60,9 +60,9 @@ openclaw pairing approve telegram <CODE>
 ### 批准节点设备
 
 ```bash
-openclaw devices list
-openclaw devices approve <requestId>
-openclaw devices reject <requestId>
+dexter devices list
+dexter devices approve <requestId>
+dexter devices reject <requestId>
 ```
 
 ### 状态存储位置
@@ -74,7 +74,7 @@ openclaw devices reject <requestId>
 
 ### 说明
 
-- 旧版 `node.pair.*` API（CLI：`openclaw nodes pending/approve`）是一个单独的 Gateway 网关拥有的配对存储。WS 节点仍然需要设备配对。
+- 旧版 `node.pair.*` API（CLI：`dexter nodes pending/approve`）是一个单独的 Gateway 网关拥有的配对存储。WS 节点仍然需要设备配对。
 
 ## 相关文档
 

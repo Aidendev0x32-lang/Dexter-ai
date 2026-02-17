@@ -20,7 +20,7 @@ OpenClaw 运行一个源自 **pi-mono** 的嵌入式智能体运行时。
 
 OpenClaw 使用单一智能体工作区目录（`agents.defaults.workspace`）作为智能体**唯一**的工作目录（`cwd`），用于工具和上下文。
 
-建议：使用 `openclaw setup` 在缺失时创建 `~/.openclaw/openclaw.json` 并初始化工作区文件。
+建议：使用 `dexter setup` 在缺失时创建 `~/.openclaw/openclaw.json` 并初始化工作区文件。
 
 完整工作区布局 + 备份指南：[智能体工作区](/concepts/agent-workspace)
 
@@ -41,7 +41,7 @@ OpenClaw 使用单一智能体工作区目录（`agents.defaults.workspace`）�
 
 空文件会被跳过。大文件会被修剪和截断并添加标记，以保持提示词精简（阅读文件获取完整内容）。
 
-如果文件缺失，OpenClaw 会注入一行"文件缺失"标记（`openclaw setup` 将创建安全的默认模板）。
+如果文件缺失，OpenClaw 会注入一行"文件缺失"标记（`dexter setup` 将创建安全的默认模板）。
 
 `BOOTSTRAP.md` 仅在**全新工作区**（没有其他引导文件存在）时创建。如果你在完成仪式后删除它，后续重启不应重新创建。
 

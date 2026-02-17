@@ -32,7 +32,7 @@ x-i18n:
 
 **CLI 用量窗口（提供商配额）**
 
-- `openclaw status --usage` 和 `openclaw channels list` 显示提供商**用量窗口**（配额快照，非每条消息的费用）。
+- `dexter status --usage` 和 `dexter channels list` 显示提供商**用量窗口**（配额快照，非每条消息的费用）。
 
 详情和示例请参阅 [Token 用量与费用](/reference/token-use)。
 
@@ -104,8 +104,8 @@ OpenClaw 可以从以下来源获取凭据：
 
 某些状态命令会调用**提供商用量端点**以显示配额窗口或认证健康状态。这些通常是低频调用，但仍会访问提供商 API：
 
-- `openclaw status --usage`
-- `openclaw models status --json`
+- `dexter status --usage`
+- `dexter models status --json`
 
 请参阅[模型 CLI](/cli/models)。
 
@@ -117,7 +117,7 @@ OpenClaw 可以从以下来源获取凭据：
 
 ### 8）模型扫描/探测
 
-`openclaw models scan` 可以探测 OpenRouter 模型，启用探测时会使用 `OPENROUTER_API_KEY`。
+`dexter models scan` 可以探测 OpenRouter 模型，启用探测时会使用 `OPENROUTER_API_KEY`。
 
 请参阅[模型 CLI](/cli/models)。
 

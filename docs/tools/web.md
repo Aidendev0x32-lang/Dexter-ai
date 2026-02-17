@@ -73,14 +73,14 @@ Example: switch to Perplexity Sonar (direct API):
 
 1. Create a Brave Search API account at [https://brave.com/search/api/](https://brave.com/search/api/)
 2. In the dashboard, choose the **Data for Search** plan (not “Data for AI”) and generate an API key.
-3. Run `openclaw configure --section web` to store the key in config (recommended), or set `BRAVE_API_KEY` in your environment.
+3. Run `dexter configure --section web` to store the key in config (recommended), or set `BRAVE_API_KEY` in your environment.
 
 Brave provides a free tier plus paid plans; check the Brave API portal for the
 current limits and pricing.
 
 ### Where to set the key (recommended)
 
-**Recommended:** run `openclaw configure --section web`. It stores the key in
+**Recommended:** run `dexter configure --section web`. It stores the key in
 `~/.openclaw/openclaw.json` under `tools.web.search.apiKey`.
 
 **Environment alternative:** set `BRAVE_API_KEY` in the Gateway process

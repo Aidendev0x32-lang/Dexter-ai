@@ -59,7 +59,7 @@ OpenClaw 在每次运行时组装自己的系统提示词。它包括：
 其他界面：
 
 - **TUI/Web TUI：** 支持 `/status` + `/usage`。
-- **CLI：** `openclaw status --usage` 和 `openclaw channels list` 显示
+- **CLI：** `dexter status --usage` 和 `dexter channels list` 显示
   提供商配额窗口（不是每响应成本）。
 
 ## 成本估算（显示时）

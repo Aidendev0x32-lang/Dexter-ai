@@ -41,7 +41,7 @@ x-i18n:
     OpenClawをインストールし、数分でGatewayを起動できます。
   </Card>
   <Card title="ウィザードを実行" href="/start/wizard" icon="sparkles">
-    `openclaw onboard`とペアリングフローによるガイド付きセットアップ。
+    `dexter onboard`とペアリングフローによるガイド付きセットアップ。
   </Card>
   <Card title="Control UIを開く" href="/web/control-ui" icon="layout-dashboard">
     チャット、設定、セッション用のブラウザダッシュボードを起動します。
@@ -97,13 +97,13 @@ Gatewayは、セッション、ルーティング、チャネル接続の信頼�
   </Step>
   <Step title="オンボーディングとサービスのインストール">
     ```bash
-    openclaw onboard --install-daemon
+    dexter onboard --install-daemon
     ```
   </Step>
   <Step title="WhatsAppをペアリングしてGatewayを起動">
     ```bash
-    openclaw channels login
-    openclaw gateway --port 18789
+    dexter channels login
+    dexter gateway --port 18789
     ```
   </Step>
 </Steps>

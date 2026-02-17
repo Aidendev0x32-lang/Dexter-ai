@@ -23,8 +23,8 @@ x-i18n:
 
 Zalo Personal 作为插件提供，不包含在核心安装中。
 
-- 通过 CLI 安装：`openclaw plugins install @openclaw/zalouser`
-- 或从源码检出安装：`openclaw plugins install ./extensions/zalouser`
+- 通过 CLI 安装：`dexter plugins install @openclaw/zalouser`
+- 或从源码检出安装：`dexter plugins install ./extensions/zalouser`
 - 详情：[插件](/tools/plugin)
 
 ## 前置条件：zca-cli
@@ -38,7 +38,7 @@ Gateway 网关机器必须在 `PATH` 中有可用的 `zca` 二进制文件。
 
 1. 安装插件（见上文）。
 2. 登录（QR，在 Gateway 网关机器上）：
-   - `openclaw channels login --channel zalouser`
+   - `dexter channels login --channel zalouser`
    - 用 Zalo 手机应用扫描终端中的二维码。
 3. 启用渠道：
 
@@ -88,8 +88,8 @@ openclaw directory groups list --channel zalouser --query "work"
 
 通过以下方式批准：
 
-- `openclaw pairing list zalouser`
-- `openclaw pairing approve zalouser <code>`
+- `dexter pairing list zalouser`
+- `dexter pairing approve zalouser <code>`
 
 ## 群组访问（可选）
 
@@ -143,5 +143,5 @@ openclaw directory groups list --channel zalouser --query "work"
 
 **登录不保持：**
 
-- `openclaw channels status --probe`
-- 重新登录：`openclaw channels logout --channel zalouser && openclaw channels login --channel zalouser`
+- `dexter channels status --probe`
+- 重新登录：`dexter channels logout --channel zalouser && dexter channels login --channel zalouser`

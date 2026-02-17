@@ -57,7 +57,7 @@ DISCORD_BOT_TOKEN=...
     Invite the bot to your server with message permissions.
 
 ```bash
-openclaw gateway
+dexter gateway
 ```
 
   </Step>
@@ -65,8 +65,8 @@ openclaw gateway
   <Step title="Approve first DM pairing">
 
 ```bash
-openclaw pairing list discord
-openclaw pairing approve discord <CODE>
+dexter pairing list discord
+dexter pairing approve discord <CODE>
 ```
 
     Pairing codes expire after 1 hour.
@@ -640,9 +640,9 @@ message(action="send", channel="discord", target="channel:123", path="/path/to/a
     Useful checks:
 
 ```bash
-openclaw doctor
-openclaw channels status --probe
-openclaw logs --follow
+dexter doctor
+dexter channels status --probe
+dexter logs --follow
 ```
 
   </Accordion>
@@ -702,7 +702,7 @@ High-signal Discord fields:
 
 - Treat bot tokens as secrets (`DISCORD_BOT_TOKEN` preferred in supervised environments).
 - Grant least-privilege Discord permissions.
-- If command deploy/state is stale, restart gateway and re-check with `openclaw channels status --probe`.
+- If command deploy/state is stale, restart gateway and re-check with `dexter channels status --probe`.
 
 ## Related
 

@@ -7,16 +7,16 @@ title: "Security"
 
 # Security 🔒
 
-## Quick check: `openclaw security audit`
+## Quick check: `dexter security audit`
 
 See also: [Formal Verification (Security Models)](/security/formal-verification/)
 
 Run this regularly (especially after changing config or exposing network surfaces):
 
 ```bash
-openclaw security audit
-openclaw security audit --deep
-openclaw security audit --fix
+dexter security audit
+dexter security audit --deep
+dexter security audit --fix
 ```
 
 It flags common footguns (Gateway auth exposure, browser control exposure, elevated allowlists, filesystem permissions).
@@ -84,7 +84,7 @@ For break-glass scenarios only, `gateway.controlUi.dangerouslyDisableDeviceAuth`
 disables device identity checks entirely. This is a severe security downgrade;
 keep it off unless you are actively debugging and can revert quickly.
 
-`openclaw security audit` warns when this setting is enabled.
+`dexter security audit` warns when this setting is enabled.
 
 ## Reverse Proxy Configuration
 
@@ -171,7 +171,7 @@ Plugins run **in-process** with the Gateway. Treat them as trusted code:
 - Prefer explicit `plugins.allow` allowlists.
 - Review plugin config before enabling.
 - Restart the Gateway after plugin changes.
-- If you install plugins from npm (`openclaw plugins install <npm-spec>`), treat it like running untrusted code:
+- If you install plugins from npm (`dexter plugins install <npm-spec>`), treat it like running untrusted code:
   - The install path is `~/.openclaw/extensions/<pluginId>/` (or `$OPENCLAW_STATE_DIR/extensions/<pluginId>/`).
   - OpenClaw uses `npm pack` and then runs `npm install --omit=dev` in that directory (npm lifecycle scripts can execute code during install).
   - Prefer pinned, exact versions (`@scope/pkg@1.2.3`), and inspect the unpacked code on disk before enabling.
@@ -190,8 +190,8 @@ All current DM-capable channels support a DM policy (`dmPolicy` or `*.dm.policy`
 Approve via CLI:
 
 ```bash
-openclaw pairing list <channel>
-openclaw pairing approve <channel> <code>
+dexter pairing list <channel>
+dexter pairing approve <channel> <code>
 ```
 
 Details + files on disk: [Pairing](/channels/pairing)
@@ -311,7 +311,7 @@ Assume “compromised” means: someone got into a room that can trigger the bot
    - Check Gateway logs and recent sessions/transcripts for unexpected tool calls.
    - Review `extensions/` and remove anything you don’t fully trust.
 4. **Re-run audit**
-   - `openclaw security audit --deep` and confirm the report is clean.
+   - `dexter security audit --deep` and confirm the report is clean.
 
 ## Lessons Learned (The Hard Way)
 
@@ -338,7 +338,7 @@ Keep config + state private on the gateway host:
 - `~/.openclaw/openclaw.json`: `600` (user read/write only)
 - `~/.openclaw`: `700` (user only)
 
-`openclaw doctor` can warn and offer to tighten these permissions.
+`dexter doctor` can warn and offer to tighten these permissions.
 
 ### 0.4) Network exposure (bind + port + firewall)
 
@@ -432,7 +432,7 @@ Set a token so **all** WS clients must authenticate:
 }
 ```
 
-Doctor can generate one for you: `openclaw doctor --generate-gateway-token`.
+Doctor can generate one for you: `dexter doctor --generate-gateway-token`.
 
 Note: `gateway.remote.token` is **only** for remote CLI calls; it does not
 protect local WS access.
@@ -524,7 +524,7 @@ Recommendations:
 
 - Keep tool summary redaction on (`logging.redactSensitive: "tools"`; default).
 - Add custom patterns for your environment via `logging.redactPatterns` (tokens, hostnames, internal URLs).
-- When sharing diagnostics, prefer `openclaw status --all` (pasteable, secrets redacted) over raw logs.
+- When sharing diagnostics, prefer `dexter status --all` (pasteable, secrets redacted) over raw logs.
 - Prune old session transcripts and log files if you don’t need long retention.
 
 Details: [Logging](/gateway/logging)
@@ -766,7 +766,7 @@ If your AI does something bad:
 
 ### Contain
 
-1. **Stop it:** stop the macOS app (if it supervises the Gateway) or terminate your `openclaw gateway` process.
+1. **Stop it:** stop the macOS app (if it supervises the Gateway) or terminate your `dexter gateway` process.
 2. **Close exposure:** set `gateway.bind: "loopback"` (or disable Tailscale Funnel/Serve) until you understand what happened.
 3. **Freeze access:** switch risky DMs/groups to `dmPolicy: "disabled"` / require mentions, and remove `"*"` allow-all entries if you had them.
 

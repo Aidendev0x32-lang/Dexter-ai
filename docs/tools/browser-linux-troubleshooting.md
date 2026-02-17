@@ -128,7 +128,7 @@ browser extension to be attached to a live tab.
 
 Fix options:
 
-1. **Use the managed browser:** `openclaw browser start --browser-profile openclaw`
+1. **Use the managed browser:** `dexter browser start --browser-profile openclaw`
    (or set `browser.defaultProfile: "openclaw"`).
 2. **Use the extension relay:** install the extension, open a tab, and click the
    OpenClaw extension icon to attach it.

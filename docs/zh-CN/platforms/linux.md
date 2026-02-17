@@ -24,7 +24,7 @@ Gateway 网关在 Linux 上完全支持。**Node 是推荐的运行时**。
 
 1. 安装 Node 22+
 2. `npm i -g openclaw@latest`
-3. `openclaw onboard --install-daemon`
+3. `dexter onboard --install-daemon`
 4. 从你的笔记本电脑：`ssh -N -L 18789:127.0.0.1:18789 <user>@<host>`
 5. 打开 `http://127.0.0.1:18789/` 并粘贴你的令牌
 
@@ -46,19 +46,19 @@ Gateway 网关在 Linux 上完全支持。**Node 是推荐的运行时**。
 使用以下任一方式：
 
 ```
-openclaw onboard --install-daemon
+dexter onboard --install-daemon
 ```
 
 或：
 
 ```
-openclaw gateway install
+dexter gateway install
 ```
 
 或：
 
 ```
-openclaw configure
+dexter configure
 ```
 
 出现提示时选择 **Gateway service**。
@@ -66,7 +66,7 @@ openclaw configure
 修复/迁移：
 
 ```
-openclaw doctor
+dexter doctor
 ```
 
 ## 系统控制（systemd 用户单元）
@@ -86,7 +86,7 @@ After=network-online.target
 Wants=network-online.target
 
 [Service]
-ExecStart=/usr/local/bin/openclaw gateway --port 18789
+ExecStart=/usr/local/bin/dexter gateway --port 18789
 Restart=always
 RestartSec=5
 

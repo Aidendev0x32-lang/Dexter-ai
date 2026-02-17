@@ -8,44 +8,44 @@ title: "Doctor"
 
 # Doctor
 
-`openclaw doctor` is the repair + migration tool for OpenClaw. It fixes stale
+`dexter doctor` is the repair + migration tool for OpenClaw. It fixes stale
 config/state, checks health, and provides actionable repair steps.
 
 ## Quick start
 
 ```bash
-openclaw doctor
+dexter doctor
 ```
 
 ### Headless / automation
 
 ```bash
-openclaw doctor --yes
+dexter doctor --yes
 ```
 
 Accept defaults without prompting (including restart/service/sandbox repair steps when applicable).
 
 ```bash
-openclaw doctor --repair
+dexter doctor --repair
 ```
 
 Apply recommended repairs without prompting (repairs + restarts where safe).
 
 ```bash
-openclaw doctor --repair --force
+dexter doctor --repair --force
 ```
 
 Apply aggressive repairs too (overwrites custom supervisor configs).
 
 ```bash
-openclaw doctor --non-interactive
+dexter doctor --non-interactive
 ```
 
 Run without prompts and only apply safe migrations (config normalization + on-disk state moves). Skips restart/service/sandbox actions that require human confirmation.
 Legacy state migrations run automatically when detected.
 
 ```bash
-openclaw doctor --deep
+dexter doctor --deep
 ```
 
 Scan system services for extra gateway installs (launchd/systemd/schtasks).
@@ -98,7 +98,7 @@ schema.
 ### 2) Legacy config key migrations
 
 When the config contains deprecated keys, other commands refuse to run and ask
-you to run `openclaw doctor`.
+you to run `dexter doctor`.
 
 Doctor will:
 
@@ -149,7 +149,7 @@ These migrations are best-effort and idempotent; doctor will emit warnings when
 it leaves any legacy folders behind as backups. The Gateway/CLI also auto-migrates
 the legacy sessions + agent dir on startup so history/auth/models land in the
 per-agent path without a manual doctor run. WhatsApp auth is intentionally only
-migrated via `openclaw doctor`.
+migrated via `dexter doctor`.
 
 ### 4) State integrity checks (session persistence, routing, and safety)
 
@@ -225,7 +225,7 @@ workspace.
 ### 12) Gateway auth checks (local token)
 
 Doctor warns when `gateway.auth` is missing on a local gateway and offers to
-generate a token. Use `openclaw doctor --generate-gateway-token` to force token
+generate a token. Use `dexter doctor --generate-gateway-token` to force token
 creation in automation.
 
 ### 13) Gateway health check + restart
@@ -247,11 +247,11 @@ rewrite the service file/task to the current defaults.
 
 Notes:
 
-- `openclaw doctor` prompts before rewriting supervisor config.
-- `openclaw doctor --yes` accepts the default repair prompts.
-- `openclaw doctor --repair` applies recommended fixes without prompts.
-- `openclaw doctor --repair --force` overwrites custom supervisor configs.
-- You can always force a full rewrite via `openclaw gateway install --force`.
+- `dexter doctor` prompts before rewriting supervisor config.
+- `dexter doctor --yes` accepts the default repair prompts.
+- `dexter doctor --repair` applies recommended fixes without prompts.
+- `dexter doctor --repair --force` overwrites custom supervisor configs.
+- You can always force a full rewrite via `dexter gateway install --force`.
 
 ### 16) Gateway runtime + port diagnostics
 

@@ -26,13 +26,13 @@ Mattermost 以插件形式提供，不包含在核心安装中。
 通过 CLI 安装（npm 注册表）：
 
 ```bash
-openclaw plugins install @openclaw/mattermost
+dexter plugins install @openclaw/mattermost
 ```
 
 本地检出（从 git 仓库运行时）：
 
 ```bash
-openclaw plugins install ./extensions/mattermost
+dexter plugins install ./extensions/mattermost
 ```
 
 如果你在配置/新手引导期间选择 Mattermost 并检测到 git 检出，OpenClaw 会自动提供本地安装路径。
@@ -100,8 +100,8 @@ Mattermost 自动响应私信。频道行为由 `chatmode` 控制：
 
 - 默认：`channels.mattermost.dmPolicy = "pairing"`（未知发送者会收到配对码）。
 - 通过以下方式批准：
-  - `openclaw pairing list mattermost`
-  - `openclaw pairing approve mattermost <CODE>`
+  - `dexter pairing list mattermost`
+  - `dexter pairing approve mattermost <CODE>`
 - 公开私信：`channels.mattermost.dmPolicy="open"` 加上 `channels.mattermost.allowFrom=["*"]`。
 
 ## 频道（群组）
@@ -112,7 +112,7 @@ Mattermost 自动响应私信。频道行为由 `chatmode` 控制：
 
 ## 出站投递目标
 
-在 `openclaw message send` 或 cron/webhooks 中使用这些目标格式：
+在 `dexter message send` 或 cron/webhooks 中使用这些目标格式：
 
 - `channel:<id>` 用于频道
 - `user:<id>` 用于私信

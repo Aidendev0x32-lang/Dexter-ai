@@ -40,7 +40,7 @@ x-i18n:
 如果你不确定，在**旧**机器上运行：
 
 ```bash
-openclaw status
+dexter status
 ```
 
 在输出中查找 `OPENCLAW_STATE_DIR` / profile 的提及。如果你运行多个 Gateway 网关，对每个配置文件重复此操作。
@@ -79,7 +79,7 @@ openclaw status
 在**旧**机器上，首先停止 Gateway 网关，这样文件不会在复制过程中发生变化：
 
 ```bash
-openclaw gateway stop
+dexter gateway stop
 ```
 
 （可选但推荐）归档状态目录和工作区：
@@ -125,7 +125,7 @@ tar -czf openclaw-workspace.tgz .openclaw/workspace
 在**新**机器上：
 
 ```bash
-openclaw doctor
+dexter doctor
 ```
 
 Doctor 是"安全可靠"的命令。它修复服务、应用配置迁移，并警告不匹配问题。
@@ -133,8 +133,8 @@ Doctor 是"安全可靠"的命令。它修复服务、应用配置迁移，并�
 然后：
 
 ```bash
-openclaw gateway restart
-openclaw status
+dexter gateway restart
+dexter status
 ```
 
 ## 常见陷阱（以及如何避免）
@@ -150,7 +150,7 @@ openclaw status
 修复：使用你迁移的**相同**配置文件/状态目录运行 Gateway 网关/服务，然后重新运行：
 
 ```bash
-openclaw doctor
+dexter doctor
 ```
 
 ### 陷阱：只复制 `openclaw.json`
@@ -187,7 +187,7 @@ openclaw doctor
 
 在新机器上，确认：
 
-- `openclaw status` 显示 Gateway 网关正在运行
+- `dexter status` 显示 Gateway 网关正在运行
 - 你的渠道仍然连接（例如 WhatsApp 不需要重新配对）
 - 仪表板打开并显示现有会话
 - 你的工作区文件（记忆、配置）存在

@@ -46,7 +46,7 @@ Disable it on the node if needed:
 ## Run (foreground)
 
 ```bash
-openclaw node run --host <gateway-host> --port 18789
+dexter node run --host <gateway-host> --port 18789
 ```
 
 Options:
@@ -63,7 +63,7 @@ Options:
 Install a headless node host as a user service.
 
 ```bash
-openclaw node install --host <gateway-host> --port 18789
+dexter node install --host <gateway-host> --port 18789
 ```
 
 Options:
@@ -80,13 +80,13 @@ Options:
 Manage the service:
 
 ```bash
-openclaw node status
-openclaw node stop
-openclaw node restart
-openclaw node uninstall
+dexter node status
+dexter node stop
+dexter node restart
+dexter node uninstall
 ```
 
-Use `openclaw node run` for a foreground node host (no service).
+Use `dexter node run` for a foreground node host (no service).
 
 Service commands accept `--json` for machine-readable output.
 
@@ -96,8 +96,8 @@ The first connection creates a pending node pair request on the Gateway.
 Approve it via:
 
 ```bash
-openclaw nodes pending
-openclaw nodes approve <requestId>
+dexter nodes pending
+dexter nodes approve <requestId>
 ```
 
 The node host stores its node id, token, display name, and gateway connection info in
@@ -109,4 +109,4 @@ The node host stores its node id, token, display name, and gateway connection in
 
 - `~/.openclaw/exec-approvals.json`
 - [Exec approvals](/tools/exec-approvals)
-- `openclaw approvals --node <id|name|ip>` (edit from the Gateway)
+- `dexter approvals --node <id|name|ip>` (edit from the Gateway)

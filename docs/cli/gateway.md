@@ -1,5 +1,5 @@
 ---
-summary: "OpenClaw Gateway CLI (`openclaw gateway`) — run, query, and discover gateways"
+summary: "OpenClaw Gateway CLI (`dexter gateway`) — run, query, and discover gateways"
 read_when:
   - Running the Gateway from the CLI (dev or servers)
   - Debugging Gateway auth, bind modes, and connectivity
@@ -11,7 +11,7 @@ title: "gateway"
 
 The Gateway is OpenClaw’s WebSocket server (channels, nodes, sessions, hooks).
 
-Subcommands in this page live under `openclaw gateway …`.
+Subcommands in this page live under `dexter gateway …`.
 
 Related docs:
 
@@ -24,13 +24,13 @@ Related docs:
 Run a local Gateway process:
 
 ```bash
-openclaw gateway
+dexter gateway
 ```
 
 Foreground alias:
 
 ```bash
-openclaw gateway run
+dexter gateway run
 ```
 
 Notes:
@@ -84,7 +84,7 @@ Pass `--token` or `--password` explicitly. Missing explicit credentials is an er
 ### `gateway health`
 
 ```bash
-openclaw gateway health --url ws://127.0.0.1:18789
+dexter gateway health --url ws://127.0.0.1:18789
 ```
 
 ### `gateway status`
@@ -92,8 +92,8 @@ openclaw gateway health --url ws://127.0.0.1:18789
 `gateway status` shows the Gateway service (launchd/systemd/schtasks) plus an optional RPC probe.
 
 ```bash
-openclaw gateway status
-openclaw gateway status --json
+dexter gateway status
+dexter gateway status --json
 ```
 
 Options:
@@ -115,8 +115,8 @@ Options:
 If multiple gateways are reachable, it prints all of them. Multiple gateways are supported when you use isolated profiles/ports (e.g., a rescue bot), but most installs still run a single gateway.
 
 ```bash
-openclaw gateway probe
-openclaw gateway probe --json
+dexter gateway probe
+dexter gateway probe --json
 ```
 
 #### Remote over SSH (Mac app parity)
@@ -126,7 +126,7 @@ The macOS app “Remote over SSH” mode uses a local port-forward so the remote
 CLI equivalent:
 
 ```bash
-openclaw gateway probe --ssh user@gateway-host
+dexter gateway probe --ssh user@gateway-host
 ```
 
 Options:
@@ -145,18 +145,18 @@ Config (optional, used as defaults):
 Low-level RPC helper.
 
 ```bash
-openclaw gateway call status
-openclaw gateway call logs.tail --params '{"sinceMs": 60000}'
+dexter gateway call status
+dexter gateway call logs.tail --params '{"sinceMs": 60000}'
 ```
 
 ## Manage the Gateway service
 
 ```bash
-openclaw gateway install
-openclaw gateway start
-openclaw gateway stop
-openclaw gateway restart
-openclaw gateway uninstall
+dexter gateway install
+dexter gateway start
+dexter gateway stop
+dexter gateway restart
+dexter gateway uninstall
 ```
 
 Notes:
@@ -186,7 +186,7 @@ Wide-Area discovery records include (TXT):
 ### `gateway discover`
 
 ```bash
-openclaw gateway discover
+dexter gateway discover
 ```
 
 Options:
@@ -197,6 +197,6 @@ Options:
 Examples:
 
 ```bash
-openclaw gateway discover --timeout 4000
-openclaw gateway discover --json | jq '.beacons[].wsUrl'
+dexter gateway discover --timeout 4000
+dexter gateway discover --json | jq '.beacons[].wsUrl'
 ```

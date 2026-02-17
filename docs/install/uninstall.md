@@ -33,13 +33,13 @@ Manual steps (same result):
 1. Stop the gateway service:
 
 ```bash
-openclaw gateway stop
+dexter gateway stop
 ```
 
 2. Uninstall the gateway service (launchd/systemd/schtasks):
 
 ```bash
-openclaw gateway uninstall
+dexter gateway uninstall
 ```
 
 3. Delete state + config:

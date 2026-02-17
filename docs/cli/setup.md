@@ -1,12 +1,12 @@
 ---
-summary: "CLI reference for `openclaw setup` (initialize config + workspace)"
+summary: "CLI reference for `dexter setup` (initialize config + workspace)"
 read_when:
   - You’re doing first-run setup without the full onboarding wizard
   - You want to set the default workspace path
 title: "setup"
 ---
 
-# `openclaw setup`
+# `dexter setup`
 
 Initialize `~/.openclaw/openclaw.json` and the agent workspace.
 
@@ -18,12 +18,12 @@ Related:
 ## Examples
 
 ```bash
-openclaw setup
-openclaw setup --workspace ~/.openclaw/workspace
+dexter setup
+dexter setup --workspace ~/.openclaw/workspace
 ```
 
 To run the wizard via setup:
 
 ```bash
-openclaw setup --wizard
+dexter setup --wizard
 ```

@@ -39,16 +39,16 @@ x-i18n:
 引导一次：
 
 ```bash
-openclaw setup
+dexter setup
 ```
 
 在此仓库内部，使用本地 CLI 入口：
 
 ```bash
-openclaw setup
+dexter setup
 ```
 
-如果你还没有全局安装，通过 `pnpm openclaw setup` 运行它。
+如果你还没有全局安装，通过 `pnpm dexter setup` 运行它。
 
 ## 稳定工作流（macOS 应用优先）
 
@@ -58,7 +58,7 @@ openclaw setup
 4. 链接表面（示例：WhatsApp）：
 
 ```bash
-openclaw channels login
+dexter channels login
 ```
 
 5. 完整性检查：
@@ -69,7 +69,7 @@ openclaw health
 
 如果你的构建版本中没有新手引导：
 
-- 运行 `openclaw setup`，然后 `openclaw channels login`，然后手动启动 Gateway 网关（`openclaw gateway`）。
+- 运行 `dexter setup`，然后 `dexter channels login`，然后手动启动 Gateway 网关（`dexter gateway`）。
 
 ## 前沿工作流（在终端中运行 Gateway 网关）
 

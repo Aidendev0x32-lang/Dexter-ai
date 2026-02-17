@@ -16,8 +16,8 @@ Export the key once, then run onboarding and set an NVIDIA model:
 
 ```bash
 export NVIDIA_API_KEY="nvapi-..."
-openclaw onboard --auth-choice skip
-openclaw models set nvidia/nvidia/llama-3.1-nemotron-70b-instruct
+dexter onboard --auth-choice skip
+dexter models set nvidia/nvidia/llama-3.1-nemotron-70b-instruct
 ```
 
 If you still pass `--token`, remember it lands in shell history and `ps` output; prefer the env var when possible.

@@ -38,10 +38,10 @@ OpenClaw 可以运行一个由智能体控制的**专用 Chrome/Brave/Edge/Chrom
 ## 快速开始
 
 ```bash
-openclaw browser --browser-profile openclaw status
-openclaw browser --browser-profile openclaw start
-openclaw browser --browser-profile openclaw open https://example.com
-openclaw browser --browser-profile openclaw snapshot
+dexter browser --browser-profile dexter status
+dexter browser --browser-profile openclaw start
+dexter browser --browser-profile openclaw open https://example.com
+dexter browser --browser-profile openclaw snapshot
 ```
 
 如果出现"Browser disabled"，请在配置中启用它（见下文）并重启 Gateway 网关。
@@ -99,7 +99,7 @@ openclaw browser --browser-profile openclaw snapshot
 CLI 示例：
 
 ```bash
-openclaw config set browser.executablePath "/usr/bin/google-chrome"
+dexter config set browser.executablePath "/usr/bin/google-chrome"
 ```
 
 ```json5
@@ -236,22 +236,22 @@ Chrome 扩展中继接管需要主机浏览器控制，因此要么：
 1. 加载扩展（开发/未打包）：
 
 ```bash
-openclaw browser extension install
+dexter browser extension install
 ```
 
 - Chrome → `chrome://extensions` → 启用"开发者模式"
-- "加载已解压的扩展程序" → 选择 `openclaw browser extension path` 打印的目录
+- "加载已解压的扩展程序" → 选择 `dexter browser extension path` 打印的目录
 - 固定扩展，然后在你想要控制的标签页上点击它（徽章显示 `ON`）。
 
 2. 使用它：
 
-- CLI：`openclaw browser --browser-profile chrome tabs`
+- CLI：`dexter browser --browser-profile chrome tabs`
 - 智能体工具：`browser` 配合 `profile="chrome"`
 
 可选：如果你想要不同的名称或中继端口，创建你自己的配置文件：
 
 ```bash
-openclaw browser create-profile \
+dexter browser create-profile \
   --name my-chrome \
   --driver extension \
   --cdp-url http://127.0.0.1:18792 \
@@ -341,79 +341,79 @@ docker compose run --rm openclaw-cli \
 
 基础操作：
 
-- `openclaw browser status`
-- `openclaw browser start`
-- `openclaw browser stop`
-- `openclaw browser tabs`
-- `openclaw browser tab`
-- `openclaw browser tab new`
-- `openclaw browser tab select 2`
-- `openclaw browser tab close 2`
-- `openclaw browser open https://example.com`
-- `openclaw browser focus abcd1234`
-- `openclaw browser close abcd1234`
+- `dexter browser status`
+- `dexter browser start`
+- `dexter browser stop`
+- `dexter browser tabs`
+- `dexter browser tab`
+- `dexter browser tab new`
+- `dexter browser tab select 2`
+- `dexter browser tab close 2`
+- `dexter browser open https://example.com`
+- `dexter browser focus abcd1234`
+- `dexter browser close abcd1234`
 
 检查：
 
-- `openclaw browser screenshot`
-- `openclaw browser screenshot --full-page`
-- `openclaw browser screenshot --ref 12`
-- `openclaw browser screenshot --ref e12`
-- `openclaw browser snapshot`
-- `openclaw browser snapshot --format aria --limit 200`
-- `openclaw browser snapshot --interactive --compact --depth 6`
-- `openclaw browser snapshot --efficient`
-- `openclaw browser snapshot --labels`
-- `openclaw browser snapshot --selector "#main" --interactive`
-- `openclaw browser snapshot --frame "iframe#main" --interactive`
-- `openclaw browser console --level error`
-- `openclaw browser errors --clear`
-- `openclaw browser requests --filter api --clear`
-- `openclaw browser pdf`
-- `openclaw browser responsebody "**/api" --max-chars 5000`
+- `dexter browser screenshot`
+- `dexter browser screenshot --full-page`
+- `dexter browser screenshot --ref 12`
+- `dexter browser screenshot --ref e12`
+- `dexter browser snapshot`
+- `dexter browser snapshot --format aria --limit 200`
+- `dexter browser snapshot --interactive --compact --depth 6`
+- `dexter browser snapshot --efficient`
+- `dexter browser snapshot --labels`
+- `dexter browser snapshot --selector "#main" --interactive`
+- `dexter browser snapshot --frame "iframe#main" --interactive`
+- `dexter browser console --level error`
+- `dexter browser errors --clear`
+- `dexter browser requests --filter api --clear`
+- `dexter browser pdf`
+- `dexter browser responsebody "**/api" --max-chars 5000`
 
 操作：
 
-- `openclaw browser navigate https://example.com`
-- `openclaw browser resize 1280 720`
-- `openclaw browser click 12 --double`
-- `openclaw browser click e12 --double`
-- `openclaw browser type 23 "hello" --submit`
-- `openclaw browser press Enter`
-- `openclaw browser hover 44`
-- `openclaw browser scrollintoview e12`
-- `openclaw browser drag 10 11`
-- `openclaw browser select 9 OptionA OptionB`
-- `openclaw browser download e12 /tmp/report.pdf`
-- `openclaw browser waitfordownload /tmp/report.pdf`
-- `openclaw browser upload /tmp/file.pdf`
-- `openclaw browser fill --fields '[{"ref":"1","type":"text","value":"Ada"}]'`
-- `openclaw browser dialog --accept`
-- `openclaw browser wait --text "Done"`
-- `openclaw browser wait "#main" --url "**/dash" --load networkidle --fn "window.ready===true"`
-- `openclaw browser evaluate --fn '(el) => el.textContent' --ref 7`
-- `openclaw browser highlight e12`
-- `openclaw browser trace start`
-- `openclaw browser trace stop`
+- `dexter browser navigate https://example.com`
+- `dexter browser resize 1280 720`
+- `dexter browser click 12 --double`
+- `dexter browser click e12 --double`
+- `dexter browser type 23 "hello" --submit`
+- `dexter browser press Enter`
+- `dexter browser hover 44`
+- `dexter browser scrollintoview e12`
+- `dexter browser drag 10 11`
+- `dexter browser select 9 OptionA OptionB`
+- `dexter browser download e12 /tmp/report.pdf`
+- `dexter browser waitfordownload /tmp/report.pdf`
+- `dexter browser upload /tmp/file.pdf`
+- `dexter browser fill --fields '[{"ref":"1","type":"text","value":"Ada"}]'`
+- `dexter browser dialog --accept`
+- `dexter browser wait --text "Done"`
+- `dexter browser wait "#main" --url "**/dash" --load networkidle --fn "window.ready===true"`
+- `dexter browser evaluate --fn '(el) => el.textContent' --ref 7`
+- `dexter browser highlight e12`
+- `dexter browser trace start`
+- `dexter browser trace stop`
 
 状态：
 
-- `openclaw browser cookies`
-- `openclaw browser cookies set session abc123 --url "https://example.com"`
-- `openclaw browser cookies clear`
-- `openclaw browser storage local get`
-- `openclaw browser storage local set theme dark`
-- `openclaw browser storage session clear`
-- `openclaw browser set offline on`
-- `openclaw browser set headers --json '{"X-Debug":"1"}'`
-- `openclaw browser set credentials user pass`
-- `openclaw browser set credentials --clear`
-- `openclaw browser set geo 37.7749 -122.4194 --origin "https://example.com"`
-- `openclaw browser set geo --clear`
-- `openclaw browser set media dark`
-- `openclaw browser set timezone America/New_York`
-- `openclaw browser set locale en-US`
-- `openclaw browser set device "iPhone 14"`
+- `dexter browser cookies`
+- `dexter browser cookies set session abc123 --url "https://example.com"`
+- `dexter browser cookies clear`
+- `dexter browser storage local get`
+- `dexter browser storage local set theme dark`
+- `dexter browser storage session clear`
+- `dexter browser set offline on`
+- `dexter browser set headers --json '{"X-Debug":"1"}'`
+- `dexter browser set credentials user pass`
+- `dexter browser set credentials --clear`
+- `dexter browser set geo 37.7749 -122.4194 --origin "https://example.com"`
+- `dexter browser set geo --clear`
+- `dexter browser set media dark`
+- `dexter browser set timezone America/New_York`
+- `dexter browser set locale en-US`
+- `dexter browser set device "iPhone 14"`
 
 注意事项：
 
@@ -435,14 +435,14 @@ docker compose run --rm openclaw-cli \
 
 OpenClaw 支持两种"快照"风格：
 
-- **AI 快照（数字 ref）**：`openclaw browser snapshot`（默认；`--format ai`）
+- **AI 快照（数字 ref）**：`dexter browser snapshot`（默认；`--format ai`）
   - 输出：包含数字 ref 的文本快照。
-  - 操作：`openclaw browser click 12`、`openclaw browser type 23 "hello"`。
+  - 操作：`dexter browser click 12`、`dexter browser type 23 "hello"`。
   - 内部通过 Playwright 的 `aria-ref` 解析 ref。
 
-- **角色快照（角色 ref 如 `e12`）**：`openclaw browser snapshot --interactive`（或 `--compact`、`--depth`、`--selector`、`--frame`）
+- **角色快照（角色 ref 如 `e12`）**：`dexter browser snapshot --interactive`（或 `--compact`、`--depth`、`--selector`、`--frame`）
   - 输出：带有 `[ref=e12]`（和可选的 `[nth=1]`）的基于角色的列表/树。
-  - 操作：`openclaw browser click e12`、`openclaw browser highlight e12`。
+  - 操作：`dexter browser click e12`、`dexter browser highlight e12`。
   - 内部通过 `getByRole(...)`（加上重复项的 `nth()`）解析 ref。
   - 添加 `--labels` 可包含带有叠加 `e12` 标签的视口截图。
 
@@ -456,18 +456,18 @@ ref 行为：
 你可以等待的不仅仅是时间/文本：
 
 - 等待 URL（Playwright 支持通配符）：
-  - `openclaw browser wait --url "**/dash"`
+  - `dexter browser wait --url "**/dash"`
 - 等待加载状态：
-  - `openclaw browser wait --load networkidle`
+  - `dexter browser wait --load networkidle`
 - 等待 JS 断言：
-  - `openclaw browser wait --fn "window.ready===true"`
+  - `dexter browser wait --fn "window.ready===true"`
 - 等待选择器变得可见：
-  - `openclaw browser wait "#main"`
+  - `dexter browser wait "#main"`
 
 这些可以组合使用：
 
 ```bash
-openclaw browser wait "#main" \
+dexter browser wait "#main" \
   --url "**/dash" \
   --load networkidle \
   --fn "window.ready===true" \
@@ -478,16 +478,16 @@ openclaw browser wait "#main" \
 
 当操作失败时（例如"not visible"、"strict mode violation"、"covered"）：
 
-1. `openclaw browser snapshot --interactive`
+1. `dexter browser snapshot --interactive`
 2. 使用 `click <ref>` / `type <ref>`（在交互模式下优先使用角色 ref）
-3. 如果仍然失败：`openclaw browser highlight <ref>` 查看 Playwright 定位的目标
+3. 如果仍然失败：`dexter browser highlight <ref>` 查看 Playwright 定位的目标
 4. 如果页面行为异常：
-   - `openclaw browser errors --clear`
-   - `openclaw browser requests --filter api --clear`
+   - `dexter browser errors --clear`
+   - `dexter browser requests --filter api --clear`
 5. 深度调试：录制 trace：
-   - `openclaw browser trace start`
+   - `dexter browser trace start`
    - 重现问题
-   - `openclaw browser trace stop`（打印 `TRACE:<path>`）
+   - `dexter browser trace stop`（打印 `TRACE:<path>`）
 
 ## JSON 输出
 
@@ -496,10 +496,10 @@ openclaw browser wait "#main" \
 示例：
 
 ```bash
-openclaw browser status --json
-openclaw browser snapshot --interactive --json
-openclaw browser requests --filter api --json
-openclaw browser cookies --json
+dexter browser status --json
+dexter browser snapshot --interactive --json
+dexter browser requests --filter api --json
+dexter browser cookies --json
 ```
 
 JSON 格式的角色快照包含 `refs` 加上一个小的 `stats` 块（lines/chars/refs/interactive），以便工具可以推断负载大小和密度。
@@ -523,7 +523,7 @@ JSON 格式的角色快照包含 `refs` 加上一个小的 `stats` 块（lines/c
 ## 安全与隐私
 
 - openclaw 浏览器配置文件可能包含已登录的会话；请将其视为敏感信息。
-- `browser act kind=evaluate` / `openclaw browser evaluate` 和 `wait --fn` 在页面上下文中执行任意 JavaScript。提示注入可能会操纵它。如果不需要，请使用 `browser.evaluateEnabled=false` 禁用它。
+- `browser act kind=evaluate` / `dexter browser evaluate` 和 `wait --fn` 在页面上下文中执行任意 JavaScript。提示注入可能会操纵它。如果不需要，请使用 `browser.evaluateEnabled=false` 禁用它。
 - 有关登录和反机器人注意事项（X/Twitter 等），请参阅 [浏览器登录 + X/Twitter 发帖](/tools/browser-login)。
 - 保持 Gateway 网关/节点主机私有（仅限 loopback 或 tailnet）。
 - 远程 CDP 端点功能强大；请通过隧道保护它们。

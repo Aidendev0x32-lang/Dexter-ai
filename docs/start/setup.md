@@ -37,16 +37,16 @@ If you want “100% tailored to me” _and_ easy updates, keep your customizatio
 Bootstrap once:
 
 ```bash
-openclaw setup
+dexter setup
 ```
 
 From inside this repo, use the local CLI entry:
 
 ```bash
-openclaw setup
+dexter setup
 ```
 
-If you don’t have a global install yet, run it via `pnpm openclaw setup`.
+If you don’t have a global install yet, run it via `pnpm dexter setup`.
 
 ## Run the Gateway from this repo
 
@@ -64,7 +64,7 @@ node openclaw.mjs gateway --port 18789 --verbose
 4. Link surfaces (example: WhatsApp):
 
 ```bash
-openclaw channels login
+dexter channels login
 ```
 
 5. Sanity check:
@@ -75,7 +75,7 @@ openclaw health
 
 If onboarding is not available in your build:
 
-- Run `openclaw setup`, then `openclaw channels login`, then start the Gateway manually (`openclaw gateway`).
+- Run `dexter setup`, then `dexter channels login`, then start the Gateway manually (`dexter gateway`).
 
 ## Bleeding edge workflow (Gateway in a terminal)
 

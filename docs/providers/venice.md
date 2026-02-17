@@ -58,7 +58,7 @@ export VENICE_API_KEY="vapi_xxxxxxxxxxxx"
 **Option B: Interactive Setup (Recommended)**
 
 ```bash
-openclaw onboard --auth-choice venice-api-key
+dexter onboard --auth-choice venice-api-key
 ```
 
 This will:
@@ -71,7 +71,7 @@ This will:
 **Option C: Non-interactive**
 
 ```bash
-openclaw onboard --non-interactive \
+dexter onboard --non-interactive \
   --auth-choice venice-api-key \
   --venice-api-key "vapi_xxxxxxxxxxxx"
 ```
@@ -94,19 +94,19 @@ After setup, OpenClaw shows all available Venice models. Pick based on your need
 Change your default model anytime:
 
 ```bash
-openclaw models set venice/claude-opus-45
-openclaw models set venice/llama-3.3-70b
+dexter models set venice/claude-opus-45
+dexter models set venice/llama-3.3-70b
 ```
 
 List all available models:
 
 ```bash
-openclaw models list | grep venice
+dexter models list | grep venice
 ```
 
-## Configure via `openclaw configure`
+## Configure via `dexter configure`
 
-1. Run `openclaw configure`
+1. Run `dexter configure`
 2. Select **Model/auth**
 3. Choose **Venice AI**
 
@@ -216,14 +216,14 @@ openclaw chat --model venice/qwen3-coder-480b-a35b-instruct
 
 ```bash
 echo $VENICE_API_KEY
-openclaw models list | grep venice
+dexter models list | grep venice
 ```
 
 Ensure the key starts with `vapi_`.
 
 ### Model not available
 
-The Venice model catalog updates dynamically. Run `openclaw models list` to see currently available models. Some models may be temporarily offline.
+The Venice model catalog updates dynamically. Run `dexter models list` to see currently available models. Some models may be temporarily offline.
 
 ### Connection issues
 

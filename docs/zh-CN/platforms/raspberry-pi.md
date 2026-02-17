@@ -137,7 +137,7 @@ npm link
 ## 7) 运行新手引导
 
 ```bash
-openclaw onboard --install-daemon
+dexter onboard --install-daemon
 ```
 
 按照向导操作：
@@ -151,7 +151,7 @@ openclaw onboard --install-daemon
 
 ```bash
 # 检查状态
-openclaw status
+dexter status
 
 # 检查服务
 sudo systemctl status openclaw
@@ -180,7 +180,7 @@ curl -fsSL https://tailscale.com/install.sh | sh
 sudo tailscale up
 
 # 更新配置
-openclaw config set gateway.bind tailnet
+dexter config set gateway.bind tailnet
 sudo systemctl restart openclaw
 ```
 

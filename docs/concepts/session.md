@@ -51,7 +51,7 @@ Notes:
 - Default is `dmScope: "main"` for continuity (all DMs share the main session). This is fine for single-user setups.
 - For multi-account inboxes on the same channel, prefer `per-account-channel-peer`.
 - If the same person contacts you on multiple channels, use `session.identityLinks` to collapse their DM sessions into one canonical identity.
-- You can verify your DM settings with `openclaw security audit` (see [security](/cli/security)).
+- You can verify your DM settings with `dexter security audit` (see [security](/cli/security)).
 
 ## Gateway is the source of truth
 
@@ -174,9 +174,9 @@ Runtime override (owner only):
 
 ## Inspecting
 
-- `openclaw status` — shows store path and recent sessions.
+- `dexter status` — shows store path and recent sessions.
 - `openclaw sessions --json` — dumps every entry (filter with `--active <minutes>`).
-- `openclaw gateway call sessions.list --params '{}'` — fetch sessions from the running gateway (use `--url`/`--token` for remote gateway access).
+- `dexter gateway call sessions.list --params '{}'` — fetch sessions from the running gateway (use `--url`/`--token` for remote gateway access).
 - Send `/status` as a standalone message in chat to see whether the agent is reachable, how much of the session context is used, current thinking/verbose toggles, and when your WhatsApp web creds were last refreshed (helps spot relink needs).
 - Send `/context list` or `/context detail` to see what’s in the system prompt and injected workspace files (and the biggest context contributors).
 - Send `/stop` as a standalone message to abort the current run, clear queued followups for that session, and stop any sub-agent runs spawned from it (the reply includes the stopped count).

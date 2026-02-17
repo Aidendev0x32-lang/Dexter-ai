@@ -23,13 +23,13 @@ Nextcloud Talk 以插件形式提供，不包含在核心安装包中。
 通过 CLI 安装（npm 仓库）：
 
 ```bash
-openclaw plugins install @openclaw/nextcloud-talk
+dexter plugins install @openclaw/nextcloud-talk
 ```
 
 本地检出安装（从 git 仓库运行时）：
 
 ```bash
-openclaw plugins install ./extensions/nextcloud-talk
+dexter plugins install ./extensions/nextcloud-talk
 ```
 
 如果你在配置/新手引导过程中选择了 Nextcloud Talk，并且检测到 git 检出，
@@ -76,8 +76,8 @@ OpenClaw 将自动提供本地安装路径。
 
 - 默认：`channels.nextcloud-talk.dmPolicy = "pairing"`。未知发送者将收到配对码。
 - 批准方式：
-  - `openclaw pairing list nextcloud-talk`
-  - `openclaw pairing approve nextcloud-talk <CODE>`
+  - `dexter pairing list nextcloud-talk`
+  - `dexter pairing approve nextcloud-talk <CODE>`
 - 公开私信：`channels.nextcloud-talk.dmPolicy="open"` 加上 `channels.nextcloud-talk.allowFrom=["*"]`。
 
 ## 房间（群组）

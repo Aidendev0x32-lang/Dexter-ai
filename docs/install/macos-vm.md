@@ -138,7 +138,7 @@ Inside the VM:
 
 ```bash
 npm install -g openclaw@latest
-openclaw onboard --install-daemon
+dexter onboard --install-daemon
 ```
 
 Follow the onboarding prompts to set up your model provider (Anthropic, OpenAI, etc.).
@@ -172,7 +172,7 @@ Add your channels:
 Then login to WhatsApp (scan QR):
 
 ```bash
-openclaw channels login
+dexter channels login
 ```
 
 ---
@@ -191,7 +191,7 @@ The VM runs in the background. OpenClaw's daemon keeps the gateway running.
 To check status:
 
 ```bash
-ssh youruser@192.168.64.X "openclaw status"
+ssh youruser@192.168.64.X "dexter status"
 ```
 
 ---
@@ -265,7 +265,7 @@ For true always-on, consider a dedicated Mac mini or a small VPS. See [VPS hosti
 | Can't SSH into VM        | Check "Remote Login" is enabled in VM's System Settings                            |
 | VM IP not showing        | Wait for VM to fully boot, run `lume get openclaw` again                           |
 | Lume command not found   | Add `~/.local/bin` to your PATH                                                    |
-| WhatsApp QR not scanning | Ensure you're logged into the VM (not host) when running `openclaw channels login` |
+| WhatsApp QR not scanning | Ensure you're logged into the VM (not host) when running `dexter channels login` |
 
 ---
 

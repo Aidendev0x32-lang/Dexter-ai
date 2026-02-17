@@ -15,19 +15,19 @@ It configures a local Gateway or a remote Gateway connection, plus channels, ski
 and workspace defaults in one guided flow.
 
 ```bash
-openclaw onboard
+dexter onboard
 ```
 
 <Info>
 Fastest first chat: open the Control UI (no channel setup needed). Run
-`openclaw dashboard` and chat in the browser. Docs: [Dashboard](/web/dashboard).
+`dexter dashboard` and chat in the browser. Docs: [Dashboard](/web/dashboard).
 </Info>
 
 To reconfigure later:
 
 ```bash
-openclaw configure
-openclaw agents add <name>
+dexter configure
+dexter agents add <name>
 ```
 
 <Note>
@@ -36,7 +36,7 @@ openclaw agents add <name>
 
 <Tip>
 Recommended: set up a Brave Search API key so the agent can use `web_search`
-(`web_fetch` works without a key). Easiest path: `openclaw configure --section web`
+(`web_fetch` works without a key). Easiest path: `dexter configure --section web`
 which stores `tools.web.search.apiKey`. Docs: [Web tools](/tools/web).
 </Tip>
 
@@ -73,7 +73,7 @@ The wizard starts with **QuickStart** (defaults) vs **Advanced** (full control).
 
 <Note>
 Re-running the wizard does **not** wipe anything unless you explicitly choose **Reset** (or pass `--reset`).
-If the config is invalid or contains legacy keys, the wizard asks you to run `openclaw doctor` first.
+If the config is invalid or contains legacy keys, the wizard asks you to run `dexter doctor` first.
 </Note>
 
 **Remote mode** only configures the local client to connect to a Gateway elsewhere.
@@ -81,7 +81,7 @@ It does **not** install or change anything on the remote host.
 
 ## Add another agent
 
-Use `openclaw agents add <name>` to create a separate agent with its own workspace,
+Use `dexter agents add <name>` to create a separate agent with its own workspace,
 sessions, and auth profiles. Running without `--workspace` launches the wizard.
 
 What it sets:
@@ -104,7 +104,7 @@ RPC API, and a full list of config fields the wizard writes, see the
 
 ## Related docs
 
-- CLI command reference: [`openclaw onboard`](/cli/onboard)
+- CLI command reference: [`dexter onboard`](/cli/onboard)
 - Onboarding overview: [Onboarding Overview](/start/onboarding-overview)
 - macOS app onboarding: [Onboarding](/start/onboarding)
 - Agent first-run ritual: [Agent Bootstrapping](/start/bootstrapping)

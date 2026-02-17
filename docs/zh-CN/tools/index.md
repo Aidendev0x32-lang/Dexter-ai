@@ -213,7 +213,7 @@ OpenClaw 为 browser、canvas、nodes 和 cron 暴露**一流的智能体工具*
 - 如果不允许 `process`，`exec` 会同步运行并忽略 `yieldMs`/`background`。
 - `elevated` 受 `tools.elevated` 加上任何 `agents.list[].tools.elevated` 覆盖的门控（两者都必须允许），是 `host=gateway` + `security=full` 的别名。
 - `elevated` 仅在智能体被沙箱隔离时改变行为（否则是空操作）。
-- `host=node` 可以针对 macOS 配套应用或无头节点主机（`openclaw node run`）。
+- `host=node` 可以针对 macOS 配套应用或无头节点主机（`dexter node run`）。
 - Gateway 网关/节点审批和允许列表：[执行审批](/tools/exec-approvals)。
 
 ### `process`
@@ -241,7 +241,7 @@ OpenClaw 为 browser、canvas、nodes 和 cron 暴露**一流的智能体工具*
 
 注意：
 
-- 需要 Brave API 密钥（推荐：`openclaw configure --section web`，或设置 `BRAVE_API_KEY`）。
+- 需要 Brave API 密钥（推荐：`dexter configure --section web`，或设置 `BRAVE_API_KEY`）。
 - 通过 `tools.web.search.enabled` 启用。
 - 响应被缓存（默认 15 分钟）。
 - 参见 [Web 工具](/tools/web) 了解设置。
@@ -318,7 +318,7 @@ OpenClaw 为 browser、canvas、nodes 和 cron 暴露**一流的智能体工具*
 - 底层使用 Gateway 网关 `node.invoke`。
 - 如果未提供 `node`，工具会选择默认值（单个连接的节点或本地 mac 节点）。
 - A2UI 仅限 v0.8（无 `createSurface`）；CLI 会拒绝 v0.9 JSONL 并显示行错误。
-- 快速冒烟测试：`openclaw nodes canvas a2ui push --node <id> --text "Hello from A2UI"`。
+- 快速冒烟测试：`dexter nodes canvas a2ui push --node <id> --text "Hello from A2UI"`。
 
 ### `nodes`
 
@@ -420,7 +420,7 @@ OpenClaw 为 browser、canvas、nodes 和 cron 暴露**一流的智能体工具*
 
 核心操作：
 
-- `restart`（授权 + 发送 `SIGUSR1` 进行进程内重启；`openclaw gateway` 就地重启）
+- `restart`（授权 + 发送 `SIGUSR1` 进行进程内重启；`dexter gateway` 就地重启）
 - `config.get` / `config.schema`
 - `config.apply`（验证 + 写入配置 + 重启 + 唤醒）
 - `config.patch`（合并部分更新 + 重启 + 唤醒）

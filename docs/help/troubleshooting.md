@@ -15,24 +15,24 @@ If you only have 2 minutes, use this page as a triage front door.
 Run this exact ladder in order:
 
 ```bash
-openclaw status
-openclaw status --all
-openclaw gateway probe
-openclaw gateway status
-openclaw doctor
-openclaw channels status --probe
-openclaw logs --follow
+dexter status
+dexter status --all
+dexter gateway probe
+dexter gateway status
+dexter doctor
+dexter channels status --probe
+dexter logs --follow
 ```
 
 Good output in one line:
 
-- `openclaw status` → shows configured channels and no obvious auth errors.
-- `openclaw status --all` → full report is present and shareable.
-- `openclaw gateway probe` → expected gateway target is reachable.
-- `openclaw gateway status` → `Runtime: running` and `RPC probe: ok`.
-- `openclaw doctor` → no blocking config/service errors.
-- `openclaw channels status --probe` → channels report `connected` or `ready`.
-- `openclaw logs --follow` → steady activity, no repeating fatal errors.
+- `dexter status` → shows configured channels and no obvious auth errors.
+- `dexter status --all` → full report is present and shareable.
+- `dexter gateway probe` → expected gateway target is reachable.
+- `dexter gateway status` → `Runtime: running` and `RPC probe: ok`.
+- `dexter doctor` → no blocking config/service errors.
+- `dexter channels status --probe` → channels report `connected` or `ready`.
+- `dexter logs --follow` → steady activity, no repeating fatal errors.
 
 ## Decision tree
 
@@ -59,11 +59,11 @@ flowchart TD
 <AccordionGroup>
   <Accordion title="No replies">
     ```bash
-    openclaw status
-    openclaw gateway status
-    openclaw channels status --probe
-    openclaw pairing list <channel>
-    openclaw logs --follow
+    dexter status
+    dexter gateway status
+    dexter channels status --probe
+    dexter pairing list <channel>
+    dexter logs --follow
     ```
 
     Good output looks like:
@@ -89,16 +89,16 @@ flowchart TD
 
   <Accordion title="Dashboard or Control UI will not connect">
     ```bash
-    openclaw status
-    openclaw gateway status
-    openclaw logs --follow
-    openclaw doctor
-    openclaw channels status --probe
+    dexter status
+    dexter gateway status
+    dexter logs --follow
+    dexter doctor
+    dexter channels status --probe
     ```
 
     Good output looks like:
 
-    - `Dashboard: http://...` is shown in `openclaw gateway status`
+    - `Dashboard: http://...` is shown in `dexter gateway status`
     - `RPC probe: ok`
     - No auth loop in logs
 
@@ -118,11 +118,11 @@ flowchart TD
 
   <Accordion title="Gateway will not start or service installed but not running">
     ```bash
-    openclaw status
-    openclaw gateway status
-    openclaw logs --follow
-    openclaw doctor
-    openclaw channels status --probe
+    dexter status
+    dexter gateway status
+    dexter logs --follow
+    dexter doctor
+    dexter channels status --probe
     ```
 
     Good output looks like:
@@ -147,11 +147,11 @@ flowchart TD
 
   <Accordion title="Channel connects but messages do not flow">
     ```bash
-    openclaw status
-    openclaw gateway status
-    openclaw logs --follow
-    openclaw doctor
-    openclaw channels status --probe
+    dexter status
+    dexter gateway status
+    dexter logs --follow
+    dexter doctor
+    dexter channels status --probe
     ```
 
     Good output looks like:
@@ -175,12 +175,12 @@ flowchart TD
 
   <Accordion title="Cron or heartbeat did not fire or did not deliver">
     ```bash
-    openclaw status
-    openclaw gateway status
+    dexter status
+    dexter gateway status
     openclaw cron status
     openclaw cron list
     openclaw cron runs --id <jobId> --limit 20
-    openclaw logs --follow
+    dexter logs --follow
     ```
 
     Good output looks like:
@@ -206,11 +206,11 @@ flowchart TD
 
   <Accordion title="Node is paired but tool fails camera canvas screen exec">
     ```bash
-    openclaw status
-    openclaw gateway status
-    openclaw nodes status
-    openclaw nodes describe --node <idOrNameOrIp>
-    openclaw logs --follow
+    dexter status
+    dexter gateway status
+    dexter nodes status
+    dexter nodes describe --node <idOrNameOrIp>
+    dexter logs --follow
     ```
 
     Good output looks like:
@@ -236,11 +236,11 @@ flowchart TD
 
   <Accordion title="Browser tool fails">
     ```bash
-    openclaw status
-    openclaw gateway status
-    openclaw browser status
-    openclaw logs --follow
-    openclaw doctor
+    dexter status
+    dexter gateway status
+    dexter browser status
+    dexter logs --follow
+    dexter doctor
     ```
 
     Good output looks like:

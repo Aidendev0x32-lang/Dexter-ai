@@ -3,7 +3,7 @@ read_when:
   - 从 CLI 运行 Gateway 网关（开发或服务器）
   - 调试 Gateway 网关认证、绑定模式和连接性
   - 通过 Bonjour 发现 Gateway 网关（局域网 + tailnet）
-summary: OpenClaw Gateway 网关 CLI（`openclaw gateway`）— 运行、查询和发现 Gateway 网关
+summary: OpenClaw Gateway 网关 CLI（`dexter gateway`）— 运行、查询和发现 Gateway 网关
 title: gateway
 x-i18n:
   generated_at: "2026-02-03T07:45:15Z"
@@ -18,7 +18,7 @@ x-i18n:
 
 Gateway 网关是 OpenClaw 的 WebSocket 服务器（渠道、节点、会话、hooks）。
 
-本页中的子命令位于 `openclaw gateway …` 下。
+本页中的子命令位于 `dexter gateway …` 下。
 
 相关文档：
 
@@ -31,13 +31,13 @@ Gateway 网关是 OpenClaw 的 WebSocket 服务器（渠道、节点、会话、
 运行本地 Gateway 网关进程：
 
 ```bash
-openclaw gateway
+dexter gateway
 ```
 
 前台运行别名：
 
 ```bash
-openclaw gateway run
+dexter gateway run
 ```
 
 注意事项：
@@ -88,7 +88,7 @@ openclaw gateway run
 ### `gateway health`
 
 ```bash
-openclaw gateway health --url ws://127.0.0.1:18789
+dexter gateway health --url ws://127.0.0.1:18789
 ```
 
 ### `gateway status`
@@ -96,8 +96,8 @@ openclaw gateway health --url ws://127.0.0.1:18789
 `gateway status` 显示 Gateway 网关服务（launchd/systemd/schtasks）以及可选的 RPC 探测。
 
 ```bash
-openclaw gateway status
-openclaw gateway status --json
+dexter gateway status
+dexter gateway status --json
 ```
 
 选项：
@@ -119,8 +119,8 @@ openclaw gateway status --json
 如果多个 Gateway 网关可达，它会打印所有。当你使用隔离的配置文件/端口（例如救援机器人）时支持多个 Gateway 网关，但大多数安装仍然运行单个 Gateway 网关。
 
 ```bash
-openclaw gateway probe
-openclaw gateway probe --json
+dexter gateway probe
+dexter gateway probe --json
 ```
 
 #### 通过 SSH 远程（Mac 应用对等）
@@ -130,7 +130,7 @@ macOS 应用的"通过 SSH 远程"模式使用本地端口转发，因此远程 
 CLI 等效命令：
 
 ```bash
-openclaw gateway probe --ssh user@gateway-host
+dexter gateway probe --ssh user@gateway-host
 ```
 
 选项：
@@ -149,18 +149,18 @@ openclaw gateway probe --ssh user@gateway-host
 低级 RPC 辅助工具。
 
 ```bash
-openclaw gateway call status
-openclaw gateway call logs.tail --params '{"sinceMs": 60000}'
+dexter gateway call status
+dexter gateway call logs.tail --params '{"sinceMs": 60000}'
 ```
 
 ## 管理 Gateway 网关服务
 
 ```bash
-openclaw gateway install
-openclaw gateway start
-openclaw gateway stop
-openclaw gateway restart
-openclaw gateway uninstall
+dexter gateway install
+dexter gateway start
+dexter gateway stop
+dexter gateway restart
+dexter gateway uninstall
 ```
 
 注意事项：
@@ -190,7 +190,7 @@ openclaw gateway uninstall
 ### `gateway discover`
 
 ```bash
-openclaw gateway discover
+dexter gateway discover
 ```
 
 选项：
@@ -201,6 +201,6 @@ openclaw gateway discover
 示例：
 
 ```bash
-openclaw gateway discover --timeout 4000
-openclaw gateway discover --json | jq '.beacons[].wsUrl'
+dexter gateway discover --timeout 4000
+dexter gateway discover --json | jq '.beacons[].wsUrl'
 ```

@@ -63,8 +63,8 @@ openclaw acp client --server "node" --server-args openclaw.mjs acp --url ws://12
 示例配置（持久化）：
 
 ```bash
-openclaw config set gateway.remote.url wss://gateway-host:18789
-openclaw config set gateway.remote.token <token>
+dexter config set gateway.remote.url wss://gateway-host:18789
+dexter config set gateway.remote.token <token>
 ```
 
 示例直接运行（不写入配置）：

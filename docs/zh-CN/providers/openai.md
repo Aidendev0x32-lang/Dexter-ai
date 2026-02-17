@@ -25,9 +25,9 @@ OpenAI 提供 GPT 模型的开发者 API。Codex 支持**ChatGPT 登录**进行�
 ### CLI 设置
 
 ```bash
-openclaw onboard --auth-choice openai-api-key
+dexter onboard --auth-choice openai-api-key
 # 或非交互式
-openclaw onboard --openai-api-key "$OPENAI_API_KEY"
+dexter onboard --openai-api-key "$OPENAI_API_KEY"
 ```
 
 ### 配置片段
@@ -48,10 +48,10 @@ Codex 云端需要 ChatGPT 登录，而 Codex CLI 支持 ChatGPT 或 API 密钥�
 
 ```bash
 # 在向导中运行 Codex OAuth
-openclaw onboard --auth-choice openai-codex
+dexter onboard --auth-choice openai-codex
 
 # 或直接运行 OAuth
-openclaw models auth login --provider openai-codex
+dexter models auth login --provider openai-codex
 ```
 
 ### 配置片段

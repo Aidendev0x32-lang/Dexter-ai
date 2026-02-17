@@ -75,10 +75,10 @@ OpenClaw 支持用于智能体工作流的**相机捕获**：
 示例：
 
 ```bash
-openclaw nodes camera snap --node <id>               # default: both front + back (2 MEDIA lines)
-openclaw nodes camera snap --node <id> --facing front
-openclaw nodes camera clip --node <id> --duration 3000
-openclaw nodes camera clip --node <id> --no-audio
+dexter nodes camera snap --node <id>               # default: both front + back (2 MEDIA lines)
+dexter nodes camera snap --node <id> --facing front
+dexter nodes camera clip --node <id> --duration 3000
+dexter nodes camera clip --node <id> --no-audio
 ```
 
 注意事项：
@@ -127,20 +127,20 @@ macOS 配套应用暴露一个复选框：
 示例：
 
 ```bash
-openclaw nodes camera list --node <id>            # list camera ids
-openclaw nodes camera snap --node <id>            # prints MEDIA:<path>
-openclaw nodes camera snap --node <id> --max-width 1280
-openclaw nodes camera snap --node <id> --delay-ms 2000
-openclaw nodes camera snap --node <id> --device-id <id>
-openclaw nodes camera clip --node <id> --duration 10s          # prints MEDIA:<path>
-openclaw nodes camera clip --node <id> --duration-ms 3000      # prints MEDIA:<path> (legacy flag)
-openclaw nodes camera clip --node <id> --device-id <id>
-openclaw nodes camera clip --node <id> --no-audio
+dexter nodes camera list --node <id>            # list camera ids
+dexter nodes camera snap --node <id>            # prints MEDIA:<path>
+dexter nodes camera snap --node <id> --max-width 1280
+dexter nodes camera snap --node <id> --delay-ms 2000
+dexter nodes camera snap --node <id> --device-id <id>
+dexter nodes camera clip --node <id> --duration 10s          # prints MEDIA:<path>
+dexter nodes camera clip --node <id> --duration-ms 3000      # prints MEDIA:<path> (legacy flag)
+dexter nodes camera clip --node <id> --device-id <id>
+dexter nodes camera clip --node <id> --no-audio
 ```
 
 注意事项：
 
-- `openclaw nodes camera snap` 默认 `maxWidth=1600`，除非被覆盖。
+- `dexter nodes camera snap` 默认 `maxWidth=1600`，除非被覆盖。
 - 在 macOS 上，`camera.snap` 在预热/曝光稳定后等待 `delayMs`（默认 2000ms）再捕获。
 - 照片载荷会重新压缩以保持 base64 小于 5 MB。
 
@@ -154,7 +154,7 @@ openclaw nodes camera clip --node <id> --no-audio
 对于*屏幕*视频（非相机），使用 macOS 配套应用：
 
 ```bash
-openclaw nodes screen record --node <id> --duration 10s --fps 15   # prints MEDIA:<path>
+dexter nodes screen record --node <id> --duration 10s --fps 15   # prints MEDIA:<path>
 ```
 
 注意事项：

@@ -26,9 +26,9 @@ Xiaomi MiMo 是 **MiMo** 模型的 API 平台。它提供与 OpenAI 和 Anthropi
 ## CLI 设置
 
 ```bash
-openclaw onboard --auth-choice xiaomi-api-key
+dexter onboard --auth-choice xiaomi-api-key
 # 或非交互式
-openclaw onboard --auth-choice xiaomi-api-key --xiaomi-api-key "$XIAOMI_API_KEY"
+dexter onboard --auth-choice xiaomi-api-key --xiaomi-api-key "$XIAOMI_API_KEY"
 ```
 
 ## 配置片段

@@ -239,7 +239,7 @@ OpenClaw 在启动时向 Telegram 的机器人菜单注册原生命令（如 `/s
 
 **提示：** 要获取你自己的用户 ID，私信机器人，它会回复你的用户 ID（配对消息），或者在命令启用后使用 `/whoami`。
 
-**隐私注意：** `@userinfobot` 是第三方机器人。如果你更倾向于其他方式，将机器人添加到群组，发送一条消息，然后使用 `openclaw logs --follow` 读取 `chat.id`，或使用 Bot API `getUpdates`。
+**隐私注意：** `@userinfobot` 是第三方机器人。如果你更倾向于其他方式，将机器人添加到群组，发送一条消息，然后使用 `dexter logs --follow` 读取 `chat.id`，或使用 Bot API `getUpdates`。
 
 ## 配置写入
 
@@ -354,8 +354,8 @@ Telegram 功能可以在两个级别配置（上面显示的对象形式；旧�
 
 - 默认：`channels.telegram.dmPolicy = "pairing"`。未知发送者收到配对码；在批准之前消息被忽略（配对码 1 小时后过期）。
 - 批准方式：
-  - `openclaw pairing list telegram`
-  - `openclaw pairing approve telegram <CODE>`
+  - `dexter pairing list telegram`
+  - `dexter pairing approve telegram <CODE>`
 - 配对是 Telegram 私信使用的默认 token 交换。详情：[配对](/channels/pairing)
 - `channels.telegram.allowFrom` 接受数字用户 ID（推荐）或 `@username` 条目。这**不是**机器人用户名；使用人类发送者的 ID。向导接受 `@username` 并在可能时将其解析为数字 ID。
 
@@ -364,7 +364,7 @@ Telegram 功能可以在两个级别配置（上面显示的对象形式；旧�
 更安全（无第三方机器人）：
 
 1. 启动 Gateway 网关并私信你的机器人。
-2. 运行 `openclaw logs --follow` 并查找 `from.id`。
+2. 运行 `dexter logs --follow` 并查找 `from.id`。
 
 备选（官方 Bot API）：
 
@@ -661,7 +661,7 @@ Telegram 反应作为**单独的 `message_reaction` 事件**到达，而不是�
 ## 投递目标（CLI/cron）
 
 - 使用聊天 id（`123456789`）或用户名（`@name`）作为目标。
-- 示例：`openclaw message send --channel telegram --target 123456789 --message "hi"`。
+- 示例：`dexter message send --channel telegram --target 123456789 --message "hi"`。
 
 ## 故障排除
 
@@ -669,8 +669,8 @@ Telegram 反应作为**单独的 `message_reaction` 事件**到达，而不是�
 
 - 如果你设置了 `channels.telegram.groups.*.requireMention=false`，Telegram 的 Bot API **隐私模式**必须禁用。
   - BotFather：`/setprivacy` → **Disable**（然后从群组中移除并重新添加机器人）
-- `openclaw channels status` 在配置期望未提及群组消息时显示警告。
-- `openclaw channels status --probe` 可以额外检查显式数字群组 ID 的成员资格（它无法审计通配符 `"*"` 规则）。
+- `dexter channels status` 在配置期望未提及群组消息时显示警告。
+- `dexter channels status --probe` 可以额外检查显式数字群组 ID 的成员资格（它无法审计通配符 `"*"` 规则）。
 - 快速测试：`/activation always`（仅会话级别；使用配置以持久化）
 
 **机器人完全看不到群组消息：**
@@ -678,7 +678,7 @@ Telegram 反应作为**单独的 `message_reaction` 事件**到达，而不是�
 - 如果设置了 `channels.telegram.groups`，群组必须被列出或使用 `"*"`
 - 在 @BotFather 中检查隐私设置 →"Group Privacy"应为 **OFF**
 - 验证机器人确实是成员（不仅仅是没有读取权限的管理员）
-- 检查 Gateway 网关日志：`openclaw logs --follow`（查找"skipping group message"）
+- 检查 Gateway 网关日志：`dexter logs --follow`（查找"skipping group message"）
 
 **机器人响应提及但不响应 `/activation always`：**
 

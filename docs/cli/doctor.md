@@ -1,12 +1,12 @@
 ---
-summary: "CLI reference for `openclaw doctor` (health checks + guided repairs)"
+summary: "CLI reference for `dexter doctor` (health checks + guided repairs)"
 read_when:
   - You have connectivity/auth issues and want guided fixes
   - You updated and want a sanity check
 title: "doctor"
 ---
 
-# `openclaw doctor`
+# `dexter doctor`
 
 Health checks + quick fixes for the gateway and channels.
 
@@ -18,9 +18,9 @@ Related:
 ## Examples
 
 ```bash
-openclaw doctor
-openclaw doctor --repair
-openclaw doctor --deep
+dexter doctor
+dexter doctor --repair
+dexter doctor --deep
 ```
 
 Notes:

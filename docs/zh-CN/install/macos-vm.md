@@ -145,7 +145,7 @@ ssh youruser@192.168.64.X
 
 ```bash
 npm install -g openclaw@latest
-openclaw onboard --install-daemon
+dexter onboard --install-daemon
 ```
 
 按照新手引导提示设置你的模型提供商（Anthropic、OpenAI 等）。
@@ -179,7 +179,7 @@ nano ~/.openclaw/openclaw.json
 然后登录 WhatsApp（扫描二维码）：
 
 ```bash
-openclaw channels login
+dexter channels login
 ```
 
 ---
@@ -198,7 +198,7 @@ VM 在后台运行。OpenClaw 的守护进程保持 Gateway 网关运行。
 检查状态：
 
 ```bash
-ssh youruser@192.168.64.X "openclaw status"
+ssh youruser@192.168.64.X "dexter status"
 ```
 
 ---
@@ -272,7 +272,7 @@ lume run openclaw --no-display
 | 无法 SSH 进入 VM        | 检查 VM 的系统设置中是否启用了"远程登录"                         |
 | VM IP 未显示            | 等待 VM 完全启动，再次运行 `lume get openclaw`                   |
 | 找不到 Lume 命令        | 将 `~/.local/bin` 添加到你的 PATH                                |
-| WhatsApp 二维码扫描失败 | 确保运行 `openclaw channels login` 时你是登录到 VM（而不是主机） |
+| WhatsApp 二维码扫描失败 | 确保运行 `dexter channels login` 时你是登录到 VM（而不是主机） |
 
 ---
 

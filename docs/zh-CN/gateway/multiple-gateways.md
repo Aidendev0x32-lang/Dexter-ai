@@ -66,8 +66,8 @@ openclaw --profile rescue gateway install
 ```bash
 # 主机器人（现有或新建，不带 --profile 参数）
 # 运行在端口 18789 + Chrome CDC/Canvas/... 端口
-openclaw onboard
-openclaw gateway install
+dexter onboard
+dexter gateway install
 
 # 救援机器人（隔离的配置文件 + 端口）
 openclaw --profile rescue onboard
@@ -103,11 +103,11 @@ openclaw --profile rescue gateway install
 ```bash
 OPENCLAW_CONFIG_PATH=~/.openclaw/main.json \
 OPENCLAW_STATE_DIR=~/.openclaw-main \
-openclaw gateway --port 18789
+dexter gateway --port 18789
 
 OPENCLAW_CONFIG_PATH=~/.openclaw/rescue.json \
 OPENCLAW_STATE_DIR=~/.openclaw-rescue \
-openclaw gateway --port 19001
+dexter gateway --port 19001
 ```
 
 ## 快速检查

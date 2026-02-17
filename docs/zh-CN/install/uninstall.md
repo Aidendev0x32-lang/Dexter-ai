@@ -40,13 +40,13 @@ npx -y openclaw uninstall --all --yes --non-interactive
 1. 停止 Gateway 网关服务：
 
 ```bash
-openclaw gateway stop
+dexter gateway stop
 ```
 
 2. 卸载 Gateway 网关服务（launchd/systemd/schtasks）：
 
 ```bash
-openclaw gateway uninstall
+dexter gateway uninstall
 ```
 
 3. 删除状态 + 配置：

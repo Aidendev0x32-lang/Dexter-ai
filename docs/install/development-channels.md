@@ -24,9 +24,9 @@ without changing the version number — dist-tags are the source of truth for np
 Git checkout:
 
 ```bash
-openclaw update --channel stable
-openclaw update --channel beta
-openclaw update --channel dev
+dexter update --channel stable
+dexter update --channel beta
+dexter update --channel dev
 ```
 
 - `stable`/`beta` check out the latest matching tag (often the same tag).
@@ -35,9 +35,9 @@ openclaw update --channel dev
 npm/pnpm global install:
 
 ```bash
-openclaw update --channel stable
-openclaw update --channel beta
-openclaw update --channel dev
+dexter update --channel stable
+dexter update --channel beta
+dexter update --channel dev
 ```
 
 This updates via the corresponding npm dist-tag (`latest`, `beta`, `dev`).
@@ -53,7 +53,7 @@ Tip: if you want stable + dev in parallel, keep two clones and point your gatewa
 
 ## Plugins and channels
 
-When you switch channels with `openclaw update`, OpenClaw also syncs plugin sources:
+When you switch channels with `dexter update`, OpenClaw also syncs plugin sources:
 
 - `dev` prefers bundled plugins from the git checkout.
 - `stable` and `beta` restore npm-installed plugin packages.

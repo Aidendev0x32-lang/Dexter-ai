@@ -26,7 +26,7 @@ OpenClaw 支持通过 OAuth 进行"订阅认证"，适用于提供此功能的�
 OpenClaw 还支持**提供商插件**，它们自带 OAuth 或 API 密钥流程。通过以下命令运行：
 
 ```bash
-openclaw models auth login --provider <id>
+dexter models auth login --provider <id>
 ```
 
 ## 令牌汇聚点（为什么需要它）
@@ -60,19 +60,19 @@ OAuth 提供商通常在登录/刷新流程中发放**新的刷新令牌**。某
 在任意机器上运行 `claude setup-token`，然后将其粘贴到 OpenClaw 中：
 
 ```bash
-openclaw models auth setup-token --provider anthropic
+dexter models auth setup-token --provider anthropic
 ```
 
 如果你在其他地方生成了令牌，可以手动粘贴：
 
 ```bash
-openclaw models auth paste-token --provider anthropic
+dexter models auth paste-token --provider anthropic
 ```
 
 验证：
 
 ```bash
-openclaw models status
+dexter models status
 ```
 
 ## OAuth 交换（登录工作原理）
@@ -87,7 +87,7 @@ OpenClaw 的交互式登录流程在 `@mariozechner/pi-ai` 中实现，并集成
 2. 将令牌粘贴到 OpenClaw
 3. 作为令牌认证配置文件存储（无刷新）
 
-向导路径为 `openclaw onboard` → 认证选择 `setup-token`（Anthropic）。
+向导路径为 `dexter onboard` → 认证选择 `setup-token`（Anthropic）。
 
 ### OpenAI Codex（ChatGPT OAuth）
 
@@ -100,7 +100,7 @@ OpenClaw 的交互式登录流程在 `@mariozechner/pi-ai` 中实现，并集成
 5. 在 `https://auth.openai.com/oauth/token` 进行交换
 6. 从访问令牌中提取 `accountId` 并存储 `{ access, refresh, expires, accountId }`
 
-向导路径为 `openclaw onboard` → 认证选择 `openai-codex`。
+向导路径为 `dexter onboard` → 认证选择 `openai-codex`。
 
 ## 刷新 + 过期
 
@@ -122,8 +122,8 @@ OpenClaw 的交互式登录流程在 `@mariozechner/pi-ai` 中实现，并集成
 如果你希望"个人"和"工作"永远不交叉，请使用隔离的智能体（独立的会话 + 凭据 + 工作区）：
 
 ```bash
-openclaw agents add work
-openclaw agents add personal
+dexter agents add work
+dexter agents add personal
 ```
 
 然后按智能体配置认证（向导），并将聊天路由到正确的智能体。
@@ -143,7 +143,7 @@ openclaw agents add personal
 
 如何查看存在哪些配置文件 ID：
 
-- `openclaw channels list --json`（显示 `auth[]`）
+- `dexter channels list --json`（显示 `auth[]`）
 
 相关文档：
 

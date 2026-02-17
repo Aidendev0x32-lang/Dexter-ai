@@ -112,7 +112,7 @@ Client                    Gateway
 
 ## 操作快照
 
-- 启动：`openclaw gateway`（前台，日志输出到 stdout）。
+- 启动：`dexter gateway`（前台，日志输出到 stdout）。
 - 健康检查：通过 WS 的 `health`（也包含在 `hello-ok` 中）。
 - 监控：使用 launchd/systemd 自动重启。
 

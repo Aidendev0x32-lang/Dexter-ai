@@ -2,7 +2,7 @@
 read_when:
   - 你想安全地更新源码检出
   - 你需要了解 `--update` 简写行为
-summary: "`openclaw update` 的 CLI 参考（相对安全的源码更新 + Gateway 网关自动重启）"
+summary: "`dexter update` 的 CLI 参考（相对安全的源码更新 + Gateway 网关自动重启）"
 title: update
 x-i18n:
   generated_at: "2026-02-03T07:45:34Z"
@@ -13,7 +13,7 @@ x-i18n:
   workflow: 15
 ---
 
-# `openclaw update`
+# `dexter update`
 
 安全更新 OpenClaw 并在 stable/beta/dev 渠道之间切换。
 
@@ -22,15 +22,15 @@ x-i18n:
 ## 用法
 
 ```bash
-openclaw update
-openclaw update status
-openclaw update wizard
-openclaw update --channel beta
-openclaw update --channel dev
-openclaw update --tag beta
-openclaw update --no-restart
-openclaw update --json
-openclaw --update
+dexter update
+dexter update status
+dexter update wizard
+dexter update --channel beta
+dexter update --channel dev
+dexter update --tag beta
+dexter update --no-restart
+dexter update --json
+dexter --update
 ```
 
 ## 选项
@@ -48,9 +48,9 @@ openclaw --update
 显示当前更新渠道 + git 标签/分支/SHA（对于源码检出），以及更新可用性。
 
 ```bash
-openclaw update status
-openclaw update status --json
-openclaw update status --timeout 10
+dexter update status
+dexter update status --json
+dexter update status --timeout 10
 ```
 
 选项：
@@ -86,16 +86,16 @@ openclaw update status --timeout 10
 5. Rebase 到所选提交（仅 dev）。
 6. 安装依赖（优先使用 pnpm；npm 作为备选）。
 7. 构建 + 构建控制界面。
-8. 运行 `openclaw doctor` 作为最终的"安全更新"检查。
+8. 运行 `dexter doctor` 作为最终的"安全更新"检查。
 9. 将插件同步到当前渠道（dev 使用捆绑的扩展；stable/beta 使用 npm）并更新 npm 安装的插件。
 
 ## `--update` 简写
 
-`openclaw --update` 会重写为 `openclaw update`（便于 shell 和启动脚本使用）。
+`dexter --update` 会重写为 `dexter update`（便于 shell 和启动脚本使用）。
 
 ## 另请参阅
 
-- `openclaw doctor`（在 git 检出上会提供先运行更新的选项）
+- `dexter doctor`（在 git 检出上会提供先运行更新的选项）
 - [开发渠道](/install/development-channels)
 - [更新](/install/updating)
 - [CLI 参考](/cli)

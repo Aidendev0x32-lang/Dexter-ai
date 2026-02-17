@@ -8,13 +8,13 @@ title: "Auth Monitoring"
 
 # Auth monitoring
 
-OpenClaw exposes OAuth expiry health via `openclaw models status`. Use that for
+OpenClaw exposes OAuth expiry health via `dexter models status`. Use that for
 automation and alerting; scripts are optional extras for phone workflows.
 
 ## Preferred: CLI check (portable)
 
 ```bash
-openclaw models status --check
+dexter models status --check
 ```
 
 Exit codes:
@@ -30,7 +30,7 @@ This works in cron/systemd and requires no extra scripts.
 These live under `scripts/` and are **optional**. They assume SSH access to the
 gateway host and are tuned for systemd + Termux.
 
-- `scripts/claude-auth-status.sh` now uses `openclaw models status --json` as the
+- `scripts/claude-auth-status.sh` now uses `dexter models status --json` as the
   source of truth (falling back to direct file reads if the CLI is unavailable),
   so keep `openclaw` on `PATH` for timers.
 - `scripts/auth-monitor.sh`: cron/systemd timer target; sends alerts (ntfy or phone).

@@ -20,7 +20,7 @@ GLM 是一个**模型系列**（而非公司），通过 Z.AI 平台提供。在
 ## CLI 设置
 
 ```bash
-openclaw onboard --auth-choice zai-api-key
+dexter onboard --auth-choice zai-api-key
 ```
 
 ## 配置片段

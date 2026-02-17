@@ -35,9 +35,9 @@ OpenClaw 只接受完全匹配 schema 的配置。
 验证失败时：
 
 - Gateway 网关不会启动。
-- 只允许诊断命令（例如：`openclaw doctor`、`openclaw logs`、`openclaw health`、`openclaw status`、`openclaw service`、`openclaw help`）。
-- 运行 `openclaw doctor` 查看具体问题。
-- 运行 `openclaw doctor --fix`（或 `--yes`）应用迁移/修复。
+- 只允许诊断命令（例如：`dexter doctor`、`dexter logs`、`openclaw health`、`dexter status`、`openclaw service`、`dexter help`）。
+- 运行 `dexter doctor` 查看具体问题。
+- 运行 `dexter doctor --fix`（或 `--yes`）应用迁移/修复。
 
 Doctor 不会写入任何更改，除非你明确选择了 `--fix`/`--yes`。
 
@@ -57,7 +57,7 @@ Gateway 网关通过 `config.schema` 暴露配置的 JSON Schema 表示，供 UI
 它会写入重启哨兵文件，并在 Gateway 网关恢复后 ping 最后活跃的会话。
 
 警告：`config.apply` 会替换**整个配置**。如果你只想更改部分键，
-请使用 `config.patch` 或 `openclaw config set`。请备份 `~/.openclaw/openclaw.json`。
+请使用 `config.patch` 或 `dexter config set`。请备份 `~/.openclaw/openclaw.json`。
 
 参数：
 
@@ -70,8 +70,8 @@ Gateway 网关通过 `config.schema` 暴露配置的 JSON Schema 表示，供 UI
 示例（通过 `gateway call`）：
 
 ```bash
-openclaw gateway call config.get --params '{}' # capture payload.hash
-openclaw gateway call config.apply --params '{
+dexter gateway call config.get --params '{}' # capture payload.hash
+dexter gateway call config.apply --params '{
   "raw": "{\\n  agents: { defaults: { workspace: \\"~/.openclaw/workspace\\" } }\\n}\\n",
   "baseHash": "<hash-from-config.get>",
   "sessionKey": "agent:main:whatsapp:dm:+15555550123",
@@ -101,8 +101,8 @@ openclaw gateway call config.apply --params '{
 示例：
 
 ```bash
-openclaw gateway call config.get --params '{}' # capture payload.hash
-openclaw gateway call config.patch --params '{
+dexter gateway call config.get --params '{}' # capture payload.hash
+dexter gateway call config.patch --params '{
   "raw": "{\\n  channels: { telegram: { groups: { \\"*\\": { requireMention: false } } } }\\n}\\n",
   "baseHash": "<hash-from-config.get>",
   "sessionKey": "agent:main:whatsapp:dm:+15555550123",
@@ -377,7 +377,7 @@ OpenClaw 在以下位置存储**每个智能体的**认证配置文件（OAuth +
 
 旧版智能体目录（多智能体之前）：
 
-- `~/.openclaw/agent/*`（由 `openclaw doctor` 迁移到 `~/.openclaw/agents/<defaultAgentId>/agent/*`）
+- `~/.openclaw/agent/*`（由 `dexter doctor` 迁移到 `~/.openclaw/agents/<defaultAgentId>/agent/*`）
 
 覆盖：
 
@@ -495,8 +495,8 @@ OpenClaw 在以下位置存储**每个智能体的**认证配置文件（OAuth +
 
 配对批准：
 
-- `openclaw pairing list whatsapp`
-- `openclaw pairing approve whatsapp <code>`
+- `dexter pairing list whatsapp`
+- `dexter pairing approve whatsapp <code>`
 
 ### `channels.whatsapp.allowFrom`
 
@@ -558,7 +558,7 @@ OpenClaw 在以下位置存储**每个智能体的**认证配置文件（OAuth +
 说明：
 
 - 出站命令默认使用 `default` 账号（如果存在）；否则使用第一个配置的账号 id（排序后）。
-- 旧版单账号 Baileys 认证目录由 `openclaw doctor` 迁移到 `whatsapp/default`。
+- 旧版单账号 Baileys 认证目录由 `dexter doctor` 迁移到 `whatsapp/default`。
 
 ### `channels.telegram.accounts` / `channels.discord.accounts` / `channels.googlechat.accounts` / `channels.slack.accounts` / `channels.mattermost.accounts` / `channels.signal.accounts` / `channels.imessage.accounts`
 
@@ -1318,7 +1318,7 @@ Slack 动作组（控制 `slack` 工具动作）：
 ### `channels.mattermost`（机器人 token）
 
 Mattermost 作为插件提供，不包含在核心安装中。
-请先安装：`openclaw plugins install @openclaw/mattermost`（或从 git checkout 使用 `./extensions/mattermost`）。
+请先安装：`dexter plugins install @openclaw/mattermost`（或从 git checkout 使用 `./extensions/mattermost`）。
 
 Mattermost 需要机器人 token 加上服务器的基础 URL：
 
@@ -2000,7 +2000,7 @@ Z.AI 模型可通过 `zai/<model>` 使用（例如 `zai/glm-4.7`），需要环�
 `tools.web` 配置 Web 搜索 + 获取工具：
 
 - `tools.web.search.enabled`（默认：有密钥时为 true）
-- `tools.web.search.apiKey`（推荐：通过 `openclaw configure --section web` 设置，或使用 `BRAVE_API_KEY` 环境变量）
+- `tools.web.search.apiKey`（推荐：通过 `dexter configure --section web` 设置，或使用 `BRAVE_API_KEY` 环境变量）
 - `tools.web.search.maxResults`（1–10，默认 5）
 - `tools.web.search.timeoutSeconds`（默认 30）
 - `tools.web.search.cacheTtlMinutes`（默认 15）
@@ -2424,7 +2424,7 @@ pi-ai 内置的 `opencode` 提供商；从 https://opencode.ai/auth 设置 `OPEN
 
 - 模型引用使用 `opencode/<modelId>`（示例：`opencode/claude-opus-4-5`）。
 - 如果你通过 `agents.defaults.models` 启用白名单，请添加你计划使用的每个模型。
-- 快捷方式：`openclaw onboard --auth-choice opencode-zen`。
+- 快捷方式：`dexter onboard --auth-choice opencode-zen`。
 
 ```json5
 {
@@ -2442,7 +2442,7 @@ pi-ai 内置的 `opencode` 提供商；从 https://opencode.ai/auth 设置 `OPEN
 Z.AI 模型通过内置的 `zai` 提供商提供。在环境中设置 `ZAI_API_KEY`
 并通过 provider/model 引用模型。
 
-快捷方式：`openclaw onboard --auth-choice zai-api-key`。
+快捷方式：`dexter onboard --auth-choice zai-api-key`。
 
 ```json5
 {
@@ -2506,7 +2506,7 @@ Z.AI 模型通过内置的 `zai` 提供商提供。在环境中设置 `ZAI_API_K
 
 说明：
 
-- 在环境中设置 `MOONSHOT_API_KEY` 或使用 `openclaw onboard --auth-choice moonshot-api-key`。
+- 在环境中设置 `MOONSHOT_API_KEY` 或使用 `dexter onboard --auth-choice moonshot-api-key`。
 - 模型引用：`moonshot/kimi-k2.5`。
 - 如需中国端点，使用 `https://api.moonshot.cn/v1`。
 
@@ -2528,7 +2528,7 @@ Z.AI 模型通过内置的 `zai` 提供商提供。在环境中设置 `ZAI_API_K
 
 说明：
 
-- 在环境中设置 `KIMI_API_KEY` 或使用 `openclaw onboard --auth-choice kimi-code-api-key`。
+- 在环境中设置 `KIMI_API_KEY` 或使用 `dexter onboard --auth-choice kimi-code-api-key`。
 - 模型引用：`kimi-coding/k2p5`。
 
 ### Synthetic（Anthropic 兼容）
@@ -2570,7 +2570,7 @@ Z.AI 模型通过内置的 `zai` 提供商提供。在环境中设置 `ZAI_API_K
 
 说明：
 
-- 设置 `SYNTHETIC_API_KEY` 或使用 `openclaw onboard --auth-choice synthetic-api-key`。
+- 设置 `SYNTHETIC_API_KEY` 或使用 `dexter onboard --auth-choice synthetic-api-key`。
 - 模型引用：`synthetic/hf:MiniMaxAI/MiniMax-M2.1`。
 - 基础 URL 应省略 `/v1`，因为 Anthropic 客户端会自动附加。
 
@@ -2618,7 +2618,7 @@ Z.AI 模型通过内置的 `zai` 提供商提供。在环境中设置 `ZAI_API_K
 
 说明：
 
-- 设置 `MINIMAX_API_KEY` 环境变量或使用 `openclaw onboard --auth-choice minimax-api`。
+- 设置 `MINIMAX_API_KEY` 环境变量或使用 `dexter onboard --auth-choice minimax-api`。
 - 可用模型：`MiniMax-M2.1`（默认）。
 - 如需精确费用跟踪，请在 `models.json` 中更新定价。
 
@@ -2828,7 +2828,7 @@ OpenClaw 可以为 OpenClaw 启动一个**专用、隔离的** Chrome/Brave/Edge
 - 控制服务：仅 local loopback（端口从 `gateway.port` 派生，默认 `18791`）
 - CDP URL：`http://127.0.0.1:18792`（控制服务 + 1，旧版单配置文件）
 - 配置文件颜色：`#FF4500`（龙虾橙）
-- 注意：控制服务器由运行中的 Gateway 网关（OpenClaw.app 菜单栏或 `openclaw gateway`）启动。
+- 注意：控制服务器由运行中的 Gateway 网关（OpenClaw.app 菜单栏或 `dexter gateway`）启动。
 - 自动检测顺序：如果为 Chromium 内核则使用默认浏览器；否则 Chrome → Brave → Edge → Chromium → Chrome Canary。
 
 ```json5
@@ -2920,7 +2920,7 @@ OpenClaw 可以为 OpenClaw 启动一个**专用、隔离的** Chrome/Brave/Edge
 
 说明：
 
-- `openclaw gateway` 拒绝启动，除非 `gateway.mode` 设为 `local`（或你传递了覆盖标志）。
+- `dexter gateway` 拒绝启动，除非 `gateway.mode` 设为 `local`（或你传递了覆盖标志）。
 - `gateway.port` 控制用于 WebSocket + HTTP（控制台 UI、hooks、A2UI）的单一多路复用端口。
 - OpenAI Chat Completions 端点：**默认禁用**；通过 `gateway.http.endpoints.chatCompletions.enabled: true` 启用。
 - 优先级：`--port` > `OPENCLAW_GATEWAY_PORT` > `gateway.port` > 默认 `18789`。
@@ -3043,7 +3043,7 @@ Gateway 网关监视 `~/.openclaw/openclaw.json`（或 `OPENCLAW_CONFIG_PATH`）
 
 便利标志（CLI）：
 
-- `openclaw --dev …` → 使用 `~/.openclaw-dev` + 端口从基础 `19001` 偏移
+- `dexter --dev …` → 使用 `~/.openclaw-dev` + 端口从基础 `19001` 偏移
 - `openclaw --profile <name> …` → 使用 `~/.openclaw-<name>`（端口通过配置/环境变量/标志）
 
 参见 [Gateway 网关运维手册](/gateway) 了解派生的端口映射（gateway/browser/canvas）。
@@ -3054,7 +3054,7 @@ Gateway 网关监视 `~/.openclaw/openclaw.json`（或 `OPENCLAW_CONFIG_PATH`）
 ```bash
 OPENCLAW_CONFIG_PATH=~/.openclaw/a.json \
 OPENCLAW_STATE_DIR=~/.openclaw-a \
-openclaw gateway --port 19001
+dexter gateway --port 19001
 ```
 
 ### `hooks`（Gateway 网关 webhook）

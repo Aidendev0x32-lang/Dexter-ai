@@ -21,7 +21,7 @@ If the Gateway is running on the same computer, open:
 
 - [http://127.0.0.1:18789/](http://127.0.0.1:18789/) (or [http://localhost:18789/](http://localhost:18789/))
 
-If the page fails to load, start the Gateway first: `openclaw gateway`.
+If the page fails to load, start the Gateway first: `dexter gateway`.
 
 Auth is supplied during the WebSocket handshake via:
 
@@ -43,14 +43,14 @@ unauthorized access.
 
 ```bash
 # List pending requests
-openclaw devices list
+dexter devices list
 
 # Approve by request ID
-openclaw devices approve <requestId>
+dexter devices approve <requestId>
 ```
 
 Once approved, the device is remembered and won't require re-approval unless
-you revoke it with `openclaw devices revoke --device <id> --role <role>`. See
+you revoke it with `dexter devices revoke --device <id> --role <role>`. See
 [Devices CLI](/cli/devices) for token rotation and revocation.
 
 **Notes:**
@@ -110,7 +110,7 @@ Cron jobs panel notes:
 Keep the Gateway on loopback and let Tailscale Serve proxy it with HTTPS:
 
 ```bash
-openclaw gateway --tailscale serve
+dexter gateway --tailscale serve
 ```
 
 Open:
@@ -128,7 +128,7 @@ if you want to require a token/password even for Serve traffic.
 ### Bind to tailnet + token
 
 ```bash
-openclaw gateway --bind tailnet --token "$(openssl rand -hex 32)"
+dexter gateway --bind tailnet --token "$(openssl rand -hex 32)"
 ```
 
 Then open:

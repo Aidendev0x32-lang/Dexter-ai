@@ -79,13 +79,13 @@ pnpm link --global
 1. 配对 WhatsApp Web（显示二维码；用助手手机扫描）：
 
 ```bash
-openclaw channels login
+dexter channels login
 ```
 
 2. 启动 Gateway 网关（保持运行）：
 
 ```bash
-openclaw gateway --port 18789
+dexter gateway --port 18789
 ```
 
 3. 在 `~/.openclaw/openclaw.json` 中放置最小配置：
@@ -98,7 +98,7 @@ openclaw gateway --port 18789
 
 现在从你允许列表中的手机向助手号码发消息。
 
-新手引导完成后，我们会自动打开带有 Gateway 网关令牌的仪表板并打印带令牌的链接。稍后重新打开：`openclaw dashboard`。
+新手引导完成后，我们会自动打开带有 Gateway 网关令牌的仪表板并打印带令牌的链接。稍后重新打开：`dexter dashboard`。
 
 ## 给智能体一个工作区（AGENTS）
 
@@ -109,7 +109,7 @@ OpenClaw 从其工作区目录读取操作指令和"记忆"。
 提示：将此文件夹视为 OpenClaw 的"记忆"，并将其设为 git 仓库（最好是私有的），这样你的 `AGENTS.md` + 记忆文件就有了备份。如果安装了 git，全新的工作区会自动初始化。
 
 ```bash
-openclaw setup
+dexter setup
 ```
 
 完整工作区布局 + 备份指南：[智能体工作区](/concepts/agent-workspace)
@@ -227,9 +227,9 @@ OpenClaw 会提取这些并将它们作为媒体与文本一起发送。
 ## 运维检查清单
 
 ```bash
-openclaw status          # 本地状态（凭证、会话、排队事件）
-openclaw status --all    # 完整诊断（只读，可粘贴）
-openclaw status --deep   # 添加 Gateway 网关健康探测（Telegram + Discord）
+dexter status          # 本地状态（凭证、会话、排队事件）
+dexter status --all    # 完整诊断（只读，可粘贴）
+dexter status --deep   # 添加 Gateway 网关健康探测（Telegram + Discord）
 openclaw health --json   # Gateway 网关健康快照（WS）
 ```
 

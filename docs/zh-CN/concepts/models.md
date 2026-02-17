@@ -43,7 +43,7 @@ OpenClaw 按以下顺序选择模型：
 如果你不想手动编辑配置，请运行新手引导向导：
 
 ```bash
-openclaw onboard
+dexter onboard
 ```
 
 它可以为常见提供商设置模型 + 认证，包括 **OpenAI Code（Codex）订阅**（OAuth）和 **Anthropic**（推荐使用 API 密钥；也支持 `claude setup-token`）。
@@ -113,27 +113,27 @@ Model "provider/model" is not allowed. Use /model to list available models.
 ## CLI 命令
 
 ```bash
-openclaw models list
-openclaw models status
-openclaw models set <provider/model>
-openclaw models set-image <provider/model>
+dexter models list
+dexter models status
+dexter models set <provider/model>
+dexter models set-image <provider/model>
 
-openclaw models aliases list
-openclaw models aliases add <alias> <provider/model>
-openclaw models aliases remove <alias>
+dexter models aliases list
+dexter models aliases add <alias> <provider/model>
+dexter models aliases remove <alias>
 
-openclaw models fallbacks list
-openclaw models fallbacks add <provider/model>
-openclaw models fallbacks remove <provider/model>
-openclaw models fallbacks clear
+dexter models fallbacks list
+dexter models fallbacks add <provider/model>
+dexter models fallbacks remove <provider/model>
+dexter models fallbacks clear
 
-openclaw models image-fallbacks list
-openclaw models image-fallbacks add <provider/model>
-openclaw models image-fallbacks remove <provider/model>
-openclaw models image-fallbacks clear
+dexter models image-fallbacks list
+dexter models image-fallbacks add <provider/model>
+dexter models image-fallbacks remove <provider/model>
+dexter models image-fallbacks clear
 ```
 
-`openclaw models`（无子命令）是 `models status` 的快捷方式。
+`dexter models`（无子命令）是 `models status` 的快捷方式。
 
 ### `models list`
 
@@ -156,12 +156,12 @@ JSON 包括 `auth.oauth`（警告窗口 + 配置文件）和 `auth.providers`（
 
 ```bash
 claude setup-token
-openclaw models status
+dexter models status
 ```
 
 ## 扫描（OpenRouter 免费模型）
 
-`openclaw models scan` 检查 OpenRouter 的**免费模型目录**，并可选择性地探测模型的工具和图像支持。
+`dexter models scan` 检查 OpenRouter 的**免费模型目录**，并可选择性地探测模型的工具和图像支持。
 
 关键标志：
 

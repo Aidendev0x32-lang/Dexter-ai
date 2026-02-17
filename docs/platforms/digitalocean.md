@@ -76,7 +76,7 @@ openclaw --version
 ## 4) Run Onboarding
 
 ```bash
-openclaw onboard --install-daemon
+dexter onboard --install-daemon
 ```
 
 The wizard will walk you through:
@@ -90,7 +90,7 @@ The wizard will walk you through:
 
 ```bash
 # Check status
-openclaw status
+dexter status
 
 # Check service
 systemctl --user status openclaw-gateway.service
@@ -120,8 +120,8 @@ curl -fsSL https://tailscale.com/install.sh | sh
 tailscale up
 
 # Configure Gateway to use Tailscale Serve
-openclaw config set gateway.tailscale.mode serve
-openclaw gateway restart
+dexter config set gateway.tailscale.mode serve
+dexter gateway restart
 ```
 
 Open: `https://<magicdns>/`
@@ -134,8 +134,8 @@ Notes:
 **Option C: Tailnet bind (no Serve)**
 
 ```bash
-openclaw config set gateway.bind tailnet
-openclaw gateway restart
+dexter config set gateway.bind tailnet
+dexter gateway restart
 ```
 
 Open: `http://<tailscale-ip>:18789` (token required).
@@ -145,14 +145,14 @@ Open: `http://<tailscale-ip>:18789` (token required).
 ### Telegram
 
 ```bash
-openclaw pairing list telegram
-openclaw pairing approve telegram <CODE>
+dexter pairing list telegram
+dexter pairing approve telegram <CODE>
 ```
 
 ### WhatsApp
 
 ```bash
-openclaw channels login whatsapp
+dexter channels login whatsapp
 # Scan QR code
 ```
 
@@ -230,8 +230,8 @@ For the full setup guide, see [Oracle Cloud](/platforms/oracle). For signup tips
 ### Gateway won't start
 
 ```bash
-openclaw gateway status
-openclaw doctor --non-interactive
+dexter gateway status
+dexter doctor --non-interactive
 journalctl -u openclaw --no-pager -n 50
 ```
 

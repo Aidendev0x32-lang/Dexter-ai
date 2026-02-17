@@ -62,7 +62,7 @@ tsx watch src/entry.ts gateway --force
 
 ```bash
 pnpm gateway:dev
-OPENCLAW_PROFILE=dev openclaw tui
+OPENCLAW_PROFILE=dev dexter tui
 ```
 
 如果你还没有全局安装，请通过 `pnpm openclaw ...` 运行 CLI。
@@ -94,7 +94,7 @@ pnpm gateway:dev:reset
 如果你需要明确拼写，请使用环境变量形式：
 
 ```bash
-OPENCLAW_PROFILE=dev openclaw gateway --dev --reset
+OPENCLAW_PROFILE=dev dexter gateway --dev --reset
 ```
 
 `--reset` 清除配置、凭证、会话和 dev 工作区（使用 `trash`，而非 `rm`），然后重新创建默认的 dev 设置。
@@ -102,7 +102,7 @@ OPENCLAW_PROFILE=dev openclaw gateway --dev --reset
 提示：如果非 dev Gateway 网关已在运行（launchd/systemd），请先停止它：
 
 ```bash
-openclaw gateway stop
+dexter gateway stop
 ```
 
 ## 原始流日志（OpenClaw）

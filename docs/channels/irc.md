@@ -29,7 +29,7 @@ IRC ships as an extension plugin, but it is configured in the main config under 
 3. Start/restart gateway:
 
 ```bash
-openclaw gateway run
+dexter gateway run
 ```
 
 ## Security defaults

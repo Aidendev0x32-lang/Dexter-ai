@@ -160,8 +160,8 @@ Quick answers plus deeper troubleshooting for real-world setups (local dev, VPS,
   - [OAuth vs API key: what's the difference?](#oauth-vs-api-key-whats-the-difference)
 - [Gateway: ports, "already running", and remote mode](#gateway-ports-already-running-and-remote-mode)
   - [What port does the Gateway use?](#what-port-does-the-gateway-use)
-  - [Why does `openclaw gateway status` say `Runtime: running` but `RPC probe: failed`?](#why-does-openclaw-gateway-status-say-runtime-running-but-rpc-probe-failed)
-  - [Why does `openclaw gateway status` show `Config (cli)` and `Config (service)` different?](#why-does-openclaw-gateway-status-show-config-cli-and-config-service-different)
+  - [Why does `dexter gateway status` say `Runtime: running` but `RPC probe: failed`?](#why-does-openclaw-gateway-status-say-runtime-running-but-rpc-probe-failed)
+  - [Why does `dexter gateway status` show `Config (cli)` and `Config (service)` different?](#why-does-openclaw-gateway-status-show-config-cli-and-config-service-different)
   - [What does "another gateway instance is already listening" mean?](#what-does-another-gateway-instance-is-already-listening-mean)
   - [How do I run OpenClaw in remote mode (client connects to a Gateway elsewhere)?](#how-do-i-run-openclaw-in-remote-mode-client-connects-to-a-gateway-elsewhere)
   - [The Control UI says "unauthorized" (or keeps reconnecting). What now?](#the-control-ui-says-unauthorized-or-keeps-reconnecting-what-now)
@@ -177,7 +177,7 @@ Quick answers plus deeper troubleshooting for real-world setups (local dev, VPS,
   - [Telegram setMyCommands fails with network errors. What should I check?](#telegram-setmycommands-fails-with-network-errors-what-should-i-check)
   - [TUI shows no output. What should I check?](#tui-shows-no-output-what-should-i-check)
   - [How do I completely stop then start the Gateway?](#how-do-i-completely-stop-then-start-the-gateway)
-  - [ELI5: `openclaw gateway restart` vs `openclaw gateway`](#eli5-openclaw-gateway-restart-vs-openclaw-gateway)
+  - [ELI5: `dexter gateway restart` vs `dexter gateway`](#eli5-openclaw-gateway-restart-vs-openclaw-gateway)
   - [What's the fastest way to get more details when something fails?](#whats-the-fastest-way-to-get-more-details-when-something-fails)
 - [Media and attachments](#media-and-attachments)
   - [My skill generated an image/PDF, but nothing was sent](#my-skill-generated-an-imagepdf-but-nothing-was-sent)
@@ -200,7 +200,7 @@ Quick answers plus deeper troubleshooting for real-world setups (local dev, VPS,
 1. **Quick status (first check)**
 
    ```bash
-   openclaw status
+   dexter status
    ```
 
    Fast local summary: OS + update, gateway/service reachability, agents/sessions, provider config + runtime issues (when gateway is reachable).
@@ -208,7 +208,7 @@ Quick answers plus deeper troubleshooting for real-world setups (local dev, VPS,
 2. **Pasteable report (safe to share)**
 
    ```bash
-   openclaw status --all
+   dexter status --all
    ```
 
    Read-only diagnosis with log tail (tokens redacted).
@@ -216,7 +216,7 @@ Quick answers plus deeper troubleshooting for real-world setups (local dev, VPS,
 3. **Daemon + port state**
 
    ```bash
-   openclaw gateway status
+   dexter gateway status
    ```
 
    Shows supervisor runtime vs RPC reachability, the probe target URL, and which config the service likely used.
@@ -224,7 +224,7 @@ Quick answers plus deeper troubleshooting for real-world setups (local dev, VPS,
 4. **Deep probes**
 
    ```bash
-   openclaw status --deep
+   dexter status --deep
    ```
 
    Runs gateway health checks + provider probes (requires a reachable gateway). See [Health](/gateway/health).
@@ -232,7 +232,7 @@ Quick answers plus deeper troubleshooting for real-world setups (local dev, VPS,
 5. **Tail the latest log**
 
    ```bash
-   openclaw logs --follow
+   dexter logs --follow
    ```
 
    If RPC is down, fall back to:
@@ -246,7 +246,7 @@ Quick answers plus deeper troubleshooting for real-world setups (local dev, VPS,
 6. **Run the doctor (repairs)**
 
    ```bash
-   openclaw doctor
+   dexter doctor
    ```
 
    Repairs/migrates config/state + runs health checks. See [Doctor](/gateway/doctor).
@@ -293,19 +293,19 @@ If you discover a real bug or fix, please file a GitHub issue or send a PR:
 Start with these commands (share outputs when asking for help):
 
 ```bash
-openclaw status
-openclaw models status
-openclaw doctor
+dexter status
+dexter models status
+dexter doctor
 ```
 
 What they do:
 
-- `openclaw status`: quick snapshot of gateway/agent health + basic config.
-- `openclaw models status`: checks provider auth + model availability.
-- `openclaw doctor`: validates and repairs common config/state issues.
+- `dexter status`: quick snapshot of gateway/agent health + basic config.
+- `dexter models status`: checks provider auth + model availability.
+- `dexter doctor`: validates and repairs common config/state issues.
 
-Other useful CLI checks: `openclaw status --all`, `openclaw logs --follow`,
-`openclaw gateway status`, `openclaw health --verbose`.
+Other useful CLI checks: `dexter status --all`, `dexter logs --follow`,
+`dexter gateway status`, `openclaw health --verbose`.
 
 Quick debug loop: [First 60 seconds if something's broken](#first-60-seconds-if-somethings-broken).
 Install docs: [Install](/install), [Installer flags](/install/installer), [Updating](/install/updating).
@@ -316,7 +316,7 @@ The repo recommends running from source and using the onboarding wizard:
 
 ```bash
 curl -fsSL https://openclaw.ai/install.sh | bash
-openclaw onboard --install-daemon
+dexter onboard --install-daemon
 ```
 
 The wizard can also build UI assets automatically. After onboarding, you typically run the Gateway on port **18789**.
@@ -329,10 +329,10 @@ cd openclaw
 pnpm install
 pnpm build
 pnpm ui:build # auto-installs UI deps on first run
-openclaw onboard
+dexter onboard
 ```
 
-If you don't have a global install yet, run it via `pnpm openclaw onboard`.
+If you don't have a global install yet, run it via `pnpm dexter onboard`.
 
 ### How do I open the dashboard after onboarding
 
@@ -344,12 +344,12 @@ The wizard opens your browser with a clean (non-tokenized) dashboard URL right a
 
 - Open `http://127.0.0.1:18789/`.
 - If it asks for auth, paste the token from `gateway.auth.token` (or `OPENCLAW_GATEWAY_TOKEN`) into Control UI settings.
-- Retrieve it from the gateway host: `openclaw config get gateway.auth.token` (or generate one: `openclaw doctor --generate-gateway-token`).
+- Retrieve it from the gateway host: `dexter config get gateway.auth.token` (or generate one: `dexter doctor --generate-gateway-token`).
 
 **Not on localhost:**
 
-- **Tailscale Serve** (recommended): keep bind loopback, run `openclaw gateway --tailscale serve`, open `https://<magicdns>/`. If `gateway.auth.allowTailscale` is `true`, identity headers satisfy auth (no token).
-- **Tailnet bind**: run `openclaw gateway --bind tailnet --token "<token>"`, open `http://<tailscale-ip>:18789/`, paste token in dashboard settings.
+- **Tailscale Serve** (recommended): keep bind loopback, run `dexter gateway --tailscale serve`, open `https://<magicdns>/`. If `gateway.auth.allowTailscale` is `true`, identity headers satisfy auth (no token).
+- **Tailnet bind**: run `dexter gateway --bind tailnet --token "<token>"`, open `http://<tailscale-ip>:18789/`, paste token in dashboard settings.
 - **SSH tunnel**: `ssh -N -L 18789:127.0.0.1:18789 user@host` then open `http://127.0.0.1:18789/` and paste the token in Control UI settings.
 
 See [Dashboard](/web/dashboard) and [Web surfaces](/web) for bind modes and auth details.
@@ -389,21 +389,21 @@ and tokens stay at 0, the agent never ran.
 1. Restart the Gateway:
 
 ```bash
-openclaw gateway restart
+dexter gateway restart
 ```
 
 2. Check status + auth:
 
 ```bash
-openclaw status
-openclaw models status
-openclaw logs --follow
+dexter status
+dexter models status
+dexter logs --follow
 ```
 
 3. If it still hangs, run:
 
 ```bash
-openclaw doctor
+dexter doctor
 ```
 
 If the Gateway is remote, ensure the tunnel/Tailscale connection is up and that the UI
@@ -418,7 +418,7 @@ state) as long as you copy **both** locations:
 1. Install OpenClaw on the new machine.
 2. Copy `$OPENCLAW_STATE_DIR` (default: `~/.openclaw`) from the old machine.
 3. Copy your workspace (default: `~/.openclaw/workspace`).
-4. Run `openclaw doctor` and restart the Gateway service.
+4. Run `dexter doctor` and restart the Gateway service.
 
 That preserves config, auth profiles, WhatsApp creds, sessions, and memory. If you're in
 remote mode, remember the gateway host owns the session store and workspace.
@@ -501,7 +501,7 @@ Two options:
 1. **Dev channel (git checkout):**
 
 ```bash
-openclaw update --channel dev
+dexter update --channel dev
 ```
 
 This switches to the `main` branch and updates from source.
@@ -636,25 +636,25 @@ can prompt for confirmation. Safer: run updates from a shell as the operator.
 Use the CLI:
 
 ```bash
-openclaw update
-openclaw update status
-openclaw update --channel stable|beta|dev
-openclaw update --tag <dist-tag|version>
-openclaw update --no-restart
+dexter update
+dexter update status
+dexter update --channel stable|beta|dev
+dexter update --tag <dist-tag|version>
+dexter update --no-restart
 ```
 
 If you must automate from an agent:
 
 ```bash
-openclaw update --yes --no-restart
-openclaw gateway restart
+dexter update --yes --no-restart
+dexter gateway restart
 ```
 
 Docs: [Update](/cli/update), [Updating](/install/updating).
 
 ### What does the onboarding wizard actually do
 
-`openclaw onboard` is the recommended setup path. In **local mode** it walks you through:
+`dexter onboard` is the recommended setup path. In **local mode** it walks you through:
 
 - **Model/auth setup** (Anthropic **setup-token** recommended for Claude subscriptions, OpenAI Codex OAuth supported, API keys optional, LM Studio local models supported)
 - **Workspace** location + bootstrap files
@@ -686,7 +686,7 @@ If you want the most explicit, supported path, use an Anthropic API key.
 
 ### How does Anthropic setuptoken auth work
 
-`claude setup-token` generates a **token string** via the Claude Code CLI (it is not available in the web console). You can run it on **any machine**. Choose **Anthropic token (paste setup-token)** in the wizard or paste it with `openclaw models auth paste-token --provider anthropic`. The token is stored as an auth profile for the **anthropic** provider and used like an API key (no auto-refresh). More detail: [OAuth](/concepts/oauth).
+`claude setup-token` generates a **token string** via the Claude Code CLI (it is not available in the web console). You can run it on **any machine**. Choose **Anthropic token (paste setup-token)** in the wizard or paste it with `dexter models auth paste-token --provider anthropic`. The token is stored as an auth profile for the **anthropic** provider and used like an API key (no auto-refresh). More detail: [OAuth](/concepts/oauth).
 
 ### Where do I find an Anthropic setuptoken
 
@@ -696,7 +696,7 @@ It is **not** in the Anthropic Console. The setup-token is generated by the **Cl
 claude setup-token
 ```
 
-Copy the token it prints, then choose **Anthropic token (paste setup-token)** in the wizard. If you want to run it on the gateway host, use `openclaw models auth setup-token --provider anthropic`. If you ran `claude setup-token` elsewhere, paste it on the gateway host with `openclaw models auth paste-token --provider anthropic`. See [Anthropic](/providers/anthropic).
+Copy the token it prints, then choose **Anthropic token (paste setup-token)** in the wizard. If you want to run it on the gateway host, use `dexter models auth setup-token --provider anthropic`. If you ran `claude setup-token` elsewhere, paste it on the gateway host with `dexter models auth paste-token --provider anthropic`. See [Anthropic](/providers/anthropic).
 
 ### Do you support Claude subscription auth (Claude Pro or Max)
 
@@ -735,8 +735,8 @@ Gemini CLI uses a **plugin auth flow**, not a client id or secret in `openclaw.j
 
 Steps:
 
-1. Enable the plugin: `openclaw plugins enable google-gemini-cli-auth`
-2. Login: `openclaw models auth login --provider google-gemini-cli --set-default`
+1. Enable the plugin: `dexter plugins enable google-gemini-cli-auth`
+2. Login: `dexter models auth login --provider google-gemini-cli --set-default`
 
 This stores OAuth tokens in auth profiles on the gateway host. Details: [Model providers](/concepts/model-providers).
 
@@ -780,7 +780,7 @@ Common pattern:
 
 - Gateway on the Mac mini (always-on).
 - MacBook Pro runs the macOS app or a node host and pairs to the Gateway.
-- Use `openclaw nodes status` / `openclaw nodes list` to see it.
+- Use `dexter nodes status` / `dexter nodes list` to see it.
 
 Docs: [Nodes](/nodes), [Nodes CLI](/cli/nodes).
 
@@ -800,7 +800,7 @@ The onboarding wizard accepts `@username` input and resolves it to a numeric ID,
 
 Safer (no third-party bot):
 
-- DM your bot, then run `openclaw logs --follow` and read `from.id`.
+- DM your bot, then run `dexter logs --follow` and read `from.id`.
 
 Official Bot API:
 
@@ -856,16 +856,16 @@ git clone https://github.com/openclaw/openclaw.git
 cd openclaw
 pnpm install
 pnpm build
-openclaw doctor
-openclaw gateway restart
+dexter doctor
+dexter gateway restart
 ```
 
 From git → npm:
 
 ```bash
 npm install -g openclaw@latest
-openclaw doctor
-openclaw gateway restart
+dexter doctor
+dexter gateway restart
 ```
 
 Doctor detects a gateway service entrypoint mismatch and offers to rewrite the service config to match the current install (use `--repair` in automation).
@@ -1151,8 +1151,8 @@ ClawHub installs into `./skills` under your current directory (or falls back to 
 Use the built-in installer, then load the unpacked extension in Chrome:
 
 ```bash
-openclaw browser extension install
-openclaw browser extension path
+dexter browser extension install
+dexter browser extension path
 ```
 
 Then Chrome → `chrome://extensions` → enable "Developer mode" → "Load unpacked" → pick that folder.
@@ -1278,7 +1278,7 @@ Everything lives under `$OPENCLAW_STATE_DIR` (default: `~/.openclaw`):
 | `$OPENCLAW_STATE_DIR/agents/<agentId>/sessions/`                | Conversation history & state (per agent)                     |
 | `$OPENCLAW_STATE_DIR/agents/<agentId>/sessions/sessions.json`   | Session metadata (per agent)                                 |
 
-Legacy single-agent path: `~/.openclaw/agent/*` (migrated by `openclaw doctor`).
+Legacy single-agent path: `~/.openclaw/agent/*` (migrated by `dexter doctor`).
 
 Your **workspace** (AGENTS.md, memory files, skills, etc.) is separate and configured via `agents.defaults.workspace` (default: `~/.openclaw/workspace`).
 
@@ -1387,7 +1387,7 @@ Notes:
 
 The wizard generates a gateway token by default (even on loopback) so **local WS clients must authenticate**. This blocks other local processes from calling the Gateway. Paste the token into the Control UI settings (or your client config) to connect.
 
-If you **really** want open loopback, remove `gateway.auth` from your config. Doctor can generate a token for you any time: `openclaw doctor --generate-gateway-token`.
+If you **really** want open loopback, remove `gateway.auth` from your config. Doctor can generate a token for you any time: `dexter doctor --generate-gateway-token`.
 
 ### Do I have to restart after changing config
 
@@ -1399,7 +1399,7 @@ The Gateway watches the config and supports hot-reload:
 ### How do I enable web search and web fetch
 
 `web_fetch` works without an API key. `web_search` requires a Brave Search API
-key. **Recommended:** run `openclaw configure --section web` to store it in
+key. **Recommended:** run `dexter configure --section web` to store it in
 `tools.web.search.apiKey`. Environment alternative: set `BRAVE_API_KEY` for the
 Gateway process.
 
@@ -1494,8 +1494,8 @@ Typical setup:
 5. Approve the node on the Gateway:
 
    ```bash
-   openclaw nodes pending
-   openclaw nodes approve <requestId>
+   dexter nodes pending
+   dexter nodes approve <requestId>
    ```
 
 No separate TCP bridge is required; nodes connect over the Gateway WebSocket.
@@ -1509,9 +1509,9 @@ Docs: [Nodes](/nodes), [Gateway protocol](/gateway/protocol), [macOS remote mode
 
 Check the basics:
 
-- Gateway is running: `openclaw gateway status`
-- Gateway health: `openclaw status`
-- Channel health: `openclaw channels status`
+- Gateway is running: `dexter gateway status`
+- Gateway health: `dexter status`
+- Channel health: `dexter channels status`
 
 Then verify auth and routing:
 
@@ -1530,14 +1530,14 @@ reliable ways:
 Have Bot A send a message to Bot B, then let Bot B reply as usual.
 
 **CLI bridge (generic):** run a script that calls the other Gateway with
-`openclaw agent --message ... --deliver`, targeting a chat where the other bot
+`dexter agent --message ... --deliver`, targeting a chat where the other bot
 listens. If one bot is on a remote VPS, point your CLI at that remote Gateway
 via SSH/Tailscale (see [Remote access](/gateway/remote)).
 
 Example pattern (run from a machine that can reach the target Gateway):
 
 ```bash
-openclaw agent --message "Hello from local bot" --deliver --channel telegram --reply-to <chat-id>
+dexter agent --message "Hello from local bot" --deliver --channel telegram --reply-to <chat-id>
 ```
 
 Tip: add a guardrail so the two bots do not loop endlessly (mention-only, channel
@@ -1603,14 +1603,14 @@ else is removed.
 Recover:
 
 - Restore from backup (git or a copied `~/.openclaw/openclaw.json`).
-- If you have no backup, re-run `openclaw doctor` and reconfigure channels/models.
+- If you have no backup, re-run `dexter doctor` and reconfigure channels/models.
 - If this was unexpected, file a bug and include your last known config or any backup.
 - A local coding agent can often reconstruct a working config from logs or history.
 
 Avoid it:
 
-- Use `openclaw config set` for small changes.
-- Use `openclaw configure` for interactive edits.
+- Use `dexter config set` for small changes.
+- Use `dexter configure` for interactive edits.
 
 Docs: [Config](/cli/config), [Configure](/cli/configure), [Doctor](/gateway/doctor).
 
@@ -1647,7 +1647,7 @@ Minimal steps:
 If you want the Control UI without SSH, use Tailscale Serve on the VPS:
 
 ```bash
-openclaw gateway --tailscale serve
+dexter gateway --tailscale serve
 ```
 
 This keeps the gateway bound to loopback and exposes HTTPS via Tailscale. See [Tailscale](/gateway/tailscale).
@@ -1664,8 +1664,8 @@ Recommended setup:
 3. **Approve the node** on the gateway:
 
    ```bash
-   openclaw nodes pending
-   openclaw nodes approve <requestId>
+   dexter nodes pending
+   dexter nodes approve <requestId>
    ```
 
 Docs: [Gateway protocol](/gateway/protocol), [Discovery](/gateway/discovery), [macOS remote mode](/platforms/mac/remote).
@@ -1717,7 +1717,7 @@ This runs your login shell and imports only missing expected keys (never overrid
 
 ### I set COPILOTGITHUBTOKEN but models status shows Shell env off Why
 
-`openclaw models status` reports whether **shell env import** is enabled. "Shell env: off"
+`dexter models status` reports whether **shell env import** is enabled. "Shell env: off"
 does **not** mean your env vars are missing - it just means OpenClaw won't load
 your login shell automatically.
 
@@ -1736,7 +1736,7 @@ environment. Fix by doing one of these:
 Then restart the gateway and recheck:
 
 ```bash
-openclaw models status
+dexter models status
 ```
 
 Copilot tokens are read from `COPILOT_GITHUB_TOKEN` (also `GH_TOKEN` / `GITHUB_TOKEN`).
@@ -1804,14 +1804,14 @@ openclaw reset --scope full --yes --non-interactive
 Then re-run onboarding:
 
 ```bash
-openclaw onboard --install-daemon
+dexter onboard --install-daemon
 ```
 
 Notes:
 
 - The onboarding wizard also offers **Reset** if it sees an existing config. See [Wizard](/start/wizard).
 - If you used profiles (`--profile` / `OPENCLAW_PROFILE`), reset each state dir (defaults are `~/.openclaw-<profile>`).
-- Dev reset: `openclaw gateway --dev --reset` (dev-only; wipes dev config + credentials + sessions + workspace).
+- Dev reset: `dexter gateway --dev --reset` (dev-only; wipes dev config + credentials + sessions + workspace).
 
 ### Im getting context too large errors how do I reset or compact
 
@@ -1892,7 +1892,7 @@ If you want only **you** to be able to trigger group replies:
 Option 1 (fastest): tail logs and send a test message in the group:
 
 ```bash
-openclaw logs --follow --json
+dexter logs --follow --json
 ```
 
 Look for `chatId` (or `from`) ending in `@g.us`, like:
@@ -1931,7 +1931,7 @@ Tips:
 
 - Keep one **active** workspace per agent (`agents.defaults.workspace`).
 - Prune old sessions (delete JSONL or store entries) if disk grows.
-- Use `openclaw doctor` to spot stray workspaces and profile mismatches.
+- Use `dexter doctor` to spot stray workspaces and profile mismatches.
 
 ### Can I run multiple bots or chats at the same time Slack and how should I set that up
 
@@ -2004,12 +2004,12 @@ Use **model commands** or edit only the **model** fields. Avoid full config repl
 Safe options:
 
 - `/model` in chat (quick, per-session)
-- `openclaw models set ...` (updates just model config)
-- `openclaw configure --section model` (interactive)
+- `dexter models set ...` (updates just model config)
+- `dexter configure --section model` (interactive)
 - edit `agents.defaults.model` in `~/.openclaw/openclaw.json`
 
 Avoid `config.apply` with a partial object unless you intend to replace the whole config.
-If you did overwrite config, restore from backup or re-run `openclaw doctor` to repair.
+If you did overwrite config, restore from backup or re-run `dexter doctor` to repair.
 
 Docs: [Models](/concepts/models), [Configure](/cli/configure), [Config](/cli/config), [Doctor](/gateway/doctor).
 
@@ -2099,7 +2099,7 @@ Fix checklist:
 4. Run:
 
    ```bash
-   openclaw models list
+   dexter models list
    ```
 
    and pick from the list (or `/model list` in chat).
@@ -2219,7 +2219,7 @@ stored in:
 
 Fix options:
 
-- Run `openclaw agents add <id>` and configure auth during the wizard.
+- Run `dexter agents add <id>` and configure auth during the wizard.
 - Or copy `auth-profiles.json` from the main agent's `agentDir` into the new agent's `agentDir`.
 
 Do **not** reuse `agentDir` across agents; it causes auth/session collisions.
@@ -2247,13 +2247,13 @@ It means the system attempted to use the auth profile ID `anthropic:default`, bu
 
 - **Confirm where auth profiles live** (new vs legacy paths)
   - Current: `~/.openclaw/agents/<agentId>/agent/auth-profiles.json`
-  - Legacy: `~/.openclaw/agent/*` (migrated by `openclaw doctor`)
+  - Legacy: `~/.openclaw/agent/*` (migrated by `dexter doctor`)
 - **Confirm your env var is loaded by the Gateway**
   - If you set `ANTHROPIC_API_KEY` in your shell but run the Gateway via systemd/launchd, it may not inherit it. Put it in `~/.openclaw/.env` or enable `env.shellEnv`.
 - **Make sure you're editing the correct agent**
   - Multi-agent setups mean there can be multiple `auth-profiles.json` files.
 - **Sanity-check model/auth status**
-  - Use `openclaw models status` to see configured models and whether providers are authenticated.
+  - Use `dexter models status` to see configured models and whether providers are authenticated.
 
 **Fix checklist for No credentials found for profile anthropic**
 
@@ -2261,14 +2261,14 @@ This means the run is pinned to an Anthropic auth profile, but the Gateway
 can't find it in its auth store.
 
 - **Use a setup-token**
-  - Run `claude setup-token`, then paste it with `openclaw models auth setup-token --provider anthropic`.
-  - If the token was created on another machine, use `openclaw models auth paste-token --provider anthropic`.
+  - Run `claude setup-token`, then paste it with `dexter models auth setup-token --provider anthropic`.
+  - If the token was created on another machine, use `dexter models auth paste-token --provider anthropic`.
 - **If you want to use an API key instead**
   - Put `ANTHROPIC_API_KEY` in `~/.openclaw/.env` on the **gateway host**.
   - Clear any pinned order that forces a missing profile:
 
     ```bash
-    openclaw models auth order clear --provider anthropic
+    dexter models auth order clear --provider anthropic
     ```
 
 - **Confirm you're running commands on the gateway host**
@@ -2311,28 +2311,28 @@ OpenClaw uses provider-prefixed IDs like:
 
 Yes. Config supports optional metadata for profiles and an ordering per provider (`auth.order.<provider>`). This does **not** store secrets; it maps IDs to provider/mode and sets rotation order.
 
-OpenClaw may temporarily skip a profile if it's in a short **cooldown** (rate limits/timeouts/auth failures) or a longer **disabled** state (billing/insufficient credits). To inspect this, run `openclaw models status --json` and check `auth.unusableProfiles`. Tuning: `auth.cooldowns.billingBackoffHours*`.
+OpenClaw may temporarily skip a profile if it's in a short **cooldown** (rate limits/timeouts/auth failures) or a longer **disabled** state (billing/insufficient credits). To inspect this, run `dexter models status --json` and check `auth.unusableProfiles`. Tuning: `auth.cooldowns.billingBackoffHours*`.
 
 You can also set a **per-agent** order override (stored in that agent's `auth-profiles.json`) via the CLI:
 
 ```bash
 # Defaults to the configured default agent (omit --agent)
-openclaw models auth order get --provider anthropic
+dexter models auth order get --provider anthropic
 
 # Lock rotation to a single profile (only try this one)
-openclaw models auth order set --provider anthropic anthropic:default
+dexter models auth order set --provider anthropic anthropic:default
 
 # Or set an explicit order (fallback within provider)
-openclaw models auth order set --provider anthropic anthropic:work anthropic:default
+dexter models auth order set --provider anthropic anthropic:work anthropic:default
 
 # Clear override (fall back to config auth.order / round-robin)
-openclaw models auth order clear --provider anthropic
+dexter models auth order clear --provider anthropic
 ```
 
 To target a specific agent:
 
 ```bash
-openclaw models auth order set --provider anthropic --agent main anthropic:default
+dexter models auth order set --provider anthropic --agent main anthropic:default
 ```
 
 ### OAuth vs API key whats the difference
@@ -2356,24 +2356,24 @@ Precedence:
 --port > OPENCLAW_GATEWAY_PORT > gateway.port > default 18789
 ```
 
-### Why does openclaw gateway status say Runtime running but RPC probe failed
+### Why does dexter gateway status say Runtime running but RPC probe failed
 
 Because "running" is the **supervisor's** view (launchd/systemd/schtasks). The RPC probe is the CLI actually connecting to the gateway WebSocket and calling `status`.
 
-Use `openclaw gateway status` and trust these lines:
+Use `dexter gateway status` and trust these lines:
 
 - `Probe target:` (the URL the probe actually used)
 - `Listening:` (what's actually bound on the port)
 - `Last gateway error:` (common root cause when the process is alive but the port isn't listening)
 
-### Why does openclaw gateway status show Config cli and Config service different
+### Why does dexter gateway status show Config cli and Config service different
 
 You're editing one config file while the service is running another (often a `--profile` / `OPENCLAW_STATE_DIR` mismatch).
 
 Fix:
 
 ```bash
-openclaw gateway install --force
+dexter gateway install --force
 ```
 
 Run that from the same `--profile` / environment you want the service to use.
@@ -2382,7 +2382,7 @@ Run that from the same `--profile` / environment you want the service to use.
 
 OpenClaw enforces a runtime lock by binding the WebSocket listener immediately on startup (default `ws://127.0.0.1:18789`). If the bind fails with `EADDRINUSE`, it throws `GatewayLockError` indicating another instance is already listening.
 
-Fix: stop the other instance, free the port, or run with `openclaw gateway --port <port>`.
+Fix: stop the other instance, free the port, or run with `dexter gateway --port <port>`.
 
 ### How do I run OpenClaw in remote mode client connects to a Gateway elsewhere
 
@@ -2403,7 +2403,7 @@ Set `gateway.mode: "remote"` and point to a remote WebSocket URL, optionally wit
 
 Notes:
 
-- `openclaw gateway` only starts when `gateway.mode` is `local` (or you pass the override flag).
+- `dexter gateway` only starts when `gateway.mode` is `local` (or you pass the override flag).
 - The macOS app watches the config file and switches modes live when these values change.
 
 ### The Control UI says unauthorized or keeps reconnecting What now
@@ -2416,12 +2416,12 @@ Facts (from code):
 
 Fix:
 
-- Fastest: `openclaw dashboard` (prints + copies the dashboard URL, tries to open; shows SSH hint if headless).
-- If you don't have a token yet: `openclaw doctor --generate-gateway-token`.
+- Fastest: `dexter dashboard` (prints + copies the dashboard URL, tries to open; shows SSH hint if headless).
+- If you don't have a token yet: `dexter doctor --generate-gateway-token`.
 - If remote, tunnel first: `ssh -N -L 18789:127.0.0.1:18789 user@host` then open `http://127.0.0.1:18789/`.
 - Set `gateway.auth.token` (or `OPENCLAW_GATEWAY_TOKEN`) on the gateway host.
 - In the Control UI settings, paste the same token.
-- Still stuck? Run `openclaw status --all` and follow [Troubleshooting](/gateway/troubleshooting). See [Dashboard](/web/dashboard) for auth details.
+- Still stuck? Run `dexter status --all` and follow [Troubleshooting](/gateway/troubleshooting). See [Dashboard](/web/dashboard) for auth details.
 
 ### I set gatewaybind tailnet but it cant bind nothing listens
 
@@ -2475,7 +2475,7 @@ Quick fixes:
 If you're using the CLI or TUI, the URL should look like:
 
 ```
-openclaw tui --url ws://<host>:18789 --token <token>
+dexter tui --url ws://<host>:18789 --token <token>
 ```
 
 Protocol details: [Gateway protocol](/gateway/protocol).
@@ -2495,7 +2495,7 @@ You can set a stable path via `logging.file`. File log level is controlled by `l
 Fastest log tail:
 
 ```bash
-openclaw logs --follow
+dexter logs --follow
 ```
 
 Service/supervisor logs (when the gateway runs via launchd/systemd):
@@ -2511,11 +2511,11 @@ See [Troubleshooting](/gateway/troubleshooting#log-locations) for more.
 Use the gateway helpers:
 
 ```bash
-openclaw gateway status
-openclaw gateway restart
+dexter gateway status
+dexter gateway restart
 ```
 
-If you run the gateway manually, `openclaw gateway --force` can reclaim the port. See [Gateway](/gateway).
+If you run the gateway manually, `dexter gateway --force` can reclaim the port. See [Gateway](/gateway).
 
 ### I closed my terminal on Windows how do I restart OpenClaw
 
@@ -2527,14 +2527,14 @@ Open PowerShell, enter WSL, then restart:
 
 ```powershell
 wsl
-openclaw gateway status
-openclaw gateway restart
+dexter gateway status
+dexter gateway restart
 ```
 
 If you never installed the service, start it in the foreground:
 
 ```bash
-openclaw gateway run
+dexter gateway run
 ```
 
 **2) Native Windows (not recommended):** the Gateway runs directly in Windows.
@@ -2542,14 +2542,14 @@ openclaw gateway run
 Open PowerShell and run:
 
 ```powershell
-openclaw gateway status
-openclaw gateway restart
+dexter gateway status
+dexter gateway restart
 ```
 
 If you run it manually (no service), use:
 
 ```powershell
-openclaw gateway run
+dexter gateway run
 ```
 
 Docs: [Windows (WSL2)](/platforms/windows), [Gateway service runbook](/gateway).
@@ -2559,10 +2559,10 @@ Docs: [Windows (WSL2)](/platforms/windows), [Gateway service runbook](/gateway).
 Start with a quick health sweep:
 
 ```bash
-openclaw status
-openclaw models status
-openclaw channels status
-openclaw logs --follow
+dexter status
+dexter models status
+dexter channels status
+dexter logs --follow
 ```
 
 Common causes:
@@ -2580,15 +2580,15 @@ Docs: [Channels](/channels), [Troubleshooting](/gateway/troubleshooting), [Remot
 
 This usually means the UI lost the WebSocket connection. Check:
 
-1. Is the Gateway running? `openclaw gateway status`
-2. Is the Gateway healthy? `openclaw status`
-3. Does the UI have the right token? `openclaw dashboard`
+1. Is the Gateway running? `dexter gateway status`
+2. Is the Gateway healthy? `dexter status`
+3. Does the UI have the right token? `dexter dashboard`
 4. If remote, is the tunnel/Tailscale link up?
 
 Then tail logs:
 
 ```bash
-openclaw logs --follow
+dexter logs --follow
 ```
 
 Docs: [Dashboard](/web/dashboard), [Remote access](/gateway/remote), [Troubleshooting](/gateway/troubleshooting).
@@ -2598,8 +2598,8 @@ Docs: [Dashboard](/web/dashboard), [Remote access](/gateway/remote), [Troublesho
 Start with logs and channel status:
 
 ```bash
-openclaw channels status
-openclaw channels logs --channel telegram
+dexter channels status
+dexter channels logs --channel telegram
 ```
 
 If you are on a VPS or behind a proxy, confirm outbound HTTPS is allowed and DNS works.
@@ -2612,9 +2612,9 @@ Docs: [Telegram](/channels/telegram), [Channel troubleshooting](/channels/troubl
 First confirm the Gateway is reachable and the agent can run:
 
 ```bash
-openclaw status
-openclaw models status
-openclaw logs --follow
+dexter status
+dexter models status
+dexter logs --follow
 ```
 
 In the TUI, use `/status` to see the current state. If you expect replies in a chat
@@ -2627,8 +2627,8 @@ Docs: [TUI](/web/tui), [Slash commands](/tools/slash-commands).
 If you installed the service:
 
 ```bash
-openclaw gateway stop
-openclaw gateway start
+dexter gateway stop
+dexter gateway start
 ```
 
 This stops/starts the **supervised service** (launchd on macOS, systemd on Linux).
@@ -2637,17 +2637,17 @@ Use this when the Gateway runs in the background as a daemon.
 If you're running in the foreground, stop with Ctrl-C, then:
 
 ```bash
-openclaw gateway run
+dexter gateway run
 ```
 
 Docs: [Gateway service runbook](/gateway).
 
-### ELI5 openclaw gateway restart vs openclaw gateway
+### ELI5 dexter gateway restart vs dexter gateway
 
-- `openclaw gateway restart`: restarts the **background service** (launchd/systemd).
-- `openclaw gateway`: runs the gateway **in the foreground** for this terminal session.
+- `dexter gateway restart`: restarts the **background service** (launchd/systemd).
+- `dexter gateway`: runs the gateway **in the foreground** for this terminal session.
 
-If you installed the service, use the gateway commands. Use `openclaw gateway` when
+If you installed the service, use the gateway commands. Use `dexter gateway` when
 you want a one-off, foreground run.
 
 ### What's the fastest way to get more details when something fails
@@ -2663,7 +2663,7 @@ Outbound attachments from the agent must include a `MEDIA:<path-or-url>` line (o
 CLI sending:
 
 ```bash
-openclaw message send --target +15555550123 --message "Here you go" --media /path/to/file.png
+dexter message send --target +15555550123 --message "Here you go" --media /path/to/file.png
 ```
 
 Also check:
@@ -2681,11 +2681,11 @@ Treat inbound DMs as untrusted input. Defaults are designed to reduce risk:
 
 - Default behavior on DM-capable channels is **pairing**:
   - Unknown senders receive a pairing code; the bot does not process their message.
-  - Approve with: `openclaw pairing approve <channel> <code>`
-  - Pending requests are capped at **3 per channel**; check `openclaw pairing list <channel>` if a code didn't arrive.
+  - Approve with: `dexter pairing approve <channel> <code>`
+  - Pending requests are capped at **3 per channel**; check `dexter pairing list <channel>` if a code didn't arrive.
 - Opening DMs publicly requires explicit opt-in (`dmPolicy: "open"` and allowlist `"*"`).
 
-Run `openclaw doctor` to surface risky DM policies.
+Run `dexter doctor` to surface risky DM policies.
 
 ### Is prompt injection only a concern for public bots
 
@@ -2740,7 +2740,7 @@ Pairing codes are sent **only** when an unknown sender messages the bot and
 Check pending requests:
 
 ```bash
-openclaw pairing list telegram
+dexter pairing list telegram
 ```
 
 If you want immediate access, allowlist your sender id or set `dmPolicy: "open"`
@@ -2753,13 +2753,13 @@ No. Default WhatsApp DM policy is **pairing**. Unknown senders only get a pairin
 Approve pairing with:
 
 ```bash
-openclaw pairing approve whatsapp <code>
+dexter pairing approve whatsapp <code>
 ```
 
 List pending requests:
 
 ```bash
-openclaw pairing list whatsapp
+dexter pairing list whatsapp
 ```
 
 Wizard phone number prompt: it's used to set your **allowlist/owner** so your own DMs are permitted. It's not used for auto-sending. If you run on your personal WhatsApp number, use that number and enable `channels.whatsapp.selfChatMode`.

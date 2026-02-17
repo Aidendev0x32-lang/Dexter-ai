@@ -1,23 +1,23 @@
 ---
-summary: "CLI reference for `openclaw config` (get/set/unset config values)"
+summary: "CLI reference for `dexter config` (get/set/unset config values)"
 read_when:
   - You want to read or edit config non-interactively
 title: "config"
 ---
 
-# `openclaw config`
+# `dexter config`
 
 Config helpers: get/set/unset values by path. Run without a subcommand to open
-the configure wizard (same as `openclaw configure`).
+the configure wizard (same as `dexter configure`).
 
 ## Examples
 
 ```bash
-openclaw config get browser.executablePath
-openclaw config set browser.executablePath "/usr/bin/google-chrome"
-openclaw config set agents.defaults.heartbeat.every "2h"
-openclaw config set agents.list[0].tools.exec.node "node-id-or-name"
-openclaw config unset tools.web.search.apiKey
+dexter config get browser.executablePath
+dexter config set browser.executablePath "/usr/bin/google-chrome"
+dexter config set agents.defaults.heartbeat.every "2h"
+dexter config set agents.list[0].tools.exec.node "node-id-or-name"
+dexter config unset tools.web.search.apiKey
 ```
 
 ## Paths
@@ -25,15 +25,15 @@ openclaw config unset tools.web.search.apiKey
 Paths use dot or bracket notation:
 
 ```bash
-openclaw config get agents.defaults.workspace
-openclaw config get agents.list[0].id
+dexter config get agents.defaults.workspace
+dexter config get agents.list[0].id
 ```
 
 Use the agent list index to target a specific agent:
 
 ```bash
-openclaw config get agents.list
-openclaw config set agents.list[1].tools.exec.node "node-id-or-name"
+dexter config get agents.list
+dexter config set agents.list[1].tools.exec.node "node-id-or-name"
 ```
 
 ## Values
@@ -42,9 +42,9 @@ Values are parsed as JSON5 when possible; otherwise they are treated as strings.
 Use `--json` to require JSON5 parsing.
 
 ```bash
-openclaw config set agents.defaults.heartbeat.every "0m"
-openclaw config set gateway.port 19001 --json
-openclaw config set channels.whatsapp.groups '["*"]' --json
+dexter config set agents.defaults.heartbeat.every "0m"
+dexter config set gateway.port 19001 --json
+dexter config set channels.whatsapp.groups '["*"]' --json
 ```
 
 Restart the gateway after edits.

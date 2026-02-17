@@ -88,7 +88,7 @@ sudo systemctl restart openclaw
 
 # 提供商登录（以 openclaw 用户运行）
 sudo -i -u openclaw
-openclaw channels login
+dexter channels login
 ```
 
 ## 安全架构
@@ -196,7 +196,7 @@ sudo -u openclaw ./scripts/sandbox-setup.sh
 
 ```bash
 sudo -i -u openclaw
-openclaw channels login
+dexter channels login
 ```
 
 ## 高级配置

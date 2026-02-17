@@ -43,16 +43,16 @@ Windows 原生配套应用也在计划中；推荐通过 WSL2 使用 Gateway 网
 - 安装指南：[入门指南](/start/getting-started)
 - Gateway 网关运行手册：[Gateway 网关](/gateway)
 - Gateway 网关配置：[配置](/gateway/configuration)
-- 服务状态：`openclaw gateway status`
+- 服务状态：`dexter gateway status`
 
 ## Gateway 网关服务安装（CLI）
 
 使用以下任一方式（均支持）：
 
-- 向导（推荐）：`openclaw onboard --install-daemon`
-- 直接安装：`openclaw gateway install`
-- 配置流程：`openclaw configure` → 选择 **Gateway service**
-- 修复/迁移：`openclaw doctor`（提供安装或修复服务）
+- 向导（推荐）：`dexter onboard --install-daemon`
+- 直接安装：`dexter gateway install`
+- 配置流程：`dexter configure` → 选择 **Gateway service**
+- 修复/迁移：`dexter doctor`（提供安装或修复服务）
 
 服务目标取决于操作系统：
 

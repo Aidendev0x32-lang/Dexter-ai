@@ -33,7 +33,7 @@ But it may be different if you use:
 If you’re not sure, run on the **old** machine:
 
 ```bash
-openclaw status
+dexter status
 ```
 
 Look for mentions of `OPENCLAW_STATE_DIR` / profile in the output. If you run multiple gateways, repeat for each profile.
@@ -72,7 +72,7 @@ Those live under `$OPENCLAW_STATE_DIR`.
 On the **old** machine, stop the gateway first so files aren’t changing mid-copy:
 
 ```bash
-openclaw gateway stop
+dexter gateway stop
 ```
 
 (Optional but recommended) archive the state dir and workspace:
@@ -118,7 +118,7 @@ After copying, ensure:
 On the **new** machine:
 
 ```bash
-openclaw doctor
+dexter doctor
 ```
 
 Doctor is the “safe boring” command. It repairs services, applies config migrations, and warns about mismatches.
@@ -126,8 +126,8 @@ Doctor is the “safe boring” command. It repairs services, applies config mig
 Then:
 
 ```bash
-openclaw gateway restart
-openclaw status
+dexter gateway restart
+dexter status
 ```
 
 ## Common footguns (and how to avoid them)
@@ -143,7 +143,7 @@ If you ran the old gateway with a profile (or `OPENCLAW_STATE_DIR`), and the new
 Fix: run the gateway/service using the **same** profile/state dir you migrated, then rerun:
 
 ```bash
-openclaw doctor
+dexter doctor
 ```
 
 ### Footgun: copying only `openclaw.json`
@@ -180,7 +180,7 @@ If you’re in remote mode, migrate the **gateway host**.
 
 On the new machine, confirm:
 
-- `openclaw status` shows the gateway running
+- `dexter status` shows the gateway running
 - Your channels are still connected (e.g. WhatsApp doesn’t require re-pair)
 - The dashboard opens and shows existing sessions
 - Your workspace files (memory, configs) are present

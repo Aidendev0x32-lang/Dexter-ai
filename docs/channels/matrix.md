@@ -22,13 +22,13 @@ Matrix ships as a plugin and is not bundled with the core install.
 Install via CLI (npm registry):
 
 ```bash
-openclaw plugins install @openclaw/matrix
+dexter plugins install @openclaw/matrix
 ```
 
 Local checkout (when running from a git repo):
 
 ```bash
-openclaw plugins install ./extensions/matrix
+dexter plugins install ./extensions/matrix
 ```
 
 If you choose Matrix during configure/onboarding and a git checkout is detected,
@@ -39,8 +39,8 @@ Details: [Plugins](/tools/plugin)
 ## Setup
 
 1. Install the Matrix plugin:
-   - From npm: `openclaw plugins install @openclaw/matrix`
-   - From a local checkout: `openclaw plugins install ./extensions/matrix`
+   - From npm: `dexter plugins install @openclaw/matrix`
+   - From a local checkout: `dexter plugins install ./extensions/matrix`
 2. Create a Matrix account on a homeserver:
    - Browse hosting options at [https://matrix.org/ecosystem/hosting/](https://matrix.org/ecosystem/hosting/)
    - Or host it yourself.
@@ -186,8 +186,8 @@ Notes:
 
 - Default: `channels.matrix.dm.policy = "pairing"`. Unknown senders get a pairing code.
 - Approve via:
-  - `openclaw pairing list matrix`
-  - `openclaw pairing approve matrix <CODE>`
+  - `dexter pairing list matrix`
+  - `dexter pairing approve matrix <CODE>`
 - Public DMs: `channels.matrix.dm.policy="open"` plus `channels.matrix.dm.allowFrom=["*"]`.
 - `channels.matrix.dm.allowFrom` accepts full Matrix user IDs (example: `@user:server`). The wizard resolves display names to user IDs when directory search finds a single exact match.
 - Do not use display names or bare localparts (example: `"Alice"` or `"alice"`). They are ambiguous and are ignored for allowlist matching. Use full `@user:server` IDs.
@@ -249,17 +249,17 @@ Notes:
 Run this ladder first:
 
 ```bash
-openclaw status
-openclaw gateway status
-openclaw logs --follow
-openclaw doctor
-openclaw channels status --probe
+dexter status
+dexter gateway status
+dexter logs --follow
+dexter doctor
+dexter channels status --probe
 ```
 
 Then confirm DM pairing state if needed:
 
 ```bash
-openclaw pairing list matrix
+dexter pairing list matrix
 ```
 
 Common failures:

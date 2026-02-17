@@ -22,13 +22,13 @@ Fast path:
 1. See what’s already loaded:
 
 ```bash
-openclaw plugins list
+dexter plugins list
 ```
 
 2. Install an official plugin (example: Voice Call):
 
 ```bash
-openclaw plugins install @openclaw/voice-call
+dexter plugins install @openclaw/voice-call
 ```
 
 Npm specs are **registry-only** (package name + optional version/tag). Git/URL/file
@@ -112,7 +112,7 @@ OpenClaw scans, in order:
 - `<openclaw>/extensions/*`
 
 Bundled plugins must be enabled explicitly via `plugins.entries.<id>.enabled`
-or `openclaw plugins enable <id>`. Installed plugins are enabled by default,
+or `dexter plugins enable <id>`. Installed plugins are enabled by default,
 but can be disabled the same way.
 
 Each plugin must include a `openclaw.plugin.json` file in its root. If a path
@@ -141,7 +141,7 @@ becomes `name/<fileBase>`.
 If your plugin imports npm deps, install them in that directory so
 `node_modules` is available (`npm install` / `pnpm install`).
 
-Security note: `openclaw plugins install` installs plugin dependencies with
+Security note: `dexter plugins install` installs plugin dependencies with
 `npm install --ignore-scripts` (no lifecycle scripts). Keep plugin dependency
 trees "pure JS/TS" and avoid packages that require `postinstall` builds.
 
@@ -286,19 +286,19 @@ Example:
 ## CLI
 
 ```bash
-openclaw plugins list
-openclaw plugins info <id>
-openclaw plugins install <path>                 # copy a local file/dir into ~/.openclaw/extensions/<id>
-openclaw plugins install ./extensions/voice-call # relative path ok
-openclaw plugins install ./plugin.tgz           # install from a local tarball
-openclaw plugins install ./plugin.zip           # install from a local zip
-openclaw plugins install -l ./extensions/voice-call # link (no copy) for dev
-openclaw plugins install @openclaw/voice-call # install from npm
-openclaw plugins update <id>
-openclaw plugins update --all
-openclaw plugins enable <id>
-openclaw plugins disable <id>
-openclaw plugins doctor
+dexter plugins list
+dexter plugins info <id>
+dexter plugins install <path>                 # copy a local file/dir into ~/.openclaw/extensions/<id>
+dexter plugins install ./extensions/voice-call # relative path ok
+dexter plugins install ./plugin.tgz           # install from a local tarball
+dexter plugins install ./plugin.zip           # install from a local zip
+dexter plugins install -l ./extensions/voice-call # link (no copy) for dev
+dexter plugins install @openclaw/voice-call # install from npm
+dexter plugins update <id>
+dexter plugins update --all
+dexter plugins enable <id>
+dexter plugins disable <id>
+dexter plugins doctor
 ```
 
 `plugins update` only works for npm installs tracked under `plugins.installs`.
@@ -342,7 +342,7 @@ API-key setup inside OpenClaw (no external scripts needed).
 Register a provider via `api.registerProvider(...)`. Each provider exposes one
 or more auth methods (OAuth, API key, device code, etc.). These methods power:
 
-- `openclaw models auth login --provider <id> [--method <id>]`
+- `dexter models auth login --provider <id> [--method <id>]`
 
 Example:
 
@@ -638,7 +638,7 @@ Publishing contract:
 
 - Plugin `package.json` must include `openclaw.extensions` with one or more entry files.
 - Entry files can be `.js` or `.ts` (jiti loads TS at runtime).
-- `openclaw plugins install <npm-spec>` uses `npm pack`, extracts into `~/.openclaw/extensions/<id>/`, and enables it in config.
+- `dexter plugins install <npm-spec>` uses `npm pack`, extracts into `~/.openclaw/extensions/<id>/`, and enables it in config.
 - Config key stability: scoped packages are normalized to the **unscoped** id for `plugins.entries.*`.
 
 ## Example plugin: Voice Call

@@ -57,7 +57,7 @@ x-i18n:
    - 如果你更喜欢使用环境变量，设置 `DISCORD_BOT_TOKEN`（配置块是可选的）。
 5. 直接聊天：发送时使用 `user:<id>`（或 `<@id>` 提及）；所有对话都进入共享的 `main` 会话。纯数字 ID 是模糊的，会被拒绝。
 6. 服务器频道：发送时使用 `channel:<channelId>`。默认需要提及，可以按服务器或按频道设置。
-7. 直接聊天：默认通过 `channels.discord.dm.policy` 进行安全保护（默认：`"pairing"`）。未知发送者会收到配对码（1 小时后过期）；通过 `openclaw pairing approve discord <code>` 批准。
+7. 直接聊天：默认通过 `channels.discord.dm.policy` 进行安全保护（默认：`"pairing"`）。未知发送者会收到配对码（1 小时后过期）；通过 `dexter pairing approve discord <code>` 批准。
    - 要保持旧的"对任何人开放"行为：设置 `channels.discord.dm.policy="open"` 和 `channels.discord.dm.allowFrom=["*"]`。
    - 要使用硬编码允许列表：设置 `channels.discord.dm.policy="allowlist"` 并在 `channels.discord.dm.allowFrom` 中列出发送者。
    - 要忽略所有私信：设置 `channels.discord.dm.enabled=false` 或 `channels.discord.dm.policy="disabled"`。
@@ -214,7 +214,7 @@ Discord 到处使用数字 ID；OpenClaw 配置优先使用 ID。
 
 ### 故障排除
 
-- 首先：运行 `openclaw doctor` 和 `openclaw channels status --probe`（可操作的警告 + 快速审计）。
+- 首先：运行 `dexter doctor` 和 `dexter channels status --probe`（可操作的警告 + 快速审计）。
 - **"Used disallowed intents"**：在开发者门户中启用 **Message Content Intent**（可能还需要 **Server Members Intent**），然后重启 Gateway 网关。
 - **机器人连接但从不在服务器频道回复**：
   - 缺少 **Message Content Intent**，或
@@ -465,4 +465,4 @@ Discord 消息 ID 在注入的上下文中显示（`[discord message id: …]` �
 
 - 像对待密码一样对待机器人令牌；在受监督的主机上优先使用 `DISCORD_BOT_TOKEN` 环境变量，或锁定配置文件权限。
 - 只授予机器人所需的权限（通常是读取/发送消息）。
-- 如果机器人卡住或受到速率限制，在确认没有其他进程拥有 Discord 会话后重启 Gateway 网关（`openclaw gateway --force`）。
+- 如果机器人卡住或受到速率限制，在确认没有其他进程拥有 Discord 会话后重启 Gateway 网关（`dexter gateway --force`）。

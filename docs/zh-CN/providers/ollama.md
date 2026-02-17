@@ -38,7 +38,7 @@ ollama pull deepseek-r1:32b
 export OLLAMA_API_KEY="ollama-local"
 
 # 或在配置文件中设置
-openclaw config set models.providers.ollama.apiKey "ollama-local"
+dexter config set models.providers.ollama.apiKey "ollama-local"
 ```
 
 4. 使用 Ollama 模型：
@@ -70,7 +70,7 @@ openclaw config set models.providers.ollama.apiKey "ollama-local"
 
 ```bash
 ollama list
-openclaw models list
+dexter models list
 ```
 
 要添加新模型，只需通过 Ollama 拉取：

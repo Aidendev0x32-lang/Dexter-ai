@@ -16,7 +16,7 @@ Nostr is a decentralized protocol for social networking. This channel enables Op
 
 ### Onboarding (recommended)
 
-- The onboarding wizard (`openclaw onboard`) and `openclaw channels add` list optional channel plugins.
+- The onboarding wizard (`dexter onboard`) and `dexter channels add` list optional channel plugins.
 - Selecting Nostr prompts you to install the plugin on demand.
 
 Install defaults:
@@ -29,13 +29,13 @@ You can always override the choice in the prompt.
 ### Manual install
 
 ```bash
-openclaw plugins install @openclaw/nostr
+dexter plugins install @openclaw/nostr
 ```
 
 Use a local checkout (dev workflows):
 
 ```bash
-openclaw plugins install --link <path-to-openclaw>/extensions/nostr
+dexter plugins install --link <path-to-openclaw>/extensions/nostr
 ```
 
 Restart the Gateway after installing or enabling plugins.

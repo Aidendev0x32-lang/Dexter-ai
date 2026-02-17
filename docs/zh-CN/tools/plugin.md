@@ -26,13 +26,13 @@ x-i18n:
 1. 查看已加载的内容：
 
 ```bash
-openclaw plugins list
+dexter plugins list
 ```
 
 2. 安装官方插件（例如：Voice Call）：
 
 ```bash
-openclaw plugins install @openclaw/voice-call
+dexter plugins install @openclaw/voice-call
 ```
 
 3. 重启 Gateway 网关，然后在 `plugins.entries.<id>.config` 下配置。
@@ -110,7 +110,7 @@ OpenClaw 按顺序扫描：
 
 - `<openclaw>/extensions/*`
 
-捆绑插件必须通过 `plugins.entries.<id>.enabled` 或 `openclaw plugins enable <id>` 显式启用。已安装的插件默认启用，但可以用相同方式禁用。
+捆绑插件必须通过 `plugins.entries.<id>.enabled` 或 `dexter plugins enable <id>` 显式启用。已安装的插件默认启用，但可以用相同方式禁用。
 
 每个插件必须在其根目录中包含 `openclaw.plugin.json` 文件。如果路径指向文件，则插件根目录是文件的目录，必须包含清单。
 
@@ -264,19 +264,19 @@ OpenClaw 在运行时根据发现的插件增强 `uiHints`：
 ## CLI
 
 ```bash
-openclaw plugins list
-openclaw plugins info <id>
-openclaw plugins install <path>                 # copy a local file/dir into ~/.openclaw/extensions/<id>
-openclaw plugins install ./extensions/voice-call # relative path ok
-openclaw plugins install ./plugin.tgz           # install from a local tarball
-openclaw plugins install ./plugin.zip           # install from a local zip
-openclaw plugins install -l ./extensions/voice-call # link (no copy) for dev
-openclaw plugins install @openclaw/voice-call # install from npm
-openclaw plugins update <id>
-openclaw plugins update --all
-openclaw plugins enable <id>
-openclaw plugins disable <id>
-openclaw plugins doctor
+dexter plugins list
+dexter plugins info <id>
+dexter plugins install <path>                 # copy a local file/dir into ~/.openclaw/extensions/<id>
+dexter plugins install ./extensions/voice-call # relative path ok
+dexter plugins install ./plugin.tgz           # install from a local tarball
+dexter plugins install ./plugin.zip           # install from a local zip
+dexter plugins install -l ./extensions/voice-call # link (no copy) for dev
+dexter plugins install @openclaw/voice-call # install from npm
+dexter plugins update <id>
+dexter plugins update --all
+dexter plugins enable <id>
+dexter plugins disable <id>
+dexter plugins doctor
 ```
 
 `plugins update` 仅适用于在 `plugins.installs` 下跟踪的 npm 安装。
@@ -317,7 +317,7 @@ export default function register(api) {
 
 通过 `api.registerProvider(...)` 注册提供商。每个提供商暴露一个或多个认证方法（OAuth、API 密钥、设备码等）。这些方法驱动：
 
-- `openclaw models auth login --provider <id> [--method <id>]`
+- `dexter models auth login --provider <id> [--method <id>]`
 
 示例：
 
@@ -606,7 +606,7 @@ export default function (api) {
 
 - 插件 `package.json` 必须包含带有一个或多个入口文件的 `openclaw.extensions`。
 - 入口文件可以是 `.js` 或 `.ts`（jiti 在运行时加载 TS）。
-- `openclaw plugins install <npm-spec>` 使用 `npm pack`，提取到 `~/.openclaw/extensions/<id>/`，并在配置中启用它。
+- `dexter plugins install <npm-spec>` 使用 `npm pack`，提取到 `~/.openclaw/extensions/<id>/`，并在配置中启用它。
 - 配置键稳定性：作用域包被规范化为 `plugins.entries.*` 的**无作用域** id。
 
 ## 示例插件：Voice Call

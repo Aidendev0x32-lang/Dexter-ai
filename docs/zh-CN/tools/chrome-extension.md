@@ -35,13 +35,13 @@ OpenClaw Chrome 扩展让智能体控制你**现有的 Chrome 标签页**（你�
 1. 将扩展安装到稳定的本地路径：
 
 ```bash
-openclaw browser extension install
+dexter browser extension install
 ```
 
 2. 打印已安装扩展的目录路径：
 
 ```bash
-openclaw browser extension path
+dexter browser extension path
 ```
 
 3. Chrome → `chrome://extensions`
@@ -57,7 +57,7 @@ openclaw browser extension path
 
 升级 OpenClaw 后：
 
-- 重新运行 `openclaw browser extension install` 以刷新 OpenClaw 状态目录下的已安装文件。
+- 重新运行 `dexter browser extension install` 以刷新 OpenClaw 状态目录下的已安装文件。
 - Chrome → `chrome://extensions` → 点击扩展上的"重新加载"。
 
 ## 使用它（无需额外配置）
@@ -66,13 +66,13 @@ OpenClaw 附带一个名为 `chrome` 的内置浏览器配置文件，它指向�
 
 使用它：
 
-- CLI：`openclaw browser --browser-profile chrome tabs`
+- CLI：`dexter browser --browser-profile chrome tabs`
 - 智能体工具：`browser` 配合 `profile="chrome"`
 
 如果你想要不同的名称或不同的中继端口，创建你自己的配置文件：
 
 ```bash
-openclaw browser create-profile \
+dexter browser create-profile \
   --name my-chrome \
   --driver extension \
   --cdp-url http://127.0.0.1:18792 \
@@ -143,7 +143,7 @@ openclaw browser create-profile \
 
 然后确保工具未被工具策略拒绝，并（如果需要）以 `target="host"` 调用 `browser`。
 
-调试：`openclaw sandbox explain`
+调试：`dexter sandbox explain`
 
 ## 远程访问提示
 
@@ -152,9 +152,9 @@ openclaw browser create-profile \
 
 ## "extension path"的工作原理
 
-`openclaw browser extension path` 打印包含扩展文件的**已安装**磁盘目录。
+`dexter browser extension path` 打印包含扩展文件的**已安装**磁盘目录。
 
-CLI 有意**不**打印 `node_modules` 路径。始终先运行 `openclaw browser extension install` 将扩展复制到 OpenClaw 状态目录下的稳定位置。
+CLI 有意**不**打印 `node_modules` 路径。始终先运行 `dexter browser extension install` 将扩展复制到 OpenClaw 状态目录下的稳定位置。
 
 如果你移动或删除该安装目录，Chrome 将把扩展标记为损坏，直到你从有效路径重新加载它。
 

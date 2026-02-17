@@ -58,8 +58,8 @@ it to drive a OpenClaw Gateway session.
 Example config (persisted):
 
 ```bash
-openclaw config set gateway.remote.url wss://gateway-host:18789
-openclaw config set gateway.remote.token <token>
+dexter config set gateway.remote.url wss://gateway-host:18789
+dexter config set gateway.remote.token <token>
 ```
 
 Example direct run (no config write):

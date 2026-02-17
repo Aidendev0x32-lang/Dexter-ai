@@ -26,7 +26,7 @@ Status: bundled plugin that talks to the BlueBubbles macOS server over HTTP. **R
 
 1. Install the BlueBubbles server on your Mac (follow the instructions at [bluebubbles.app/install](https://bluebubbles.app/install)).
 2. In the BlueBubbles config, enable the web API and set a password.
-3. Run `openclaw onboard` and select BlueBubbles, or configure manually:
+3. Run `dexter onboard` and select BlueBubbles, or configure manually:
 
    ```json5
    {
@@ -127,7 +127,7 @@ launchctl load ~/Library/LaunchAgents/com.user.poke-messages.plist
 BlueBubbles is available in the interactive setup wizard:
 
 ```
-openclaw onboard
+dexter onboard
 ```
 
 The wizard prompts for:
@@ -141,7 +141,7 @@ The wizard prompts for:
 You can also add BlueBubbles via CLI:
 
 ```
-openclaw channels add bluebubbles --http-url http://192.168.1.100:1234 --password <password>
+dexter channels add bluebubbles --http-url http://192.168.1.100:1234 --password <password>
 ```
 
 ## Access control (DMs + groups)
@@ -151,8 +151,8 @@ DMs:
 - Default: `channels.bluebubbles.dmPolicy = "pairing"`.
 - Unknown senders receive a pairing code; messages are ignored until approved (codes expire after 1 hour).
 - Approve via:
-  - `openclaw pairing list bluebubbles`
-  - `openclaw pairing approve bluebubbles <CODE>`
+  - `dexter pairing list bluebubbles`
+  - `dexter pairing approve bluebubbles <CODE>`
 - Pairing is the default token exchange. Details: [Pairing](/channels/pairing)
 
 Groups:
@@ -335,11 +335,11 @@ Prefer `chat_guid` for stable routing:
 ## Troubleshooting
 
 - If typing/read events stop working, check the BlueBubbles webhook logs and verify the gateway path matches `channels.bluebubbles.webhookPath`.
-- Pairing codes expire after one hour; use `openclaw pairing list bluebubbles` and `openclaw pairing approve bluebubbles <code>`.
+- Pairing codes expire after one hour; use `dexter pairing list bluebubbles` and `dexter pairing approve bluebubbles <code>`.
 - Reactions require the BlueBubbles private API (`POST /api/v1/message/react`); ensure the server version exposes it.
 - Edit/unsend require macOS 13+ and a compatible BlueBubbles server version. On macOS 26 (Tahoe), edit is currently broken due to private API changes.
 - Group icon updates can be flaky on macOS 26 (Tahoe): the API may return success but the new icon does not sync.
 - OpenClaw auto-hides known-broken actions based on the BlueBubbles server's macOS version. If edit still appears on macOS 26 (Tahoe), disable it manually with `channels.bluebubbles.actions.edit=false`.
-- For status/health info: `openclaw status --all` or `openclaw status --deep`.
+- For status/health info: `dexter status --all` or `dexter status --deep`.
 
 For general channel workflow reference, see [Channels](/channels) and the [Plugins](/tools/plugin) guide.

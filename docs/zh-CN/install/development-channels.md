@@ -31,9 +31,9 @@ OpenClaw 提供三个更新渠道：
 Git checkout：
 
 ```bash
-openclaw update --channel stable
-openclaw update --channel beta
-openclaw update --channel dev
+dexter update --channel stable
+dexter update --channel beta
+dexter update --channel dev
 ```
 
 - `stable`/`beta` 检出最新匹配的标签（通常是同一个标签）。
@@ -42,9 +42,9 @@ openclaw update --channel dev
 npm/pnpm 全局安装：
 
 ```bash
-openclaw update --channel stable
-openclaw update --channel beta
-openclaw update --channel dev
+dexter update --channel stable
+dexter update --channel beta
+dexter update --channel dev
 ```
 
 这会通过相应的 npm dist-tag（`latest`、`beta`、`dev`）进行更新。
@@ -59,7 +59,7 @@ openclaw update --channel dev
 
 ## 插件和渠道
 
-当你使用 `openclaw update` 切换渠道时，OpenClaw 还会同步插件来源：
+当你使用 `dexter update` 切换渠道时，OpenClaw 还会同步插件来源：
 
 - `dev` 优先使用 git checkout 中的内置插件。
 - `stable` 和 `beta` 恢复 npm 安装的插件包。

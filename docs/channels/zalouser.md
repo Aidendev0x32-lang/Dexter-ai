@@ -16,8 +16,8 @@ Status: experimental. This integration automates a **personal Zalo account** via
 
 Zalo Personal ships as a plugin and is not bundled with the core install.
 
-- Install via CLI: `openclaw plugins install @openclaw/zalouser`
-- Or from a source checkout: `openclaw plugins install ./extensions/zalouser`
+- Install via CLI: `dexter plugins install @openclaw/zalouser`
+- Or from a source checkout: `dexter plugins install ./extensions/zalouser`
 - Details: [Plugins](/tools/plugin)
 
 ## Prerequisite: zca-cli
@@ -31,7 +31,7 @@ The Gateway machine must have the `zca` binary available in `PATH`.
 
 1. Install the plugin (see above).
 2. Login (QR, on the Gateway machine):
-   - `openclaw channels login --channel zalouser`
+   - `dexter channels login --channel zalouser`
    - Scan the QR code in the terminal with the Zalo mobile app.
 3. Enable the channel:
 
@@ -81,8 +81,8 @@ openclaw directory groups list --channel zalouser --query "work"
 
 Approve via:
 
-- `openclaw pairing list zalouser`
-- `openclaw pairing approve zalouser <code>`
+- `dexter pairing list zalouser`
+- `dexter pairing approve zalouser <code>`
 
 ## Group access (optional)
 
@@ -136,5 +136,5 @@ Accounts map to zca profiles. Example:
 
 **Login doesn’t stick:**
 
-- `openclaw channels status --probe`
-- Re-login: `openclaw channels logout --channel zalouser && openclaw channels login --channel zalouser`
+- `dexter channels status --probe`
+- Re-login: `dexter channels logout --channel zalouser && dexter channels login --channel zalouser`

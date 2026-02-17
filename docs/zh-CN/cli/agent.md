@@ -23,8 +23,8 @@ x-i18n:
 ## 示例
 
 ```bash
-openclaw agent --to +15555550123 --message "status update" --deliver
-openclaw agent --agent ops --message "Summarize logs"
-openclaw agent --session-id 1234 --message "Summarize inbox" --thinking medium
-openclaw agent --agent ops --message "Generate report" --deliver --reply-channel slack --reply-to "#reports"
+dexter agent --to +15555550123 --message "status update" --deliver
+dexter agent --agent ops --message "Summarize logs"
+dexter agent --session-id 1234 --message "Summarize inbox" --thinking medium
+dexter agent --agent ops --message "Generate report" --deliver --reply-channel slack --reply-to "#reports"
 ```

@@ -14,11 +14,11 @@ Use this page for scheduler and delivery issues (`cron` + `heartbeat`).
 ## Command ladder
 
 ```bash
-openclaw status
-openclaw gateway status
-openclaw logs --follow
-openclaw doctor
-openclaw channels status --probe
+dexter status
+dexter gateway status
+dexter logs --follow
+dexter doctor
+dexter channels status --probe
 ```
 
 Then run automation checks:
@@ -35,7 +35,7 @@ openclaw system heartbeat last
 openclaw cron status
 openclaw cron list
 openclaw cron runs --id <jobId> --limit 20
-openclaw logs --follow
+dexter logs --follow
 ```
 
 Good output looks like:
@@ -55,8 +55,8 @@ Common signatures:
 ```bash
 openclaw cron runs --id <jobId> --limit 20
 openclaw cron list
-openclaw channels status --probe
-openclaw logs --follow
+dexter channels status --probe
+dexter logs --follow
 ```
 
 Good output looks like:
@@ -75,9 +75,9 @@ Common signatures:
 
 ```bash
 openclaw system heartbeat last
-openclaw logs --follow
-openclaw config get agents.defaults.heartbeat
-openclaw channels status --probe
+dexter logs --follow
+dexter config get agents.defaults.heartbeat
+dexter channels status --probe
 ```
 
 Good output looks like:
@@ -95,11 +95,11 @@ Common signatures:
 ## Timezone and activeHours gotchas
 
 ```bash
-openclaw config get agents.defaults.heartbeat.activeHours
-openclaw config get agents.defaults.heartbeat.activeHours.timezone
-openclaw config get agents.defaults.userTimezone || echo "agents.defaults.userTimezone not set"
+dexter config get agents.defaults.heartbeat.activeHours
+dexter config get agents.defaults.heartbeat.activeHours.timezone
+dexter config get agents.defaults.userTimezone || echo "agents.defaults.userTimezone not set"
 openclaw cron list
-openclaw logs --follow
+dexter logs --follow
 ```
 
 Quick rules:

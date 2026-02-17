@@ -61,7 +61,7 @@ imsg rpc --help
       <Step title="Start gateway">
 
 ```bash
-openclaw gateway
+dexter gateway
 ```
 
       </Step>
@@ -69,8 +69,8 @@ openclaw gateway
       <Step title="Approve first DM pairing (default dmPolicy)">
 
 ```bash
-openclaw pairing list imessage
-openclaw pairing approve imessage <CODE>
+dexter pairing list imessage
+dexter pairing approve imessage <CODE>
 ```
 
         Pairing requests expire after 1 hour.
@@ -295,7 +295,7 @@ Disable:
 
 ```bash
 imsg rpc --help
-openclaw channels status --probe
+dexter channels status --probe
 ```
 
     If probe reports RPC unsupported, update `imsg`.
@@ -307,7 +307,7 @@ openclaw channels status --probe
 
     - `channels.imessage.dmPolicy`
     - `channels.imessage.allowFrom`
-    - pairing approvals (`openclaw pairing list imessage`)
+    - pairing approvals (`dexter pairing list imessage`)
 
   </Accordion>
 

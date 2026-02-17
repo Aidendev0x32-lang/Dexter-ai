@@ -1,7 +1,7 @@
 ---
 summary: "Complete reference for CLI onboarding flow, auth/model setup, outputs, and internals"
 read_when:
-  - You need detailed behavior for openclaw onboard
+  - You need detailed behavior for dexter onboard
   - You are debugging onboarding results or integrating onboarding clients
 title: "CLI Onboarding Reference"
 sidebarTitle: "CLI reference"
@@ -9,7 +9,7 @@ sidebarTitle: "CLI reference"
 
 # CLI Onboarding Reference
 
-This page is the full reference for `openclaw onboard`.
+This page is the full reference for `dexter onboard`.
 For the short guide, see [Onboarding Wizard (CLI)](/start/wizard).
 
 ## What the wizard does
@@ -33,7 +33,7 @@ It does not install or modify anything on the remote host.
   <Step title="Existing config detection">
     - If `~/.openclaw/openclaw.json` exists, choose Keep, Modify, or Reset.
     - Re-running the wizard does not wipe anything unless you explicitly choose Reset (or pass `--reset`).
-    - If config is invalid or contains legacy keys, the wizard stops and asks you to run `openclaw doctor` before continuing.
+    - If config is invalid or contains legacy keys, the wizard stops and asks you to run `dexter doctor` before continuing.
     - Reset uses `trash` and offers scopes:
       - Config only
       - Config + credentials + sessions
@@ -63,7 +63,7 @@ It does not install or modify anything on the remote host.
     - [BlueBubbles](/channels/bluebubbles): recommended for iMessage; server URL + password + webhook
     - [iMessage](/channels/imessage): legacy `imsg` CLI path + DB access
     - DM security: default is pairing. First DM sends a code; approve via
-      `openclaw pairing approve <channel> <code>` or use allowlists.
+      `dexter pairing approve <channel> <code>` or use allowlists.
   </Step>
   <Step title="Daemon install">
     - macOS: LaunchAgent
@@ -75,7 +75,7 @@ It does not install or modify anything on the remote host.
   </Step>
   <Step title="Health check">
     - Starts gateway (if needed) and runs `openclaw health`.
-    - `openclaw status --deep` adds gateway health probes to status output.
+    - `dexter status --deep` adds gateway health probes to status output.
   </Step>
   <Step title="Skills">
     - Reads available skills and checks requirements.
@@ -224,7 +224,7 @@ Typical fields in `~/.openclaw/openclaw.json`:
 - `wizard.lastRunCommand`
 - `wizard.lastRunMode`
 
-`openclaw agents add` writes `agents.list[]` and optional `bindings`.
+`dexter agents add` writes `agents.list[]` and optional `bindings`.
 
 WhatsApp credentials go under `~/.openclaw/credentials/whatsapp/<accountId>/`.
 Sessions are stored under `~/.openclaw/agents/<agentId>/sessions/`.
@@ -256,4 +256,4 @@ Signal setup behavior:
 
 - Onboarding hub: [Onboarding Wizard (CLI)](/start/wizard)
 - Automation and scripts: [CLI Automation](/start/wizard-cli-automation)
-- Command reference: [`openclaw onboard`](/cli/onboard)
+- Command reference: [`dexter onboard`](/cli/onboard)

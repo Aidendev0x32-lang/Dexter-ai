@@ -46,13 +46,13 @@ If you link your personal WhatsApp to OpenClaw, every message to you becomes “
 1. Pair WhatsApp Web (shows QR; scan with the assistant phone):
 
 ```bash
-openclaw channels login
+dexter channels login
 ```
 
 2. Start the Gateway (leave it running):
 
 ```bash
-openclaw gateway --port 18789
+dexter gateway --port 18789
 ```
 
 3. Put a minimal config in `~/.openclaw/openclaw.json`:
@@ -65,7 +65,7 @@ openclaw gateway --port 18789
 
 Now message the assistant number from your allowlisted phone.
 
-When onboarding finishes, we auto-open the dashboard and print a clean (non-tokenized) link. If it prompts for auth, paste the token from `gateway.auth.token` into Control UI settings. To reopen later: `openclaw dashboard`.
+When onboarding finishes, we auto-open the dashboard and print a clean (non-tokenized) link. If it prompts for auth, paste the token from `gateway.auth.token` into Control UI settings. To reopen later: `dexter dashboard`.
 
 ## Give the agent a workspace (AGENTS)
 
@@ -76,7 +76,7 @@ By default, OpenClaw uses `~/.openclaw/workspace` as the agent workspace, and wi
 Tip: treat this folder like OpenClaw’s “memory” and make it a git repo (ideally private) so your `AGENTS.md` + memory files are backed up. If git is installed, brand-new workspaces are auto-initialized.
 
 ```bash
-openclaw setup
+dexter setup
 ```
 
 Full workspace layout + backup guide: [Agent workspace](/concepts/agent-workspace)
@@ -194,9 +194,9 @@ OpenClaw extracts these and sends them as media alongside the text.
 ## Operations checklist
 
 ```bash
-openclaw status          # local status (creds, sessions, queued events)
-openclaw status --all    # full diagnosis (read-only, pasteable)
-openclaw status --deep   # adds gateway health probes (Telegram + Discord)
+dexter status          # local status (creds, sessions, queued events)
+dexter status --all    # full diagnosis (read-only, pasteable)
+dexter status --deep   # adds gateway health probes (Telegram + Discord)
 openclaw health --json   # gateway health snapshot (WS)
 ```
 

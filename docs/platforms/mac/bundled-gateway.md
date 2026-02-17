@@ -38,7 +38,7 @@ Plist location (per‑user):
 Manager:
 
 - The macOS app owns LaunchAgent install/update in Local mode.
-- The CLI can also install it: `openclaw gateway install`.
+- The CLI can also install it: `dexter gateway install`.
 
 Behavior:
 
@@ -63,11 +63,11 @@ openclaw --version
 
 OPENCLAW_SKIP_CHANNELS=1 \
 OPENCLAW_SKIP_CANVAS_HOST=1 \
-openclaw gateway --port 18999 --bind loopback
+dexter gateway --port 18999 --bind loopback
 ```
 
 Then:
 
 ```bash
-openclaw gateway call health --url ws://127.0.0.1:18999 --timeout 3000
+dexter gateway call health --url ws://127.0.0.1:18999 --timeout 3000
 ```

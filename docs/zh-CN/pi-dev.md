@@ -50,7 +50,7 @@ scripts/pi/run-tests.sh --live
 - 以开发模式运行 Gateway 网关：
   - `pnpm gateway:dev`
 - 直接触发智能体：
-  - `pnpm openclaw agent --message "Hello" --thinking low`
+  - `pnpm dexter agent --message "Hello" --thinking low`
 - 使用 TUI 进行交互式调试：
   - `pnpm tui`
 

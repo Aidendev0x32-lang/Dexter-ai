@@ -130,7 +130,7 @@ The hackable install gives you direct access to logs and code — useful for deb
 ## 7) Run Onboarding
 
 ```bash
-openclaw onboard --install-daemon
+dexter onboard --install-daemon
 ```
 
 Follow the wizard:
@@ -144,7 +144,7 @@ Follow the wizard:
 
 ```bash
 # Check status
-openclaw status
+dexter status
 
 # Check service
 sudo systemctl status openclaw
@@ -173,7 +173,7 @@ curl -fsSL https://tailscale.com/install.sh | sh
 sudo tailscale up
 
 # Update config
-openclaw config set gateway.bind tailnet
+dexter config set gateway.bind tailnet
 sudo systemctl restart openclaw
 ```
 

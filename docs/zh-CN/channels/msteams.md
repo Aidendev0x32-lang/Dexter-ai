@@ -31,13 +31,13 @@ Microsoft Teams 作为插件提供，不包含在核心安装中。
 通过 CLI 安装（npm 注册表）：
 
 ```bash
-openclaw plugins install @openclaw/msteams
+dexter plugins install @openclaw/msteams
 ```
 
 本地检出（从 git 仓库运行时）：
 
 ```bash
-openclaw plugins install ./extensions/msteams
+dexter plugins install ./extensions/msteams
 ```
 
 如果你在配置/新手引导过程中选择 Teams 并检测到 git 检出，
@@ -246,8 +246,8 @@ tailscale funnel 3978
 ## 设置（最小纯文本）
 
 1. **安装 Microsoft Teams 插件**
-   - 从 npm：`openclaw plugins install @openclaw/msteams`
-   - 从本地检出：`openclaw plugins install ./extensions/msteams`
+   - 从 npm：`dexter plugins install @openclaw/msteams`
+   - 从本地检出：`dexter plugins install ./extensions/msteams`
 
 2. **机器人注册**
    - 创建一个 Azure Bot（见上文）并记录：
@@ -602,7 +602,7 @@ Authorization 头仅附加到 `channels.msteams.mediaAuthAllowHosts` 中的主�
 
 OpenClaw 将 Teams 投票作为 Adaptive Cards 发送（没有原生 Teams 投票 API）。
 
-- CLI：`openclaw message poll --channel msteams --target conversation:<id> ...`
+- CLI：`dexter message poll --channel msteams --target conversation:<id> ...`
 - 投票由 Gateway 网关记录在 `~/.openclaw/msteams-polls.json` 中。
 - Gateway 网关必须保持在线才能记录投票。
 - 投票尚不自动发布结果摘要（如需要请检查存储文件）。
@@ -631,7 +631,7 @@ OpenClaw 将 Teams 投票作为 Adaptive Cards 发送（没有原生 Teams 投�
 **CLI：**
 
 ```bash
-openclaw message send --channel msteams \
+dexter message send --channel msteams \
   --target "conversation:19:abc...@thread.tacv2" \
   --card '{"type":"AdaptiveCard","version":"1.5","body":[{"type":"TextBlock","text":"Hello!"}]}'
 ```
@@ -653,16 +653,16 @@ MSTeams 目标使用前缀来区分用户和会话：
 
 ```bash
 # 按 ID 发送给用户
-openclaw message send --channel msteams --target "user:40a1a0ed-..." --message "Hello"
+dexter message send --channel msteams --target "user:40a1a0ed-..." --message "Hello"
 
 # 按显示名称发送给用户（触发 Graph API 查找）
-openclaw message send --channel msteams --target "user:John Smith" --message "Hello"
+dexter message send --channel msteams --target "user:John Smith" --message "Hello"
 
 # 发送到群聊或频道
-openclaw message send --channel msteams --target "conversation:19:abc...@thread.tacv2" --message "Hello"
+dexter message send --channel msteams --target "conversation:19:abc...@thread.tacv2" --message "Hello"
 
 # 向会话发送 Adaptive Card
-openclaw message send --channel msteams --target "conversation:19:abc...@thread.tacv2" \
+dexter message send --channel msteams --target "conversation:19:abc...@thread.tacv2" \
   --card '{"type":"AdaptiveCard","version":"1.5","body":[{"type":"TextBlock","text":"Hello"}]}'
 ```
 

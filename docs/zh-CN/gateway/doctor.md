@@ -15,43 +15,43 @@ x-i18n:
 
 # Doctor
 
-`openclaw doctor` 是 OpenClaw 的修复 + 迁移工具。它修复过时的配置/状态，检查健康状况，并提供可操作的修复步骤。
+`dexter doctor` 是 OpenClaw 的修复 + 迁移工具。它修复过时的配置/状态，检查健康状况，并提供可操作的修复步骤。
 
 ## 快速开始
 
 ```bash
-openclaw doctor
+dexter doctor
 ```
 
 ### 无头/自动化
 
 ```bash
-openclaw doctor --yes
+dexter doctor --yes
 ```
 
 无需提示接受默认值（包括适用时的重启/服务/沙箱修复步骤）。
 
 ```bash
-openclaw doctor --repair
+dexter doctor --repair
 ```
 
 无需提示应用推荐的修复（安全时进行修复 + 重启）。
 
 ```bash
-openclaw doctor --repair --force
+dexter doctor --repair --force
 ```
 
 也应用激进的修复（覆盖自定义 supervisor 配置）。
 
 ```bash
-openclaw doctor --non-interactive
+dexter doctor --non-interactive
 ```
 
 无需提示运行，仅应用安全迁移（配置规范化 + 磁盘状态移动）。跳过需要人工确认的重启/服务/沙箱操作。
 检测到时自动运行遗留状态迁移。
 
 ```bash
-openclaw doctor --deep
+dexter doctor --deep
 ```
 
 扫描系统服务以查找额外的 Gateway 网关安装（launchd/systemd/schtasks）。
@@ -100,7 +100,7 @@ cat ~/.openclaw/openclaw.json
 
 ### 2）遗留配置键迁移
 
-当配置包含已弃用的键时，其他命令会拒绝运行并要求你运行 `openclaw doctor`。
+当配置包含已弃用的键时，其他命令会拒绝运行并要求你运行 `dexter doctor`。
 
 Doctor 将：
 
@@ -143,7 +143,7 @@ Doctor 可以将旧的磁盘布局迁移到当前结构：
   - 从遗留的 `~/.openclaw/credentials/*.json`（除 `oauth.json` 外）
   - 到 `~/.openclaw/credentials/whatsapp/<accountId>/...`（默认账户 id：`default`）
 
-这些迁移是尽力而为且幂等的；当 doctor 将任何遗留文件夹作为备份保留时会发出警告。Gateway 网关/CLI 也会在启动时自动迁移遗留会话 + 智能体目录，因此历史/认证/模型会落在每智能体路径中，无需手动运行 doctor。WhatsApp 认证有意仅通过 `openclaw doctor` 迁移。
+这些迁移是尽力而为且幂等的；当 doctor 将任何遗留文件夹作为备份保留时会发出警告。Gateway 网关/CLI 也会在启动时自动迁移遗留会话 + 智能体目录，因此历史/认证/模型会落在每智能体路径中，无需手动运行 doctor。WhatsApp 认证有意仅通过 `dexter doctor` 迁移。
 
 ### 4）状态完整性检查（会话持久化、路由和安全）
 
@@ -197,7 +197,7 @@ Doctor 打印当前工作区符合条件/缺失/被阻止的 Skills 的快速摘
 
 ### 12）Gateway 网关认证检查（本地 token）
 
-当本地 Gateway 网关缺少 `gateway.auth` 时，Doctor 会发出警告并提供生成 token 的选项。使用 `openclaw doctor --generate-gateway-token` 在自动化中强制创建 token。
+当本地 Gateway 网关缺少 `gateway.auth` 时，Doctor 会发出警告并提供生成 token 的选项。使用 `dexter doctor --generate-gateway-token` 在自动化中强制创建 token。
 
 ### 13）Gateway 网关健康检查 + 重启
 
@@ -213,11 +213,11 @@ Doctor 检查已安装的 supervisor 配置（launchd/systemd/schtasks）是否�
 
 注意事项：
 
-- `openclaw doctor` 在重写 supervisor 配置前提示。
-- `openclaw doctor --yes` 接受默认修复提示。
-- `openclaw doctor --repair` 无需提示应用推荐的修复。
-- `openclaw doctor --repair --force` 覆盖自定义 supervisor 配置。
-- 你始终可以通过 `openclaw gateway install --force` 强制完全重写。
+- `dexter doctor` 在重写 supervisor 配置前提示。
+- `dexter doctor --yes` 接受默认修复提示。
+- `dexter doctor --repair` 无需提示应用推荐的修复。
+- `dexter doctor --repair --force` 覆盖自定义 supervisor 配置。
+- 你始终可以通过 `dexter gateway install --force` 强制完全重写。
 
 ### 16）Gateway 网关运行时 + 端口诊断
 

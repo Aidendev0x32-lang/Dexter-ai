@@ -89,7 +89,7 @@ rg "telegram http error" /tmp/openclaw/openclaw-*.log
 tail -f /tmp/openclaw/openclaw-$(date +%F).log | rg "telegram http error"
 ```
 
-对于远程 Gateway 网关，你也可以使用 `openclaw logs --follow`（参见 [/cli/logs](/cli/logs)）。
+对于远程 Gateway 网关，你也可以使用 `dexter logs --follow`（参见 [/cli/logs](/cli/logs)）。
 
 ## 注意事项
 

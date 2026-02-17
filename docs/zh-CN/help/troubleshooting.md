@@ -20,17 +20,17 @@ x-i18n:
 按顺序运行这些命令：
 
 ```bash
-openclaw status
-openclaw status --all
-openclaw gateway probe
-openclaw logs --follow
-openclaw doctor
+dexter status
+dexter status --all
+dexter gateway probe
+dexter logs --follow
+dexter doctor
 ```
 
 如果 Gateway 网关可达，进行深度探测：
 
 ```bash
-openclaw status --deep
+dexter status --deep
 ```
 
 ## 常见的“它坏了”情况
@@ -89,7 +89,7 @@ curl -fsSL https://openclaw.ai/install.sh | bash -s -- --beta --verbose
 
 这通常意味着 `agents.defaults.models` 配置为允许列表。当它非空时，只能选择那些提供商/模型键。
 
-- 检查允许列表：`openclaw config get agents.defaults.models`
+- 检查允许列表：`dexter config get agents.defaults.models`
 - 添加你想要的模型（或清除允许列表）然后重试 `/model`
 - 使用 `/models` 浏览允许的提供商/模型
 
@@ -98,7 +98,7 @@ curl -fsSL https://openclaw.ai/install.sh | bash -s -- --beta --verbose
 粘贴一份安全报告：
 
 ```bash
-openclaw status --all
+dexter status --all
 ```
 
-如果可以的话，包含来自 `openclaw logs --follow` 的相关日志尾部。
+如果可以的话，包含来自 `dexter logs --follow` 的相关日志尾部。

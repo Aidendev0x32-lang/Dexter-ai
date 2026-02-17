@@ -32,19 +32,19 @@ Native Windows companion apps are planned.
 Inside WSL2:
 
 ```
-openclaw onboard --install-daemon
+dexter onboard --install-daemon
 ```
 
 Or:
 
 ```
-openclaw gateway install
+dexter gateway install
 ```
 
 Or:
 
 ```
-openclaw configure
+dexter configure
 ```
 
 Select **Gateway service** when prompted.
@@ -52,7 +52,7 @@ Select **Gateway service** when prompted.
 Repair/migrate:
 
 ```
-openclaw doctor
+dexter doctor
 ```
 
 ## Advanced: expose WSL services over LAN (portproxy)
@@ -95,7 +95,7 @@ Notes:
 
 - SSH from another machine targets the **Windows host IP** (example: `ssh user@windows-host -p 2222`).
 - Remote nodes must point at a **reachable** Gateway URL (not `127.0.0.1`); use
-  `openclaw status --all` to confirm.
+  `dexter status --all` to confirm.
 - Use `listenaddress=0.0.0.0` for LAN access; `127.0.0.1` keeps it local only.
 - If you want this automatic, register a Scheduled Task to run the refresh
   step at login.
@@ -148,7 +148,7 @@ cd openclaw
 pnpm install
 pnpm ui:build # auto-installs UI deps on first run
 pnpm build
-openclaw onboard
+dexter onboard
 ```
 
 Full guide: [Getting Started](/start/getting-started)

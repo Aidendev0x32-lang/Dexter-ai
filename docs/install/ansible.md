@@ -81,7 +81,7 @@ sudo systemctl restart openclaw
 
 # Provider login (run as openclaw user)
 sudo -i -u openclaw
-openclaw channels login
+dexter channels login
 ```
 
 ## Security Architecture
@@ -189,7 +189,7 @@ Make sure you're running as the `openclaw` user:
 
 ```bash
 sudo -i -u openclaw
-openclaw channels login
+dexter channels login
 ```
 
 ## Advanced Configuration

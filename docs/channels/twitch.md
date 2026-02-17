@@ -16,13 +16,13 @@ Twitch ships as a plugin and is not bundled with the core install.
 Install via CLI (npm registry):
 
 ```bash
-openclaw plugins install @openclaw/twitch
+dexter plugins install @openclaw/twitch
 ```
 
 Local checkout (when running from a git repo):
 
 ```bash
-openclaw plugins install ./extensions/twitch
+dexter plugins install ./extensions/twitch
 ```
 
 Details: [Plugins](/tools/plugin)
@@ -251,8 +251,8 @@ By default, `requireMention` is `true`. To disable and respond to all messages:
 First, run diagnostic commands:
 
 ```bash
-openclaw doctor
-openclaw channels status --probe
+dexter doctor
+dexter channels status --probe
 ```
 
 ### Bot doesn't respond to messages

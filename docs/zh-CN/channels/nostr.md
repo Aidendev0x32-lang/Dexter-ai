@@ -23,7 +23,7 @@ Nostr 是一个去中心化的社交网络协议。此渠道使 OpenClaw 能够�
 
 ### 新手引导（推荐）
 
-- 新手引导向导（`openclaw onboard`）和 `openclaw channels add` 会列出可选的渠道插件。
+- 新手引导向导（`dexter onboard`）和 `dexter channels add` 会列出可选的渠道插件。
 - 选择 Nostr 会提示你按需安装插件。
 
 安装默认值：
@@ -36,13 +36,13 @@ Nostr 是一个去中心化的社交网络协议。此渠道使 OpenClaw 能够�
 ### 手动安装
 
 ```bash
-openclaw plugins install @openclaw/nostr
+dexter plugins install @openclaw/nostr
 ```
 
 使用本地 checkout（开发工作流）：
 
 ```bash
-openclaw plugins install --link <path-to-openclaw>/extensions/nostr
+dexter plugins install --link <path-to-openclaw>/extensions/nostr
 ```
 
 安装或启用插件后重启 Gateway 网关。

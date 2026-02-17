@@ -25,10 +25,10 @@ OpenClaw 有三个相关（但不同）的控制：
 使用检查器查看 OpenClaw *实际*在做什么：
 
 ```bash
-openclaw sandbox explain
-openclaw sandbox explain --session agent:main:main
-openclaw sandbox explain --agent work
-openclaw sandbox explain --json
+dexter sandbox explain
+dexter sandbox explain --session agent:main:main
+dexter sandbox explain --agent work
+dexter sandbox explain --json
 ```
 
 它会打印：

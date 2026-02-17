@@ -37,7 +37,7 @@ x-i18n:
 Shelley，[exe.dev](https://exe.dev) 的智能体，可以使用我们的提示立即安装 OpenClaw。使用的提示如下：
 
 ```
-Set up OpenClaw (https://docs.openclaw.ai/install) on this VM. Use the non-interactive and accept-risk flags for openclaw onboarding. Add the supplied auth or token as needed. Configure nginx to forward from the default port 18789 to the root location on the default enabled site config, making sure to enable Websocket support. Pairing is done by "openclaw devices list" and "openclaw device approve <request id>". Make sure the dashboard shows that OpenClaw's health is OK. exe.dev handles forwarding from port 8000 to port 80/443 and HTTPS for us, so the final "reachable" should be <vm-name>.exe.xyz, without port specification.
+Set up OpenClaw (https://docs.openclaw.ai/install) on this VM. Use the non-interactive and accept-risk flags for dexter onboarding. Add the supplied auth or token as needed. Configure nginx to forward from the default port 18789 to the root location on the default enabled site config, making sure to enable Websocket support. Pairing is done by "dexter devices list" and "openclaw device approve <request id>". Make sure the dashboard shows that OpenClaw's health is OK. exe.dev handles forwarding from port 8000 to port 80/443 and HTTPS for us, so the final "reachable" should be <vm-name>.exe.xyz, without port specification.
 ```
 
 ## 手动安装
@@ -109,7 +109,7 @@ server {
 
 ## 5) 访问 OpenClaw 并授予权限
 
-访问 `https://<vm-name>.exe.xyz/?token=YOUR-TOKEN-FROM-TERMINAL`（参阅新手引导中的控制 UI 输出）。使用 `openclaw devices list` 和 `openclaw devices approve <requestId>` 批准设备。如有疑问，从浏览器使用 Shelley！
+访问 `https://<vm-name>.exe.xyz/?token=YOUR-TOKEN-FROM-TERMINAL`（参阅新手引导中的控制 UI 输出）。使用 `dexter devices list` 和 `dexter devices approve <requestId>` 批准设备。如有疑问，从浏览器使用 Shelley！
 
 ## 远程访问
 
@@ -119,8 +119,8 @@ server {
 
 ```bash
 npm i -g openclaw@latest
-openclaw doctor
-openclaw gateway restart
+dexter doctor
+dexter gateway restart
 openclaw health
 ```
 

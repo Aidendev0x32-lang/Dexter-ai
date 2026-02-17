@@ -78,13 +78,13 @@ OpenClaw 提供两个轻量级 Web 工具：
 
 1. 在 https://brave.com/search/api/ 创建 Brave Search API 账户
 2. 在控制面板中，选择 **Data for Search** 计划（不是"Data for AI"）并生成 API 密钥。
-3. 运行 `openclaw configure --section web` 将密钥存储在配置中（推荐），或在环境中设置 `BRAVE_API_KEY`。
+3. 运行 `dexter configure --section web` 将密钥存储在配置中（推荐），或在环境中设置 `BRAVE_API_KEY`。
 
 Brave 提供免费层和付费计划；查看 Brave API 门户了解当前限制和定价。
 
 ### 在哪里设置密钥（推荐）
 
-**推荐：** 运行 `openclaw configure --section web`。它将密钥存储在 `~/.openclaw/openclaw.json` 的 `tools.web.search.apiKey` 下。
+**推荐：** 运行 `dexter configure --section web`。它将密钥存储在 `~/.openclaw/openclaw.json` 的 `tools.web.search.apiKey` 下。
 
 **环境变量替代方案：** 在 Gateway 网关进程环境中设置 `BRAVE_API_KEY`。对于 Gateway 网关安装，将其放在 `~/.openclaw/.env`（或你的服务环境）中。参见[环境变量](/help/faq#how-does-openclaw-load-environment-variables)。
 

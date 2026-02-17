@@ -14,7 +14,7 @@ OpenClaw has two distinct problems that look similar on the surface:
 1. **Operator remote control**: the macOS menu bar app controlling a gateway running elsewhere.
 2. **Node pairing**: iOS/Android (and future nodes) finding a gateway and pairing securely.
 
-The design goal is to keep all network discovery/advertising in the **Node Gateway** (`openclaw gateway`) and keep clients (mac app, iOS) as consumers.
+The design goal is to keep all network discovery/advertising in the **Node Gateway** (`dexter gateway`) and keep clients (mac app, iOS) as consumers.
 
 ## Terms
 

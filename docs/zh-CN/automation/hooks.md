@@ -80,7 +80,7 @@ openclaw hooks info session-memory
 
 ### 新手引导
 
-在新手引导期间（`openclaw onboard`），你将被提示启用推荐的 hooks。向导会自动发现符合条件的 hooks 并呈现供选择。
+在新手引导期间（`dexter onboard`），你将被提示启用推荐的 hooks。向导会自动发现符合条件的 hooks 并呈现供选择。
 
 ## Hook 发现
 

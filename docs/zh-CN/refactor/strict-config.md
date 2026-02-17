@@ -55,8 +55,8 @@ x-i18n:
 - 每次加载配置时都会运行 Doctor（默认 dry-run）。
 - 如果配置无效：
   - 打印摘要 + 可操作的错误。
-  - 指示：`openclaw doctor --fix`。
-- `openclaw doctor --fix`：
+  - 指示：`dexter doctor --fix`。
+- `dexter doctor --fix`：
   - 应用迁移。
   - 移除未知键。
   - 写入更新后的配置。
@@ -65,14 +65,14 @@ x-i18n:
 
 允许的命令（仅诊断）：
 
-- `openclaw doctor`
-- `openclaw logs`
+- `dexter doctor`
+- `dexter logs`
 - `openclaw health`
-- `openclaw help`
-- `openclaw status`
-- `openclaw gateway status`
+- `dexter help`
+- `dexter status`
+- `dexter gateway status`
 
-其他所有命令必须硬失败并显示："Config invalid. Run `openclaw doctor --fix`."
+其他所有命令必须硬失败并显示："Config invalid. Run `dexter doctor --fix`."
 
 ## 错误用户体验格式
 

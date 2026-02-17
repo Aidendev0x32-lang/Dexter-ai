@@ -63,7 +63,7 @@ node --import tsx scripts/repro/tsx-name-repro.ts
 ## 回归历史
 
 - `2871657e`（2026-01-06）：脚本从 Bun 改为 tsx，使 Bun 成为可选项。
-- 在此之前（Bun 路径），`openclaw status` 和 `gateway:watch` 均正常工作。
+- 在此之前（Bun 路径），`dexter status` 和 `gateway:watch` 均正常工作。
 
 ## 解决方法
 
