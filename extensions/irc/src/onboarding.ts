@@ -457,7 +457,7 @@ export const ircOnboardingAdapter: ChannelOnboardingAdapter = {
     await prompter.note(
       [
         "Next: restart gateway and verify status.",
-        "Command: openclaw channels status --probe",
+        "Command: dexter channels status --probe",
         `Docs: ${formatDocsLink("/channels/irc", "channels/irc")}`,
       ].join("\n"),
       "IRC next steps",

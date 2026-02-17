@@ -115,11 +115,11 @@ export function resolveModel(
 const LOCAL_PROVIDER_HINTS: Record<string, string> = {
   ollama:
     "Ollama requires authentication to be registered as a provider. " +
-    'Set OLLAMA_API_KEY="ollama-local" (any value works) or run "openclaw configure". ' +
+    'Set OLLAMA_API_KEY="ollama-local" (any value works) or run "dexter configure". ' +
     "See: https://docs.openclaw.ai/providers/ollama",
   vllm:
     "vLLM requires authentication to be registered as a provider. " +
-    'Set VLLM_API_KEY (any value works) or run "openclaw configure". ' +
+    'Set VLLM_API_KEY (any value works) or run "dexter configure". ' +
     "See: https://docs.openclaw.ai/providers/vllm",
 };
 

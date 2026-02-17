@@ -22,7 +22,7 @@ export async function modelsSetCommand(modelRaw: string, runtime: RuntimeEnv) {
     const catalogKeys = new Set(catalog.map((e) => modelKey(e.provider, e.id)));
     if (!catalogKeys.has(key)) {
       throw new Error(
-        `Unknown model: ${key}\nModel not found in catalog. Run "openclaw models list" to see available models.`,
+        `Unknown model: ${key}\nModel not found in catalog. Run "dexter models list" to see available models.`,
       );
     }
   }

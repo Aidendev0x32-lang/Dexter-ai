@@ -27,12 +27,12 @@ export function registerNodeCli(program: Command) {
       () =>
         `\n${theme.heading("Examples:")}\n${formatHelpExamples([
           [
-            "openclaw node run --host 127.0.0.1 --port 18789",
+            "dexter node run --host 127.0.0.1 --port 18789",
             "Run the node host in the foreground.",
           ],
-          ["openclaw node status", "Check node host service status."],
-          ["openclaw node install", "Install the node host service."],
-          ["openclaw node restart", "Restart the installed node host service."],
+          ["dexter node status", "Check node host service status."],
+          ["dexter node install", "Install the node host service."],
+          ["dexter node restart", "Restart the installed node host service."],
         ])}\n\n${theme.muted("Docs:")} ${formatDocsLink("/cli/node", "docs.openclaw.ai/cli/node")}\n`,
     );
 

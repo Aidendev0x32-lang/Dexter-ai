@@ -31,7 +31,8 @@ describe("createWebOnboardingRunner", () => {
     expect(runOnboardingWizard).toHaveBeenCalledWith(
       expect.objectContaining({
         authChoice: "openai-api-key",
-        skipChannels: true,
+        showModelPicker: true,
+        skipChannels: false,
         skipSkills: true,
         installDaemon: false,
         skipUi: true,
@@ -57,7 +58,8 @@ describe("createWebOnboardingRunner", () => {
         workspace: "~/my-workspace",
         acceptRisk: true,
         authChoice: "openai-api-key",
-        skipChannels: true,
+        showModelPicker: true,
+        skipChannels: false,
       }),
       mockRuntime,
       mockPrompter,

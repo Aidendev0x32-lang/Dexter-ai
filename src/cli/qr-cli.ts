@@ -170,8 +170,8 @@ export function registerQrCli(program: Command) {
           `${theme.muted("Source:")} ${resolved.urlSource}`,
           "",
           "Approve after scan with:",
-          `  ${theme.command("openclaw devices list")}`,
-          `  ${theme.command("openclaw devices approve <requestId>")}`,
+          `  ${theme.command("dexter devices list")}`,
+          `  ${theme.command("dexter devices approve <requestId>")}`,
         );
 
         defaultRuntime.log(lines.join("\n"));

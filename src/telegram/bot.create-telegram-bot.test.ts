@@ -285,7 +285,7 @@ describe("createTelegramBot", () => {
     expect(pairingText).toContain("Your Telegram user id: 999");
     expect(pairingText).toContain("Pairing code:");
     expect(pairingText).toContain("PAIRME12");
-    expect(pairingText).toContain("openclaw pairing approve telegram PAIRME12");
+    expect(pairingText).toContain("dexter pairing approve telegram PAIRME12");
     expect(pairingText).not.toContain("<code>");
   });
   it("does not resend pairing code when a request is already pending", async () => {

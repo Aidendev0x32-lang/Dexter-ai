@@ -299,7 +299,7 @@ async function linkWhatsAppWeb(
     await prompter.note("WhatsApp linked successfully!", "WhatsApp");
   } else {
     await prompter.note(
-      `${waitResult.message}\n\nYou can link later with \`openclaw channels login\`.`,
+      `${waitResult.message}\n\nYou can link later with \`dexter channels login\`.`,
       "WhatsApp",
     );
   }
@@ -409,7 +409,7 @@ export const whatsappOnboardingAdapter: ChannelOnboardingAdapter = {
       const skipMsg =
         prompter.mode === "web"
           ? "You can link WhatsApp later from the settings page."
-          : `Run \`${formatCliCommand("openclaw channels login")}\` later to link WhatsApp.`;
+          : `Run \`${formatCliCommand("dexter channels login")}\` later to link WhatsApp.`;
       await prompter.note(skipMsg, "WhatsApp");
     }
 

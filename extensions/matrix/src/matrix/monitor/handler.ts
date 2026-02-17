@@ -256,7 +256,7 @@ export function createMatrixRoomMessageHandler(params: MatrixMonitorHandlerParam
                       `Pairing code: ${code}`,
                       "",
                       "Ask the bot owner to approve with:",
-                      "openclaw pairing approve matrix <code>",
+                      "dexter pairing approve matrix <code>",
                     ].join("\n"),
                     { client },
                   );

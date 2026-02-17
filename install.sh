@@ -84,7 +84,7 @@ $PKG_MGR run ui:build
 ok "UI built"
 
 # ── Link binary ──
-info "Linking openclaw CLI..."
+info "Linking dexter CLI..."
 if [ "$PKG_MGR" = "pnpm" ]; then
   pnpm link --global 2>/dev/null || true
 else
@@ -92,11 +92,13 @@ else
 fi
 
 # ── Verify ──
-if command -v openclaw &>/dev/null; then
-  ok "openclaw CLI is available globally"
+if command -v dexter &>/dev/null; then
+  ok "dexter CLI is available globally"
+elif command -v openclaw &>/dev/null; then
+  ok "openclaw CLI is available globally (alias: dexter)"
 else
   warn "Could not link globally. You can run directly:"
-  warn "  cd $INSTALL_DIR && $PKG_MGR openclaw"
+  warn "  cd $INSTALL_DIR && $PKG_MGR dexter"
 fi
 
 echo ""
@@ -106,9 +108,9 @@ printf "${GREEN}━━━━━━━━━━━━━━━━━━━━━�
 echo ""
 info "Quick start (web wizard):"
 echo "  cd $INSTALL_DIR"
-echo "  openclaw gateway run --setup --port 18789"
+echo "  dexter gateway run --setup --port 18789"
 echo ""
 info "Quick start (CLI wizard):"
-echo "  openclaw onboard --install-daemon"
+echo "  dexter onboard --install-daemon"
 echo ""
 info "Installed at: $INSTALL_DIR"

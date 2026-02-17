@@ -632,7 +632,7 @@ export async function collectPluginsCodeSafetyFindings(params: {
       title: "Plugin extensions directory scan failed",
       detail: `Static code scan could not list extensions directory: ${String(err)}`,
       remediation:
-        "Check file permissions and plugin layout, then rerun `openclaw security audit --deep`.",
+        "Check file permissions and plugin layout, then rerun `dexter security audit --deep`.",
     });
     return [];
   });
@@ -684,7 +684,7 @@ export async function collectPluginsCodeSafetyFindings(params: {
           title: `Plugin "${pluginName}" code scan failed`,
           detail: `Static code scan could not complete: ${String(err)}`,
           remediation:
-            "Check file permissions and plugin layout, then rerun `openclaw security audit --deep`.",
+            "Check file permissions and plugin layout, then rerun `dexter security audit --deep`.",
         });
         return null;
       });
@@ -755,7 +755,7 @@ export async function collectInstalledSkillsCodeSafetyFindings(params: {
           title: `Skill "${skillName}" code scan failed`,
           detail: `Static code scan could not complete for ${skillDir}: ${String(err)}`,
           remediation:
-            "Check file permissions and skill layout, then rerun `openclaw security audit --deep`.",
+            "Check file permissions and skill layout, then rerun `dexter security audit --deep`.",
         });
         return null;
       });
