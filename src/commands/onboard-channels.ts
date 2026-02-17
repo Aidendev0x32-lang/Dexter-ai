@@ -172,7 +172,11 @@ export async function noteChannelStatus(params: {
     accountOverrides: params.accountOverrides ?? {},
   });
   if (statusLines.length > 0) {
-    await params.prompter.note(statusLines.join("\n"), "Channel status");
+    const content =
+      params.prompter.mode === "web"
+        ? statusLines.map((line) => `- ${line}`).join("\n")
+        : statusLines.join("\n");
+    await params.prompter.note(content, "Channel status");
   }
 }
 
@@ -180,6 +184,19 @@ async function noteChannelPrimer(
   prompter: WizardPrompter,
   channels: Array<{ id: ChannelChoice; blurb: string; label: string }>,
 ): Promise<void> {
+  if (prompter.mode === "web") {
+    const channelLines = channels.map((ch) => `- **${ch.label}** — ${ch.blurb}`);
+    await prompter.note(
+      [
+        "Each channel controls who can message your AI via **DM policies**.",
+        "Default: **pairing** — unknown senders receive a one-time code you approve.",
+        "",
+        ...channelLines,
+      ].join("\n"),
+      "How channels work",
+    );
+    return;
+  }
   const channelLines = channels.map((channel) =>
     formatChannelPrimerLine({
       id: channel.id,
@@ -244,19 +261,33 @@ async function maybeConfigureDmPolicies(params: {
 
   let cfg = params.cfg;
   const selectPolicy = async (policy: ChannelOnboardingDmPolicy) => {
-    await prompter.note(
-      [
-        "Default: pairing (unknown DMs get a pairing code).",
-        `Approve: ${formatCliCommand(`openclaw pairing approve ${policy.channel} <code>`)}`,
-        `Allowlist DMs: ${policy.policyKey}="allowlist" + ${policy.allowFromKey} entries.`,
-        `Public DMs: ${policy.policyKey}="open" + ${policy.allowFromKey} includes "*".`,
-        "Multi-user DMs: run: " +
-          formatCliCommand('openclaw config set session.dmScope "per-channel-peer"') +
-          ' (or "per-account-channel-peer" for multi-account channels) to isolate sessions.',
-        `Docs: ${formatDocsLink("/start/pairing", "start/pairing")}`,
-      ].join("\n"),
-      `${policy.label} DM access`,
-    );
+    if (prompter.mode === "web") {
+      await prompter.note(
+        [
+          "**DM policies** control who can start conversations:",
+          "",
+          "- **Pairing** (default) — unknown senders get a code you approve",
+          "- **Allowlist** — only pre-approved users can message",
+          "- **Open** — anyone can send messages",
+          "- **Disabled** — DMs are ignored on this channel",
+        ].join("\n"),
+        `${policy.label} DM access`,
+      );
+    } else {
+      await prompter.note(
+        [
+          "Default: pairing (unknown DMs get a pairing code).",
+          `Approve: ${formatCliCommand(`openclaw pairing approve ${policy.channel} <code>`)}`,
+          `Allowlist DMs: ${policy.policyKey}="allowlist" + ${policy.allowFromKey} entries.`,
+          `Public DMs: ${policy.policyKey}="open" + ${policy.allowFromKey} includes "*".`,
+          "Multi-user DMs: run: " +
+            formatCliCommand('openclaw config set session.dmScope "per-channel-peer"') +
+            ' (or "per-account-channel-peer" for multi-account channels) to isolate sessions.',
+          `Docs: ${formatDocsLink("/start/pairing", "start/pairing")}`,
+        ].join("\n"),
+        `${policy.label} DM access`,
+      );
+    }
     return (await prompter.select({
       message: `${policy.label} DM policy`,
       options: [
@@ -306,7 +337,11 @@ export async function setupChannels(
   const { installedPlugins, catalogEntries, statusByChannel, statusLines } =
     await collectChannelStatus({ cfg: next, options, accountOverrides });
   if (!options?.skipStatusNote && statusLines.length > 0) {
-    await prompter.note(statusLines.join("\n"), "Channel status");
+    const statusContent =
+      prompter.mode === "web"
+        ? statusLines.map((line) => `- ${line}`).join("\n")
+        : statusLines.join("\n");
+    await prompter.note(statusContent, "Channel status");
   }
 
   const shouldConfigure = options?.skipConfirm
@@ -657,7 +692,12 @@ export async function setupChannels(
   const selectionNotes = new Map<string, string>();
   const { entries: selectionEntries } = getChannelEntries();
   for (const entry of selectionEntries) {
-    selectionNotes.set(entry.id, formatChannelSelectionLine(entry.meta, formatDocsLink));
+    selectionNotes.set(
+      entry.id,
+      prompter.mode === "web"
+        ? `- **${entry.meta.label}** — ${entry.meta.blurb}`
+        : formatChannelSelectionLine(entry.meta, formatDocsLink),
+    );
   }
   const selectedLines = selection
     .map((channel) => selectionNotes.get(channel))

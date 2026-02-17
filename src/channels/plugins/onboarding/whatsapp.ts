@@ -1,6 +1,7 @@
 import path from "node:path";
 import { loginWeb } from "../../../channel-web.js";
 import { formatCliCommand } from "../../../cli/command-format.js";
+import { startWebLoginWithQr, waitForWebLogin } from "../../../web/login-qr.js";
 import type { OpenClawConfig } from "../../../config/config.js";
 import { mergeWhatsAppConfig } from "../../../config/merge-config.js";
 import type { DmPolicy } from "../../../config/types.js";
@@ -120,19 +121,35 @@ async function promptWhatsAppAllowFrom(
     });
   }
 
-  await prompter.note(
-    [
-      "WhatsApp direct chats are gated by `channels.whatsapp.dmPolicy` + `channels.whatsapp.allowFrom`.",
-      "- pairing (default): unknown senders get a pairing code; owner approves",
-      "- allowlist: unknown senders are blocked",
-      '- open: public inbound DMs (requires allowFrom to include "*")',
-      "- disabled: ignore WhatsApp DMs",
-      "",
-      `Current: dmPolicy=${existingPolicy}, allowFrom=${existingLabel}`,
-      `Docs: ${formatDocsLink("/whatsapp", "whatsapp")}`,
-    ].join("\n"),
-    "WhatsApp DM access",
-  );
+  if (prompter.mode === "web") {
+    await prompter.note(
+      [
+        "**DM policies** control who can message via WhatsApp:",
+        "",
+        "- **Pairing** (default) — unknown senders get a code you approve",
+        "- **Allowlist** — only pre-approved numbers can message",
+        "- **Open** — anyone can send messages",
+        "- **Disabled** — ignore WhatsApp DMs",
+        "",
+        `Current policy: **${existingPolicy}**`,
+      ].join("\n"),
+      "WhatsApp DM access",
+    );
+  } else {
+    await prompter.note(
+      [
+        "WhatsApp direct chats are gated by `channels.whatsapp.dmPolicy` + `channels.whatsapp.allowFrom`.",
+        "- pairing (default): unknown senders get a pairing code; owner approves",
+        "- allowlist: unknown senders are blocked",
+        '- open: public inbound DMs (requires allowFrom to include "*")',
+        "- disabled: ignore WhatsApp DMs",
+        "",
+        `Current: dmPolicy=${existingPolicy}, allowFrom=${existingLabel}`,
+        `Docs: ${formatDocsLink("/whatsapp", "whatsapp")}`,
+      ].join("\n"),
+      "WhatsApp DM access",
+    );
+  }
 
   const phoneMode = await prompter.select({
     message: "WhatsApp phone setup",
@@ -244,6 +261,50 @@ async function promptWhatsAppAllowFrom(
   return next;
 }
 
+async function linkWhatsAppWeb(
+  prompter: WizardPrompter,
+  runtime: RuntimeEnv,
+  accountId: string,
+): Promise<void> {
+  const qrResult = await startWebLoginWithQr({
+    force: true,
+    accountId,
+    runtime,
+    timeoutMs: 30_000,
+  });
+
+  if (!qrResult.qrDataUrl) {
+    await prompter.note(qrResult.message, "WhatsApp");
+    return;
+  }
+
+  await prompter.note(
+    [
+      `![WhatsApp QR Code](${qrResult.qrDataUrl})`,
+      "",
+      "Open **WhatsApp** on your phone, go to **Linked Devices**, and scan this QR code.",
+      "",
+      "Click Continue after scanning.",
+    ].join("\n"),
+    "Scan QR Code",
+  );
+
+  const waitResult = await waitForWebLogin({
+    accountId,
+    runtime,
+    timeoutMs: 60_000,
+  });
+
+  if (waitResult.connected) {
+    await prompter.note("WhatsApp linked successfully!", "WhatsApp");
+  } else {
+    await prompter.note(
+      `${waitResult.message}\n\nYou can link later with \`openclaw channels login\`.`,
+      "WhatsApp",
+    );
+  }
+}
+
 export const whatsappOnboardingAdapter: ChannelOnboardingAdapter = {
   channel,
   getStatus: async ({ cfg, accountOverrides }) => {
@@ -313,14 +374,21 @@ export const whatsappOnboardingAdapter: ChannelOnboardingAdapter = {
     });
 
     if (!linked) {
-      await prompter.note(
-        [
-          "Scan the QR with WhatsApp on your phone.",
-          `Credentials are stored under ${authDir}/ for future runs.`,
-          `Docs: ${formatDocsLink("/whatsapp", "whatsapp")}`,
-        ].join("\n"),
-        "WhatsApp linking",
-      );
+      if (prompter.mode === "web") {
+        await prompter.note(
+          "Scan the QR code with WhatsApp on your phone to link your account.",
+          "WhatsApp linking",
+        );
+      } else {
+        await prompter.note(
+          [
+            "Scan the QR with WhatsApp on your phone.",
+            `Credentials are stored under ${authDir}/ for future runs.`,
+            `Docs: ${formatDocsLink("/whatsapp", "whatsapp")}`,
+          ].join("\n"),
+          "WhatsApp linking",
+        );
+      }
     }
     const wantsLink = await prompter.confirm({
       message: linked ? "WhatsApp already linked. Re-link now?" : "Link WhatsApp now (QR)?",
@@ -328,16 +396,21 @@ export const whatsappOnboardingAdapter: ChannelOnboardingAdapter = {
     });
     if (wantsLink) {
       try {
-        await loginWeb(false, undefined, runtime, accountId);
+        if (prompter.mode === "web") {
+          await linkWhatsAppWeb(prompter, runtime, accountId);
+        } else {
+          await loginWeb(false, undefined, runtime, accountId);
+        }
       } catch (err) {
         runtime.error(`WhatsApp login failed: ${String(err)}`);
         await prompter.note(`Docs: ${formatDocsLink("/whatsapp", "whatsapp")}`, "WhatsApp help");
       }
     } else if (!linked) {
-      await prompter.note(
-        `Run \`${formatCliCommand("openclaw channels login")}\` later to link WhatsApp.`,
-        "WhatsApp",
-      );
+      const skipMsg =
+        prompter.mode === "web"
+          ? "You can link WhatsApp later from the settings page."
+          : `Run \`${formatCliCommand("openclaw channels login")}\` later to link WhatsApp.`;
+      await prompter.note(skipMsg, "WhatsApp");
     }
 
     next = await promptWhatsAppAllowFrom(next, runtime, prompter, {
