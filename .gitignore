@@ -86,3 +86,6 @@ USER.md
 !.agent/workflows/
 /local/
 package-lock.json
+
+# Claude Code pre-dev setup
+.claude/

@@ -23,6 +23,7 @@ export type ControlUiRequestOptions = {
   config?: OpenClawConfig;
   agentId?: string;
   root?: ControlUiRootState;
+  setupMode?: boolean;
 };
 
 export type ControlUiRootState =
@@ -254,6 +255,7 @@ export function handleControlUiHttpRequest(
       assistantName: identity.name,
       assistantAvatar: avatarValue ?? identity.avatar,
       assistantAgentId: identity.agentId,
+      ...(opts?.setupMode ? { setupMode: true } : {}),
     } satisfies ControlUiBootstrapConfig);
     return true;
   }

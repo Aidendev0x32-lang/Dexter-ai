@@ -20,6 +20,8 @@ export type WizardTextParams = {
   message: string;
   initialValue?: string;
   placeholder?: string;
+  /** When true, the UI should mask the input (password field). */
+  sensitive?: boolean;
   validate?: (value: string) => string | undefined;
 };
 

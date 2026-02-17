@@ -86,6 +86,7 @@ export async function applyAuthChoiceOpenAI(
     } else {
       key = await params.prompter.text({
         message: "Enter OpenAI API key",
+        sensitive: true,
         validate: validateApiKeyInput,
       });
     }

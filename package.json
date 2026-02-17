@@ -1,17 +1,17 @@
 {
-  "name": "openclaw",
+  "name": "dexter-ai",
   "version": "2026.2.16",
-  "description": "Multi-channel AI gateway with extensible messaging integrations",
+  "description": "Dexter — Personal AI assistant with web-based setup wizard",
   "keywords": [],
-  "homepage": "https://github.com/openclaw/openclaw#readme",
+  "homepage": "https://github.com/Aidendev0x32-lang/Dexter-ai#readme",
   "bugs": {
-    "url": "https://github.com/openclaw/openclaw/issues"
+    "url": "https://github.com/Aidendev0x32-lang/Dexter-ai/issues"
   },
   "license": "MIT",
   "author": "",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/openclaw/openclaw.git"
+    "url": "git+https://github.com/Aidendev0x32-lang/Dexter-ai.git"
   },
   "bin": {
     "openclaw": "openclaw.mjs"

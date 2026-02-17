@@ -146,6 +146,12 @@ export type GatewayServerOptions = {
    */
   tailscale?: import("../config/config.js").GatewayTailscaleConfig;
   /**
+   * When true, skip auth and config validation so the gateway can boot
+   * with a missing/empty config. Binds to loopback with auth=none.
+   * Used by `openclaw gateway run --setup` for web-based onboarding.
+   */
+  setupMode?: boolean;
+  /**
    * Test-only: allow canvas host startup even when NODE_ENV/VITEST would disable it.
    */
   allowCanvasHostInTests?: boolean;
@@ -177,8 +183,13 @@ export async function startGatewayServer(
     description: "raw stream log path override",
   });
 
+  const isSetupMode = Boolean(opts.setupMode);
+  if (isSetupMode) {
+    log.warn("gateway starting in SETUP MODE — auth is disabled on loopback");
+  }
+
   let configSnapshot = await readConfigFileSnapshot();
-  if (configSnapshot.legacyIssues.length > 0) {
+  if (!isSetupMode && configSnapshot.legacyIssues.length > 0) {
     if (isNixMode) {
       throw new Error(
         "Legacy config entries detected while running in Nix mode. Update your Nix config to the latest schema and restart.",
@@ -200,17 +211,19 @@ export async function startGatewayServer(
     }
   }
 
-  configSnapshot = await readConfigFileSnapshot();
-  if (configSnapshot.exists && !configSnapshot.valid) {
-    const issues =
-      configSnapshot.issues.length > 0
-        ? configSnapshot.issues
-            .map((issue) => `${issue.path || "<root>"}: ${issue.message}`)
-            .join("\n")
-        : "Unknown validation issue.";
-    throw new Error(
-      `Invalid config at ${configSnapshot.path}.\n${issues}\nRun "${formatCliCommand("openclaw doctor")}" to repair, then retry.`,
-    );
+  if (!isSetupMode) {
+    configSnapshot = await readConfigFileSnapshot();
+    if (configSnapshot.exists && !configSnapshot.valid) {
+      const issues =
+        configSnapshot.issues.length > 0
+          ? configSnapshot.issues
+              .map((issue) => `${issue.path || "<root>"}: ${issue.message}`)
+              .join("\n")
+          : "Unknown validation issue.";
+      throw new Error(
+        `Invalid config at ${configSnapshot.path}.\n${issues}\nRun "${formatCliCommand("openclaw doctor")}" to repair, then retry.`,
+      );
+    }
   }
 
   const autoEnable = applyPluginAutoEnable({ config: configSnapshot.config, env: process.env });
@@ -262,13 +275,14 @@ export async function startGatewayServer(
   const runtimeConfig = await resolveGatewayRuntimeConfig({
     cfg: cfgAtStart,
     port,
-    bind: opts.bind,
+    bind: isSetupMode ? "loopback" : opts.bind,
     host: opts.host,
-    controlUiEnabled: opts.controlUiEnabled,
+    controlUiEnabled: isSetupMode ? true : opts.controlUiEnabled,
     openAiChatCompletionsEnabled: opts.openAiChatCompletionsEnabled,
     openResponsesEnabled: opts.openResponsesEnabled,
-    auth: opts.auth,
+    auth: isSetupMode ? undefined : opts.auth,
     tailscale: opts.tailscale,
+    setupMode: isSetupMode,
   });
   const {
     bindHost,
@@ -323,7 +337,11 @@ export async function startGatewayServer(
       : { kind: "missing" };
   }
 
-  const wizardRunner = opts.wizardRunner ?? runOnboardingWizard;
+  let wizardRunner = opts.wizardRunner ?? runOnboardingWizard;
+  if (isSetupMode && !opts.wizardRunner) {
+    const { createWebOnboardingRunner } = await import("../wizard/web-onboarding.js");
+    wizardRunner = createWebOnboardingRunner();
+  }
   const { wizardSessions, findRunningWizard, purgeWizardSession } = createWizardSessionTracker();
 
   const deps = createDefaultDeps();
@@ -373,6 +391,7 @@ export async function startGatewayServer(
     log,
     logHooks,
     logPlugins,
+    setupMode: isSetupMode,
   });
   let bonjourStop: (() => Promise<void>) | null = null;
   const nodeRegistry = new NodeRegistry();
@@ -607,6 +626,13 @@ export async function startGatewayServer(
     log,
     isNixMode,
   });
+  if (isSetupMode && controlUiEnabled) {
+    const setupUrl = `http://127.0.0.1:${port}${controlUiBasePath ? controlUiBasePath + "/" : "/"}`;
+    log.info(`Setup wizard: ${setupUrl}`);
+    import("../commands/onboard-helpers.js")
+      .then(({ openUrl }) => openUrl(setupUrl))
+      .catch(() => {});
+  }
   if (!minimalTestGateway) {
     scheduleGatewayUpdateCheck({ cfg: cfgAtStart, log, isNixMode });
   }

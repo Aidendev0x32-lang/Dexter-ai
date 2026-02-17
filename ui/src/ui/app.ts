@@ -53,6 +53,12 @@ import type { AppViewState } from "./app-view-state.ts";
 import { normalizeAssistantIdentity } from "./assistant-identity.ts";
 import { loadAssistantIdentity as loadAssistantIdentityInternal } from "./controllers/assistant-identity.ts";
 import type { DevicePairingList } from "./controllers/devices.ts";
+import type { WizardSessionStatus, WizardStep } from "./controllers/wizard.ts";
+import {
+  startWizard as startWizardInternal,
+  sendWizardAnswer as sendWizardAnswerInternal,
+  cancelWizard as cancelWizardInternal,
+} from "./controllers/wizard.ts";
 import type { ExecApprovalRequest } from "./controllers/exec-approval.ts";
 import type { ExecApprovalsFile, ExecApprovalsSnapshot } from "./controllers/exec-approvals.ts";
 import type { SkillMessage } from "./controllers/skills.ts";
@@ -96,6 +102,19 @@ function resolveOnboardingMode(): boolean {
   }
   const params = new URLSearchParams(window.location.search);
   const raw = params.get("onboarding");
+  if (!raw) {
+    return false;
+  }
+  const normalized = raw.trim().toLowerCase();
+  return normalized === "1" || normalized === "true" || normalized === "yes" || normalized === "on";
+}
+
+function resolveSetupModeFromUrl(): boolean {
+  if (!window.location.search) {
+    return false;
+  }
+  const params = new URLSearchParams(window.location.search);
+  const raw = params.get("setup");
   if (!raw) {
     return false;
   }
@@ -348,6 +367,13 @@ export class OpenClawApp extends LitElement {
   private toolStreamOrder: string[] = [];
   refreshSessionsAfterChat = new Set<string>();
   basePath = "";
+  @state() setupMode = resolveSetupModeFromUrl();
+  @state() wizardSessionId: string | null = null;
+  @state() wizardStep: WizardStep | null = null;
+  @state() wizardStatus: WizardSessionStatus | null = null;
+  @state() wizardError: string | null = null;
+  @state() wizardLoading = false;
+  @state() wizardDone = false;
   private popStateHandler = () =>
     onPopStateInternal(this as unknown as Parameters<typeof onPopStateInternal>[0]);
   private themeMedia: MediaQueryList | null = null;
@@ -573,6 +599,32 @@ export class OpenClawApp extends LitElement {
     const newRatio = Math.max(0.4, Math.min(0.7, ratio));
     this.splitRatio = newRatio;
     this.applySettings({ ...this.settings, splitRatio: newRatio });
+  }
+
+  async handleWizardStart() {
+    await startWizardInternal(this, this.client);
+  }
+
+  async handleWizardAnswer(stepId: string, value: unknown) {
+    await sendWizardAnswerInternal(this, this.client, stepId, value);
+  }
+
+  async handleWizardCancel() {
+    await cancelWizardInternal(this, this.client);
+    this.setupMode = false;
+  }
+
+  handleWizardComplete() {
+    this.setupMode = false;
+    this.wizardDone = false;
+    this.wizardSessionId = null;
+    this.wizardStep = null;
+    this.wizardStatus = null;
+    // Remove ?setup param and reload into the normal Control UI.
+    const url = new URL(window.location.href);
+    url.searchParams.delete("setup");
+    window.history.replaceState(null, "", url.toString());
+    this.connect();
   }
 
   render() {

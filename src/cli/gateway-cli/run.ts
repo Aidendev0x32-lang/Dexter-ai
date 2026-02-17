@@ -40,6 +40,7 @@ type GatewayRunOpts = {
   tailscale?: unknown;
   tailscaleResetOnExit?: boolean;
   allowUnconfigured?: boolean;
+  setup?: boolean;
   force?: boolean;
   verbose?: boolean;
   claudeCliLogs?: boolean;
@@ -160,11 +161,21 @@ async function runGatewayCommand(opts: GatewayRunOpts) {
   const passwordRaw = toOptionString(opts.password);
   const tokenRaw = toOptionString(opts.token);
 
+  const isSetupMode = Boolean(opts.setup);
+
   const snapshot = await readConfigFileSnapshot().catch(() => null);
   const configExists = snapshot?.exists ?? fs.existsSync(CONFIG_PATH);
   const configAuditPath = path.join(resolveStateDir(process.env), "logs", "config-audit.jsonl");
   const mode = cfg.gateway?.mode;
-  if (!opts.allowUnconfigured && mode !== "local") {
+
+  if (isSetupMode && configExists && mode === "local" && !opts.force) {
+    defaultRuntime.error(
+      `Refusing --setup: gateway is already configured (mode=${mode}). Pass --force to override.`,
+    );
+    defaultRuntime.exit(1);
+    return;
+  }
+  if (!isSetupMode && !opts.allowUnconfigured && mode !== "local") {
     if (!configExists) {
       defaultRuntime.error(
         `Missing config. Run \`${formatCliCommand("openclaw setup")}\` or set gateway.mode=local (or pass --allow-unconfigured).`,
@@ -221,44 +232,46 @@ async function runGatewayCommand(opts: GatewayRunOpts) {
       '"gateway.remote.token" is for remote CLI calls; it does not enable local gateway auth.',
     );
   }
-  if (resolvedAuthMode === "token" && !hasToken && !resolvedAuth.allowTailscale) {
-    defaultRuntime.error(
-      [
-        "Gateway auth is set to token, but no token is configured.",
-        "Set gateway.auth.token (or OPENCLAW_GATEWAY_TOKEN), or pass --token.",
-        ...authHints,
-      ]
-        .filter(Boolean)
-        .join("\n"),
-    );
-    defaultRuntime.exit(1);
-    return;
-  }
-  if (resolvedAuthMode === "password" && !hasPassword) {
-    defaultRuntime.error(
-      [
-        "Gateway auth is set to password, but no password is configured.",
-        "Set gateway.auth.password (or OPENCLAW_GATEWAY_PASSWORD), or pass --password.",
-        ...authHints,
-      ]
-        .filter(Boolean)
-        .join("\n"),
-    );
-    defaultRuntime.exit(1);
-    return;
-  }
-  if (bind !== "loopback" && !hasSharedSecret && resolvedAuthMode !== "trusted-proxy") {
-    defaultRuntime.error(
-      [
-        `Refusing to bind gateway to ${bind} without auth.`,
-        "Set gateway.auth.token/password (or OPENCLAW_GATEWAY_TOKEN/OPENCLAW_GATEWAY_PASSWORD) or pass --token/--password.",
-        ...authHints,
-      ]
-        .filter(Boolean)
-        .join("\n"),
-    );
-    defaultRuntime.exit(1);
-    return;
+  if (!isSetupMode) {
+    if (resolvedAuthMode === "token" && !hasToken && !resolvedAuth.allowTailscale) {
+      defaultRuntime.error(
+        [
+          "Gateway auth is set to token, but no token is configured.",
+          "Set gateway.auth.token (or OPENCLAW_GATEWAY_TOKEN), or pass --token.",
+          ...authHints,
+        ]
+          .filter(Boolean)
+          .join("\n"),
+      );
+      defaultRuntime.exit(1);
+      return;
+    }
+    if (resolvedAuthMode === "password" && !hasPassword) {
+      defaultRuntime.error(
+        [
+          "Gateway auth is set to password, but no password is configured.",
+          "Set gateway.auth.password (or OPENCLAW_GATEWAY_PASSWORD), or pass --password.",
+          ...authHints,
+        ]
+          .filter(Boolean)
+          .join("\n"),
+      );
+      defaultRuntime.exit(1);
+      return;
+    }
+    if (bind !== "loopback" && !hasSharedSecret && resolvedAuthMode !== "trusted-proxy") {
+      defaultRuntime.error(
+        [
+          `Refusing to bind gateway to ${bind} without auth.`,
+          "Set gateway.auth.token/password (or OPENCLAW_GATEWAY_TOKEN/OPENCLAW_GATEWAY_PASSWORD) or pass --token/--password.",
+          ...authHints,
+        ]
+          .filter(Boolean)
+          .join("\n"),
+      );
+      defaultRuntime.exit(1);
+      return;
+    }
   }
 
   try {
@@ -282,6 +295,7 @@ async function runGatewayCommand(opts: GatewayRunOpts) {
                   resetOnExit: Boolean(opts.tailscaleResetOnExit),
                 }
               : undefined,
+          setupMode: isSetupMode,
         }),
     });
   } catch (err) {
@@ -334,6 +348,11 @@ export function addGatewayRunCommand(cmd: Command): Command {
     .option(
       "--allow-unconfigured",
       "Allow gateway start without gateway.mode=local in config",
+      false,
+    )
+    .option(
+      "--setup",
+      "Launch gateway in first-time web setup mode (no auth, loopback only, serves onboarding wizard)",
       false,
     )
     .option("--dev", "Create a dev config + workspace if missing (no BOOTSTRAP.md)", false)

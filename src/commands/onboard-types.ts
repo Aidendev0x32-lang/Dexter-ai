@@ -134,6 +134,8 @@ export type OnboardOptions = {
   tailscaleResetOnExit?: boolean;
   installDaemon?: boolean;
   daemonRuntime?: GatewayDaemonRuntime;
+  /** Force model picker even when authChoice is pre-set (e.g. web onboarding). */
+  showModelPicker?: boolean;
   skipChannels?: boolean;
   /** @deprecated Legacy alias for `skipChannels`. */
   skipProviders?: boolean;

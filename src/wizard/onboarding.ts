@@ -368,7 +368,7 @@ export async function runOnboardingWizard(
       config: nextConfig,
       prompter,
       runtime,
-      setDefaultModel: true,
+      setDefaultModel: !opts.showModelPicker,
       opts: {
         tokenProvider: opts.tokenProvider,
         token: opts.authChoice === "apiKey" && opts.token ? opts.token : undefined,
@@ -377,7 +377,7 @@ export async function runOnboardingWizard(
     nextConfig = authResult.config;
   }
 
-  if (authChoiceFromPrompt && authChoice !== "custom-api-key") {
+  if ((authChoiceFromPrompt || opts.showModelPicker) && authChoice !== "custom-api-key") {
     const modelSelection = await promptDefaultModel({
       config: nextConfig,
       prompter,
@@ -394,7 +394,10 @@ export async function runOnboardingWizard(
     }
   }
 
-  await warnIfModelConfigLooksOff(nextConfig, prompter);
+  // Skip model warnings when the user just picked a model interactively.
+  if (!authChoiceFromPrompt && !opts.showModelPicker) {
+    await warnIfModelConfigLooksOff(nextConfig, prompter);
+  }
 
   const { configureGatewayForOnboarding } = await import("./onboarding.gateway-config.js");
   const gateway = await configureGatewayForOnboarding({

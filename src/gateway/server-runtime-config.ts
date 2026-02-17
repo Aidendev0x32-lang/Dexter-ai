@@ -39,10 +39,22 @@ export async function resolveGatewayRuntimeConfig(params: {
   openResponsesEnabled?: boolean;
   auth?: GatewayAuthConfig;
   tailscale?: GatewayTailscaleConfig;
+  /** When true, skip auth assertions (setup mode binds loopback with no auth). */
+  setupMode?: boolean;
 }): Promise<GatewayRuntimeConfig> {
   const bindMode = params.bind ?? params.cfg.gateway?.bind ?? "loopback";
   const customBindHost = params.cfg.gateway?.customBindHost;
   const bindHost = params.host ?? (await resolveGatewayBindHost(bindMode, customBindHost));
+
+  // Setup mode must only bind to loopback. If the host resolution fell back to
+  // 0.0.0.0 (e.g. loopback unavailable in a container), refuse to start rather
+  // than exposing an unauthenticated gateway to the network.
+  if (params.setupMode && !isLoopbackHost(bindHost)) {
+    throw new Error(
+      `setup mode requires loopback binding but resolved to ${bindHost} — cannot start unauthenticated on a non-loopback interface`,
+    );
+  }
+
   const controlUiEnabled =
     params.controlUiEnabled ?? params.cfg.gateway?.controlUi?.enabled ?? true;
   const openAiChatCompletionsEnabled =
@@ -70,11 +82,11 @@ export async function resolveGatewayRuntimeConfig(params: {
     ...tailscaleOverrides,
   };
   const tailscaleMode = tailscaleConfig.mode ?? "off";
-  const resolvedAuth = resolveGatewayAuth({
-    authConfig,
-    env: process.env,
-    tailscaleMode,
-  });
+  // In setup mode the gateway boots with no auth on loopback — construct a
+  // clean auth object so the existing config's token/password is never used.
+  const resolvedAuth: ResolvedGatewayAuth = params.setupMode
+    ? { mode: "none", allowTailscale: false }
+    : resolveGatewayAuth({ authConfig, env: process.env, tailscaleMode });
   const authMode: ResolvedGatewayAuth["mode"] = resolvedAuth.mode;
   const hasToken = typeof resolvedAuth.token === "string" && resolvedAuth.token.trim().length > 0;
   const hasPassword =
@@ -87,31 +99,33 @@ export async function resolveGatewayRuntimeConfig(params: {
 
   const trustedProxies = params.cfg.gateway?.trustedProxies ?? [];
 
-  assertGatewayAuthConfigured(resolvedAuth);
-  if (tailscaleMode === "funnel" && authMode !== "password") {
-    throw new Error(
-      "tailscale funnel requires gateway auth mode=password (set gateway.auth.password or OPENCLAW_GATEWAY_PASSWORD)",
-    );
-  }
-  if (tailscaleMode !== "off" && !isLoopbackHost(bindHost)) {
-    throw new Error("tailscale serve/funnel requires gateway bind=loopback (127.0.0.1)");
-  }
-  if (!isLoopbackHost(bindHost) && !hasSharedSecret && authMode !== "trusted-proxy") {
-    throw new Error(
-      `refusing to bind gateway to ${bindHost}:${params.port} without auth (set gateway.auth.token/password, or set OPENCLAW_GATEWAY_TOKEN/OPENCLAW_GATEWAY_PASSWORD)`,
-    );
-  }
-
-  if (authMode === "trusted-proxy") {
-    if (isLoopbackHost(bindHost)) {
+  if (!params.setupMode) {
+    assertGatewayAuthConfigured(resolvedAuth);
+    if (tailscaleMode === "funnel" && authMode !== "password") {
       throw new Error(
-        "gateway auth mode=trusted-proxy makes no sense with bind=loopback; use bind=lan or bind=custom with gateway.trustedProxies configured",
+        "tailscale funnel requires gateway auth mode=password (set gateway.auth.password or OPENCLAW_GATEWAY_PASSWORD)",
       );
     }
-    if (trustedProxies.length === 0) {
+    if (tailscaleMode !== "off" && !isLoopbackHost(bindHost)) {
+      throw new Error("tailscale serve/funnel requires gateway bind=loopback (127.0.0.1)");
+    }
+    if (!isLoopbackHost(bindHost) && !hasSharedSecret && authMode !== "trusted-proxy") {
       throw new Error(
-        "gateway auth mode=trusted-proxy requires gateway.trustedProxies to be configured with at least one proxy IP",
+        `refusing to bind gateway to ${bindHost}:${params.port} without auth (set gateway.auth.token/password, or set OPENCLAW_GATEWAY_TOKEN/OPENCLAW_GATEWAY_PASSWORD)`,
       );
+    }
+
+    if (authMode === "trusted-proxy") {
+      if (isLoopbackHost(bindHost)) {
+        throw new Error(
+          "gateway auth mode=trusted-proxy makes no sense with bind=loopback; use bind=lan or bind=custom with gateway.trustedProxies configured",
+        );
+      }
+      if (trustedProxies.length === 0) {
+        throw new Error(
+          "gateway auth mode=trusted-proxy requires gateway.trustedProxies to be configured with at least one proxy IP",
+        );
+      }
     }
   }
 

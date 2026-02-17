@@ -68,6 +68,7 @@ import { renderNodes } from "./views/nodes.ts";
 import { renderOverview } from "./views/overview.ts";
 import { renderSessions } from "./views/sessions.ts";
 import { renderSkills } from "./views/skills.ts";
+import { renderWizard } from "./views/wizard.ts";
 
 const AVATAR_DATA_RE = /^data:/i;
 const AVATAR_HTTP_RE = /^https?:\/\//i;
@@ -89,6 +90,23 @@ function resolveAssistantAvatarUrl(state: AppViewState): string | undefined {
 }
 
 export function renderApp(state: AppViewState) {
+  if (state.setupMode) {
+    return renderWizard({
+      wizardSessionId: state.wizardSessionId,
+      wizardStep: state.wizardStep,
+      wizardStatus: state.wizardStatus,
+      wizardError: state.wizardError,
+      wizardLoading: state.wizardLoading,
+      wizardDone: state.wizardDone,
+      connected: state.connected,
+      onAnswer: (stepId, value) => state.handleWizardAnswer(stepId, value),
+      onAcknowledge: (stepId) => state.handleWizardAnswer(stepId, undefined),
+      onStart: () => state.handleWizardStart(),
+      onCancel: () => state.handleWizardCancel(),
+      onComplete: () => state.handleWizardComplete(),
+    });
+  }
+
   const presenceCount = state.presenceEntries.length;
   const sessionsCount = state.sessionsResult?.count ?? null;
   const cronNext = state.cronStatus?.nextWakeAtMs ?? null;
