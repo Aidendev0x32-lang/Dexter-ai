@@ -671,7 +671,7 @@ export async function startGatewayServer(
     }
   }
 
-  const configReloader = minimalTestGateway
+  const configReloader = minimalTestGateway || isSetupMode
     ? { stop: async () => {} }
     : (() => {
         const { applyHotReload, requestGatewayRestart } = createGatewayReloadHandlers({

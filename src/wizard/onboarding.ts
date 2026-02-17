@@ -432,9 +432,6 @@ export async function runOnboardingWizard(
     });
   }
 
-  await writeConfigFile(nextConfig);
-  const { logConfigUpdated } = await import("../config/logging.js");
-  logConfigUpdated(runtime);
   await onboardHelpers.ensureWorkspaceAndSessions(workspaceDir, runtime, {
     skipBootstrap: Boolean(nextConfig.agents?.defaults?.skipBootstrap),
   });
@@ -452,6 +449,8 @@ export async function runOnboardingWizard(
 
   nextConfig = onboardHelpers.applyWizardMetadata(nextConfig, { command: "onboard", mode });
   await writeConfigFile(nextConfig);
+  const { logConfigUpdated } = await import("../config/logging.js");
+  logConfigUpdated(runtime);
 
   const { finalizeOnboardingWizard } = await import("./onboarding.finalize.js");
   const { launchedTui } = await finalizeOnboardingWizard({
