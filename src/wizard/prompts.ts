@@ -35,7 +35,11 @@ export type WizardProgress = {
   stop: (message?: string) => void;
 };
 
+export type WizardPrompterMode = "cli" | "web";
+
 export type WizardPrompter = {
+  /** Whether the wizard is running in a CLI terminal or web browser. */
+  mode: WizardPrompterMode;
   intro: (title: string) => Promise<void>;
   outro: (message: string) => Promise<void>;
   note: (message: string, title?: string) => Promise<void>;

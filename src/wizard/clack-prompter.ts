@@ -27,6 +27,7 @@ function guardCancel<T>(value: T | symbol): T {
 
 export function createClackPrompter(): WizardPrompter {
   return {
+    mode: "cli",
     intro: async (title) => {
       intro(stylePromptTitle(title) ?? title);
     },

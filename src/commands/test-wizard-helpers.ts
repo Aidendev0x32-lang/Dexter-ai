@@ -24,6 +24,7 @@ export function createWizardPrompter(
   options?: { defaultSelect?: string },
 ): WizardPrompter {
   return {
+    mode: "cli",
     intro: vi.fn(noopAsync),
     outro: vi.fn(noopAsync),
     note: vi.fn(noopAsync),

@@ -14,6 +14,7 @@ const selectFirstOption = async <T>(params: { options: Array<{ value: T }> }): P
 describe("irc onboarding", () => {
   it("configures host and nick via onboarding prompts", async () => {
     const prompter: WizardPrompter = {
+      mode: "cli",
       intro: vi.fn(async () => {}),
       outro: vi.fn(async () => {}),
       note: vi.fn(async () => {}),
@@ -85,6 +86,7 @@ describe("irc onboarding", () => {
 
   it("writes DM allowFrom to top-level config for non-default account prompts", async () => {
     const prompter: WizardPrompter = {
+      mode: "cli",
       intro: vi.fn(async () => {}),
       outro: vi.fn(async () => {}),
       note: vi.fn(async () => {}),

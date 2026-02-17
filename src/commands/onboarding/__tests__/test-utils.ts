@@ -12,6 +12,7 @@ export const makeRuntime = (overrides: Partial<RuntimeEnv> = {}): RuntimeEnv => 
 });
 
 export const makePrompter = (overrides: Partial<WizardPrompter> = {}): WizardPrompter => ({
+  mode: "cli",
   intro: vi.fn(async () => {}),
   outro: vi.fn(async () => {}),
   note: vi.fn(async () => {}),

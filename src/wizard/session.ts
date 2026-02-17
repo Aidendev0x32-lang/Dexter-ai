@@ -45,6 +45,8 @@ function createDeferred<T>(): Deferred<T> {
 }
 
 class WizardSessionPrompter implements WizardPrompter {
+  readonly mode = "web" as const;
+
   constructor(private session: WizardSession) {}
 
   async intro(title: string): Promise<void> {
