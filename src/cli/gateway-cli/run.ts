@@ -161,7 +161,7 @@ async function runGatewayCommand(opts: GatewayRunOpts) {
   const passwordRaw = toOptionString(opts.password);
   const tokenRaw = toOptionString(opts.token);
 
-  const isSetupMode = Boolean(opts.setup);
+  let isSetupMode = Boolean(opts.setup);
 
   const snapshot = await readConfigFileSnapshot().catch(() => null);
   const configExists = snapshot?.exists ?? fs.existsSync(CONFIG_PATH);
@@ -177,17 +177,17 @@ async function runGatewayCommand(opts: GatewayRunOpts) {
   }
   if (!isSetupMode && !opts.allowUnconfigured && mode !== "local") {
     if (!configExists) {
-      defaultRuntime.error(
-        `Missing config. Run \`${formatCliCommand("openclaw setup")}\` or set gateway.mode=local (or pass --allow-unconfigured).`,
-      );
+      // Auto-enter setup mode for first-time users with no config
+      defaultRuntime.log("No config found — starting in setup mode.");
+      isSetupMode = true;
     } else {
       defaultRuntime.error(
         `Gateway start blocked: set gateway.mode=local (current: ${mode ?? "unset"}) or pass --allow-unconfigured.`,
       );
       defaultRuntime.error(`Config write audit: ${configAuditPath}`);
+      defaultRuntime.exit(1);
+      return;
     }
-    defaultRuntime.exit(1);
-    return;
   }
   const bindRaw = toOptionString(opts.bind) ?? cfg.gateway?.bind ?? "loopback";
   const bind =
