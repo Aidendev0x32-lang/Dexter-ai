@@ -611,7 +611,6 @@ export class OpenClawApp extends LitElement {
 
   async handleWizardCancel() {
     await cancelWizardInternal(this, this.client);
-    this.setupMode = false;
   }
 
   handleWizardComplete() {
