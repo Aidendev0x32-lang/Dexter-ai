@@ -29,19 +29,11 @@
 
 /* ── Brand logo ── */
 .wizard-logo {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   width: 56px;
   height: 56px;
   border-radius: var(--radius-xl);
-  background: linear-gradient(135deg, var(--accent) 0%, #ff8a65 100%);
+  object-fit: cover;
   box-shadow: 0 8px 24px var(--accent-glow), 0 0 0 1px rgba(255, 255, 255, 0.08);
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: -0.04em;
   flex-shrink: 0;
   animation: wizard-logo-enter 0.5s var(--ease-spring) backwards;
 }
@@ -50,7 +42,6 @@
   width: 32px;
   height: 32px;
   border-radius: var(--radius-md);
-  font-size: 0.875rem;
   box-shadow: 0 4px 12px var(--accent-glow);
 }
 
@@ -103,7 +94,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, var(--accent) 0%, #ff8a65 50%, var(--accent-2) 100%);
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 50%, #5b6270 100%);
   z-index: 1;
 }
 

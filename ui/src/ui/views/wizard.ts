@@ -36,7 +36,7 @@ export function renderWizard(props: WizardViewProps) {
     <div class="wizard-container">
       <div class="wizard-card">
         <div class="wizard-card-header">
-          <div class="wizard-logo wizard-logo--sm">D</div>
+          <img class="wizard-logo wizard-logo--sm" src="/DexterLogo.jpeg" alt="Dexter" />
           <div class="wizard-card-header-text">
             <h2 class="wizard-title">Dexter Setup</h2>
             ${props.wizardStep
@@ -91,7 +91,7 @@ function renderWizardStart(props: WizardViewProps) {
     <div class="wizard-container">
       <div class="wizard-welcome">
         <div class="wizard-welcome-logo">
-          <div class="wizard-logo">D</div>
+          <img class="wizard-logo" src="/DexterLogo.jpeg" alt="Dexter" />
         </div>
         <h1 class="wizard-welcome-title">Welcome to Dexter</h1>
         <p class="wizard-welcome-subtitle">
@@ -118,7 +118,7 @@ function renderWizardConnecting() {
     <div class="wizard-container">
       <div class="wizard-welcome">
         <div class="wizard-welcome-logo">
-          <div class="wizard-logo">D</div>
+          <img class="wizard-logo" src="/DexterLogo.jpeg" alt="Dexter" />
         </div>
         <h1 class="wizard-welcome-title">Dexter</h1>
         <div class="wizard-connecting-dots">
